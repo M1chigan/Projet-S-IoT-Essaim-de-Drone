@@ -15,11 +15,11 @@ const uint8_t PIN_IRQ = 34;
 const uint8_t PIN_SS  = 4;
 
 // --- Identity of THIS module : adjust for each board (0x01, 0x02, or 0x03) ---
-#define SELF_DRONE_ID       0x04   
+#define SELF_DRONE_ID       0x01   
 #define BROADCAST_ID        0xFF
-#define MAX_DRONES          5      // Supports IDs up to 0x03
+#define MAX_DRONES          5      
 
-#define POLL_INTERVAL_MS    300    // Base time between polls
+#define POLL_INTERVAL_MS    300    
 #define DISPLAY_INTERVAL_MS 500
 #define REPLY_DELAY_US      2500   
 
@@ -34,15 +34,21 @@ const uint16_t ANTENNA_DELAY_TICKS = 16436;
 const float DISTANCE_PER_TICK      = 0.00469176368f;
 const int64_t MASK_40BIT           = 0xFFFFFFFFFFLL;
 
-// --- Define UWB Frame payload (Stripped down for Ranging ONLY) ---
+// --- Define UWB Frame payload (Optimized for cm) ---
 typedef struct __attribute__((packed)) {
     uint8_t msg_type;
     uint8_t dest_id;
     uint8_t src_id;
 
+    // DS-TWR Timestamps
     int64_t t_tx_poll;   
     int64_t t_rx_resp[MAX_DRONES];   
     int64_t t_tx_final;  
+    
+    // --- CUSTOM PAYLOAD ---
+    // Distances in centimeters using int16_t (Max ~327 meters)
+    int16_t distances_cm[MAX_DRONES];
+
 } UwbFrame;
 
 // --- Global Variables ---
@@ -64,7 +70,9 @@ uint32_t current_poll_interval = POLL_INTERVAL_MS;
 uint32_t last_display_time = 0;
 
 int64_t init_t_rx_resp_array[MAX_DRONES] = {0};
-float current_distances_m[MAX_DRONES] = {-1.0f, -1.0f, -1.0f, -1.0f}; // Array for multiple peers
+
+// The Swarm Mental Map: Distances in cm (Values < 0 mean unknown)
+int16_t network_distances_cm[MAX_DRONES][MAX_DRONES];
 
 bool waiting_for_responses = false;
 uint32_t poll_sent_micros = 0;
@@ -81,7 +89,6 @@ void receiver() {
     DW1000.startReceive();
 }
 
-// Dynamically assign slots (0, 1, 2...) skipping the drone that sent the POLL
 uint32_t getResponderDelayUs(uint8_t my_id, uint8_t initiator_id) {
     uint8_t slot_index = 0;
     for (uint8_t i = 1; i < MAX_DRONES; i++) {
@@ -92,6 +99,13 @@ uint32_t getResponderDelayUs(uint8_t my_id, uint8_t initiator_id) {
     return BASE_DELAY_US + (slot_index * SLOT_DURATION_US);
 }
 
+// Helper function to inject local distances into outgoing frame
+void populatePayload(UwbFrame *f) {
+    for (int i = 0; i < MAX_DRONES; i++) {
+        f->distances_cm[i] = network_distances_cm[SELF_DRONE_ID][i];
+    }
+}
+
 // --- Ranging Functions ---
 void sendPoll() {
     UwbFrame f;
@@ -99,6 +113,8 @@ void sendPoll() {
     f.msg_type = MSG_TYPE_POLL;
     f.dest_id = BROADCAST_ID;
     f.src_id = SELF_DRONE_ID;
+    
+    populatePayload(&f); 
 
     pending_tx_type = TX_POLL;
     DW1000.newTransmit();
@@ -113,6 +129,8 @@ void sendResponse(uint8_t target_id, uint32_t delay_us) {
     f.msg_type = MSG_TYPE_RESP;
     f.dest_id = target_id; 
     f.src_id = SELF_DRONE_ID;
+    
+    populatePayload(&f);
     
     pending_tx_type = TX_RESP;
     DW1000.newTransmit();
@@ -138,6 +156,8 @@ void sendFinal() {
     for(int i = 0; i < MAX_DRONES; i++) {
         f.t_rx_resp[i] = init_t_rx_resp_array[i];
     }
+    
+    populatePayload(&f); 
 
     pending_tx_type = TX_FINAL;
     DW1000.newTransmit();
@@ -158,7 +178,6 @@ void processIncomingPacket() {
     if (DW1000.getDataLength() != sizeof(f)) { receiver(); return; }
     DW1000.getData((uint8_t*)&f, sizeof(f));
     
-    // Accept messages meant for me OR broadcast messages
     if (f.dest_id != SELF_DRONE_ID && f.dest_id != BROADCAST_ID) { 
         receiver(); return; 
     }
@@ -166,16 +185,23 @@ void processIncomingPacket() {
     DW1000Time rxTime;
     DW1000.getReceiveTimestamp(rxTime);
     int64_t current_rx_ts = rxTime.getTimestamp();
+    
+    // --- GOSSIP PROTOCOL UPDATE WITH BOUNDS CHECK ---
+    // Safety check: Prevent memory corruption if src_id is malformed
+    if (f.src_id < MAX_DRONES) {
+        for (int i = 0; i < MAX_DRONES; i++) {
+            if (f.distances_cm[i] >= 0) {
+                network_distances_cm[f.src_id][i] = f.distances_cm[i];
+            }
+        }
+    }
 
     if (f.msg_type == MSG_TYPE_POLL) {
         resp_t_rx_poll = current_rx_ts;
-        
-        // Calculate delay based on who initiated the POLL
         sendResponse(f.src_id, getResponderDelayUs(SELF_DRONE_ID, f.src_id));
     }
     
     else if (f.msg_type == MSG_TYPE_RESP) {
-        // Only record if I am currently the Initiator waiting for responses
         if (waiting_for_responses && f.dest_id == SELF_DRONE_ID) {
             if (f.src_id < MAX_DRONES) {
                 init_t_rx_resp_array[f.src_id] = current_rx_ts;
@@ -186,8 +212,6 @@ void processIncomingPacket() {
     
     else if (f.msg_type == MSG_TYPE_FINAL) {
         resp_t_rx_final = current_rx_ts;
-        
-        // The Initiator has embedded my specific RX timestamp in its array
         int64_t my_t_rx_resp = f.t_rx_resp[SELF_DRONE_ID];
         
         if (my_t_rx_resp != 0) {
@@ -196,12 +220,25 @@ void processIncomingPacket() {
             double t_round2 = (double)((resp_t_rx_final - resp_t_tx_resp) & MASK_40BIT);
             double t_reply2 = (double)((f.t_tx_final - my_t_rx_resp) & MASK_40BIT);
 
-            double tof_ticks = (t_round1 * t_round2 - t_reply1 * t_reply2) / (t_round1 + t_round2 + t_reply1 + t_reply2);
-            float dist = (float)(tof_ticks * DISTANCE_PER_TICK);
+            // Prevent division by zero just in case
+            double denominator = t_round1 + t_round2 + t_reply1 + t_reply2;
             
-            // Save the computed distance to the specific Drone that initiated
-            if (dist >= 0.0f && dist < 100.0f) {
-                current_distances_m[f.src_id] = dist; 
+            if (denominator != 0) {
+                double tof_ticks = (t_round1 * t_round2 - t_reply1 * t_reply2) / denominator;
+                float dist_m = (float)(tof_ticks * DISTANCE_PER_TICK);
+                
+                // If distance is plausible (between 0 and 100 meters)
+                if (dist_m >= 0.0f && dist_m < 100.0f) {
+                    
+                    // Convert to centimeters
+                    int16_t dist_cm = (int16_t)(dist_m * 100.0f);
+                    
+                    // CRITICAL FIX: Ensure array bounds are respected to prevent ESP32 crashes
+                    if (f.src_id < MAX_DRONES) {
+                        network_distances_cm[SELF_DRONE_ID][f.src_id] = dist_cm; 
+                        network_distances_cm[f.src_id][SELF_DRONE_ID] = dist_cm; 
+                    }
+                }
             }
         }
         receiver();
@@ -213,6 +250,13 @@ void setup() {
     Serial.begin(115200);
     delay(1500);
     Serial.printf("=== DRONE 0x%02X ===\n", SELF_DRONE_ID);
+
+    // Initialize all distances to -1 (unknown)
+    for(int i = 0; i < MAX_DRONES; i++) {
+        for(int j = 0; j < MAX_DRONES; j++) {
+            network_distances_cm[i][j] = -1;
+        }
+    }
 
     SPI.begin(SPI_SCK, SPI_MISO, SPI_MOSI);
 
@@ -229,10 +273,22 @@ void setup() {
     DW1000.attachReceivedHandler(handleRxInterrupt);
     DW1000.attachSentHandler(handleTxInterrupt);
 
+    // --- LA CORRECTION ANTI-CRASH ---
+    // La librairie vient d'attacher une interruption, on la détache immédiatement
+    // pour éviter que l'ESP32 ne fasse du SPI en arrière-plan et ne crashe.
+    detachInterrupt(digitalPinToInterrupt(PIN_IRQ));
+
     receiver();
 }
 
 void loop() {
+    // --- GESTION MANUELLE DE LA PUCE UWB ---
+    // Au lieu de crasher dans une interruption, on lit la broche ici en toute sécurité
+    if (digitalRead(PIN_IRQ) == HIGH) {
+        DW1000.handleInterrupt();
+    }
+
+    // --- LE RESTE DU CODE RESTE IDENTIQUE ---
     if (rx_packet_ready) {
         rx_packet_ready = false;
         processIncomingPacket();
@@ -246,10 +302,9 @@ void loop() {
             DW1000.getTransmitTimestamp(txTime);
             init_t_tx_poll = txTime.getTimestamp();
             
-            // CRITICAL: Start the response window timer only when POLL physically leaves antenna
             poll_sent_micros = micros();
             waiting_for_responses = true;
-            memset(init_t_rx_resp_array, 0, sizeof(init_t_rx_resp_array)); // Clear old data
+            memset(init_t_rx_resp_array, 0, sizeof(init_t_rx_resp_array)); 
         }
         
         pending_tx_type = TX_NONE;
@@ -259,32 +314,41 @@ void loop() {
     uint32_t now_ms = millis();
     uint32_t now_us = micros();
 
-    // EVERY drone acts as an initiator with a randomized jitter to avoid permanent collisions
     if (now_ms - last_poll_time >= current_poll_interval) {
         last_poll_time = now_ms;
-        current_poll_interval = POLL_INTERVAL_MS + random(10, 80); // Organic TDMA shift
+        current_poll_interval = POLL_INTERVAL_MS + random(10, 80); 
         
-        if (!waiting_for_responses) { // Only send POLL if we are not busy listening
+        if (!waiting_for_responses) { 
             sendPoll();
         }
     }
     
-    // Close the listening window and shoot the FINAL message
     if (waiting_for_responses && (now_us - poll_sent_micros >= FINAL_TRIGGER_DELAY_US)) {
         waiting_for_responses = false;
         sendFinal();
     }
 
-    // Display output and status
+    // --- AFFICHAGE ---
     if (now_ms - last_display_time >= DISPLAY_INTERVAL_MS) {
         last_display_time = now_ms;
         bool has_connections = false;
         
-        Serial.printf("\n--- Status Drone 0x%02X ---\n", SELF_DRONE_ID);
+        Serial.printf("\n--- SWARM MAP (Drone 0x%02X) ---\n", SELF_DRONE_ID);
+        
         for (int i = 1; i < MAX_DRONES; i++) {
-            if (i != SELF_DRONE_ID && current_distances_m[i] >= 0.0f) {
-                Serial.printf("Distance to 0x%02X : %.2f cm\n", i, current_distances_m[i]*100);
+            if (i != SELF_DRONE_ID && network_distances_cm[SELF_DRONE_ID][i] >= 0) {
+                Serial.printf("[LOCAL] Distance to Drone 0x%02X : %d cm\n", i, network_distances_cm[SELF_DRONE_ID][i]);
                 has_connections = true;
+            }
+        }
+        
+        for (int i = 1; i < MAX_DRONES; i++) {
+            for (int j = i + 1; j < MAX_DRONES; j++) {
+                if (i == SELF_DRONE_ID || j == SELF_DRONE_ID) continue;
+                
+                if (network_distances_cm[i][j] >= 0) {
+                    Serial.printf("[GOSSIP] Drone 0x%02X to Drone 0x%02X : %d cm\n", i, j, network_distances_cm[i][j]);
+                }
             }
         }
         
