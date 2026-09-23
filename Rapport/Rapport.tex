@@ -1,0 +1,120 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{siunitx}
+\usepackage[version=4]{mhchem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{Determination of the Enthalpy of Neutralisation of HCl and NaOH}
+\author{J.\ Alvarez \\ Chemistry 201, Section B}
+\date{14 March 2026}
+
+\begin{document}
+\maketitle
+\section*{Objective}
+
+To determine the molar enthalpy of neutralisation, $\Delta H_\text{neut}$, for
+the reaction between hydrochloric acid and sodium hydroxide, and to compare
+the measured value against the accepted literature value for a strong
+acid--strong base neutralisation~\cite{atkins2018}.
+
+\section*{Method}
+
+\SI{50}{\milli\liter} of \SI{1.0}{\mole\per\liter} \ce{HCl} and
+\SI{50}{\milli\liter} of \SI{1.0}{\mole\per\liter} \ce{NaOH} were each
+brought to room temperature and their initial temperatures recorded
+separately. The \ce{NaOH} solution was added rapidly to the \ce{HCl} in an
+insulated calorimeter, stirred continuously, and the temperature was
+recorded every 15 seconds for 5 minutes.
+
+The overall reaction is:
+\begin{equation}
+  \ce{HCl (aq) + NaOH (aq) -> NaCl (aq) + H2O (l)}
+\end{equation}
+
+\section*{Data}
+
+\begin{table}[h]
+  \centering
+  \caption{Temperature readings during neutralisation}
+  \begin{tabular}{S[table-format=2.0] S[table-format=2.1]}
+    \toprule
+    {Time (s)} & {Temperature (\si{\celsius})} \\
+    \midrule
+    0   & 21.4 \\
+    15  & 24.8 \\
+    30  & 27.1 \\
+    45  & 27.9 \\
+    60  & 28.0 \\
+    90  & 27.8 \\
+    120 & 27.5 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The maximum temperature (extrapolated back to the moment of mixing to
+correct for heat loss) was taken as \SI{28.3}{\celsius}, giving a temperature
+change of $\Delta T = \SI{6.9}{\celsius}$.
+
+\section*{Calculations}
+
+Assuming the combined solution has the density and specific heat capacity
+of water ($\rho = \SI{1.00}{\gram\per\milli\liter}$,
+$c = \SI{4.18}{\joule\per\gram\per\kelvin}$), the heat released is:
+
+\begin{equation}
+  q = mc\Delta T = (100~\text{g})(\SI{4.18}{\joule\per\gram\per\kelvin})(6.9~\text{K}) = \SI{2884}{\joule}
+\end{equation}
+
+Moles of water formed (limiting reagent, either acid or base, both
+\SI{0.050}{\mole}):
+
+\begin{equation}
+  n = \SI{0.050}{\liter} \times \SI{1.0}{\mole\per\liter} = \SI{0.050}{\mole}
+\end{equation}
+
+Molar enthalpy of neutralisation:
+
+\begin{equation}
+  \Delta H_\text{neut} = -\frac{q}{n} = -\frac{\SI{2884}{\joule}}{\SI{0.050}{\mole}} = \SI{-57.7}{\kilo\joule\per\mole}
+\end{equation}
+
+\section*{Results and Discussion}
+
+\begin{table}[h]
+  \centering
+  \caption{Comparison with the literature value}
+  \begin{tabular}{lS[table-format=-2.1]}
+    \toprule
+    {Source} & {$\Delta H_\text{neut}$ (\si{\kilo\joule\per\mole})} \\
+    \midrule
+    This experiment      & -57.7 \\
+    Literature~\cite{atkins2018} & -57.3 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The measured value of \SI{-57.7}{\kilo\joule\per\mole} agrees with the
+accepted literature value of \SI{-57.3}{\kilo\joule\per\mole} to within
+0.7\%. The small discrepancy is most likely due to heat loss to the
+calorimeter and surroundings despite insulation, and to the extrapolation
+used to estimate the maximum temperature, since the reaction rate at these
+concentrations is fast enough that some heat is lost before the true peak
+temperature is reached.
+
+\section*{Conclusion}
+
+The molar enthalpy of neutralisation of \ce{HCl} and \ce{NaOH} was measured
+as \SI{-57.7}{\kilo\joule\per\mole}, consistent with the expected value for
+a strong acid--strong base reaction, confirming that the reaction is
+exothermic and that the result is independent of the specific acid and base
+used, as both dissociate completely in solution.
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

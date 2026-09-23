@@ -15,7 +15,7 @@ const uint8_t PIN_IRQ = 34;
 const uint8_t PIN_SS  = 4;
 
 // --- Identity of THIS module : adjust for each board (0x01, 0x02, or 0x03) ---
-#define SELF_DRONE_ID       0x04   
+#define SELF_DRONE_ID       0x03  
 #define BROADCAST_ID        0xFF
 #define MAX_DRONES          5      // Supports IDs up to 0x03
 

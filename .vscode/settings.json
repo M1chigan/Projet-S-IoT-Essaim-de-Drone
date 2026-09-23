@@ -1,0 +1,32 @@
+{
+  // Ouvre le PDF dans un onglet VS Code côte à côte
+  "latex-workshop.view.pdf.viewer": "tab",
+
+  // Nettoie automatiquement les fichiers temporaires après compilation
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.ist",
+    "*.fls",
+    "*.log",
+    "*.fdb_latexmk",
+    "*.synctex.gz"
+  ],
+
+  // Désactive le comptage de mots automatique pour éviter les erreurs TeXcount/Perl
+  "latex-workshop.view.outline.count.words": false
+}
