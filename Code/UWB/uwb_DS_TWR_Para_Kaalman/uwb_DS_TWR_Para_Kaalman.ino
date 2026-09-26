@@ -173,6 +173,22 @@ void computeBenchmark(uint8_t peer_id, float &raw_std_dev, float &kf_std_dev, fl
     }
 }
 
+float getMovingAverage10(uint8_t peer_id) {
+    if (peer_id >= MAX_DRONES || bench_stats[peer_id].count == 0) return -1.0f;
+    
+    // Take max 10 samples (or fewer if startup)
+    uint16_t n = (bench_stats[peer_id].count < 50) ? bench_stats[peer_id].count : 10;
+    float sum = 0.0f;
+    
+    // Navigate backward in the circular buffer
+    uint16_t idx = bench_stats[peer_id].index;
+    for (uint16_t i = 0; i < n; i++) {
+        idx = (idx == 0) ? (BENCHMARK_WINDOW - 1) : (idx - 1);
+        sum += bench_stats[peer_id].kf_history[idx]; 
+    }
+    return sum / n; 
+}
+
 // --- Frame Structure ---
 typedef struct __attribute__((packed)) {
     uint8_t msg_type;
@@ -229,6 +245,22 @@ uint32_t getResponderDelayUs(uint8_t my_id, uint8_t initiator_id) {
         slot_index++;
     }
     return BASE_DELAY_US + (slot_index * SLOT_DURATION_US);
+}
+
+// --- Empirical Correction (Polynomial Interpolation) ---
+float applyEmpiricalCorrection(float raw_m) {
+    // Tweak these coefficients based on your real-world calibration curve
+    // Equation: Error = a*x^2 + b*x + c
+    const float a = 0.0028f;   // Quadratic term (set to 0 by default until you measure it)
+    const float b = -0.0277f;   // Linear term
+    const float c = 0.0f;   // Constant bias
+
+    float estimated_error = (a * raw_m * raw_m) + (b * raw_m) + c;
+    float corrected_m = raw_m - estimated_error;
+
+    if (corrected_m < 0.0f) corrected_m = 0.0f;
+
+    return corrected_m;
 }
 
 // --- Radio Transmission Functions ---
@@ -332,28 +364,19 @@ void processIncomingPacket() {
             float dist = (float)(tof_ticks * DISTANCE_PER_TICK);
             
             if (dist >= 0.0f && dist < 100.0f && f.src_id < MAX_DRONES) {
-                current_raw_distances_m[f.src_id] = dist;
-                current_filtered_distances_m[f.src_id] = updateKalmanTrack(kalman_filters[f.src_id], dist);
-                addBenchmarkSample(f.src_id, dist, current_filtered_distances_m[f.src_id]);
+                
+                // 1. Apply empirical correction polynomial
+                float corrected_dist = applyEmpiricalCorrection(dist);
+
+                // 2. Feed corrected distance into the processing pipeline
+                current_raw_distances_m[f.src_id] = corrected_dist;
+                current_filtered_distances_m[f.src_id] = updateKalmanTrack(kalman_filters[f.src_id], corrected_dist);
+                
+                addBenchmarkSample(f.src_id, corrected_dist, current_filtered_distances_m[f.src_id]);
             }
         }
         receiver();
     }
-}
-float getMovingAverage10(uint8_t peer_id) {
-    if (peer_id >= MAX_DRONES || bench_stats[peer_id].count == 0) return -1.0f;
-    
-    // On prend au maximum 10 échantillons (ou moins si le démarrage a moins de 10 ticks)
-    uint16_t n = (bench_stats[peer_id].count < 10) ? bench_stats[peer_id].count : 10;
-    float sum = 0.0f;
-    
-    // On remonte l'historique circulaire à partir de l'index actuel
-    uint16_t idx = bench_stats[peer_id].index;
-    for (uint16_t i = 0; i < n; i++) {
-        idx = (idx == 0) ? (BENCHMARK_WINDOW - 1) : (idx - 1);
-        sum += bench_stats[peer_id].kf_history[idx]; // Valeurs filtrées par Kalman en cm
-    }
-    return sum / n; 
 }
 
 // --- Setup & Loop ---
@@ -435,7 +458,6 @@ void loop() {
                 float raw_sigma = 0.0f, kf_sigma = 0.0f, gain_pct = 0.0f;
                 computeBenchmark(i, raw_sigma, kf_sigma, gain_pct);
 
-                // Récupération de la moyenne mobile sur 10 ticks
                 float avg_10_cm = getMovingAverage10(i);
 
                 Serial.printf("[0x%02X] Raw: %5.1f cm | KF: %5.1f cm | Avg10: %5.1f cm (std: +/-%.2f) | V: %+.2f m/s\n",
