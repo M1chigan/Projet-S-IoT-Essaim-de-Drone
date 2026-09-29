@@ -15,7 +15,7 @@ const uint8_t PIN_IRQ = 34;
 const uint8_t PIN_SS  = 4;
 
 // --- Identity of THIS module : adjust for each board (0x01, 0x02, or 0x03) ---
-#define SELF_DRONE_ID       0x01  
+#define SELF_DRONE_ID       0x02  
 #define BROADCAST_ID        0xFF
 #define MAX_DRONES          5      // Supports IDs up to 0x03
 
@@ -41,7 +41,7 @@ struct MovingAvg {
 
 MovingAvg bench_stats[MAX_DRONES] = {0}; // Initialize to zero
 
-const uint16_t ANTENNA_DELAY_TICKS = 16436; 
+const uint16_t ANTENNA_DELAY_TICKS = 16436+9; 
 const float DISTANCE_PER_TICK      = 0.00469176368f;
 const int64_t MASK_40BIT           = 0xFFFFFFFFFFLL;
 
