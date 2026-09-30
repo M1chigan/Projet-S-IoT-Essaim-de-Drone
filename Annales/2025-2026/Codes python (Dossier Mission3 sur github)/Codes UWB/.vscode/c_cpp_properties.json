@@ -4,16 +4,16 @@
             "name": "esp32:esp32:esp32wroverkit",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\Users\\liene\\AppData\\Local\\Temp\\vs-arduino-sketch-bH11SU\\Autocalibration_anchor",
-                "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esp32-libs\\3.3.11/qio_qspi/include",
-                "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.11\\cores\\esp32",
-                "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.11\\variants\\esp32",
-                "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.11\\libraries\\SPI\\src",
-                "C:\\Users\\liene\\Documents\\Arduino\\libraries\\DW1000\\src",
+                "C:\\Users\\liene\\AppData\\Local\\Temp\\vs-arduino-sketch-ZjeqhX\\TAG",
+                "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esp32-libs\\3.3.12/qio_qspi/include",
+                "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.12\\cores\\esp32",
+                "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.12\\variants\\esp32",
+                "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.12\\libraries\\SPI\\src",
+                "c:\\Users\\liene\\Documents\\Arduino\\libraries\\DW1000\\src",
                 "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esp-x32\\2601\\xtensa-esp32-elf\\include"
             ],
             "forcedInclude": [
-                "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.11\\cores\\esp32\\Arduino.h"
+                "C:\\Users\\liene\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.12\\cores\\esp32\\Arduino.h"
             ],
             "defines": [
                 "F_CPU=240000000L",
@@ -36,5 +36,7 @@
             "intelliSenseMode": "gcc-x64"
         }
     ],
+    "version": 4
+}
     "version": 4
 }
