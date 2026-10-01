@@ -4,16 +4,16 @@
 \section{UWB}
 
 \subsection{Definitions} 
-The Ultra-Wideband (UWB) is a technology using radio frequency to exchange data created in 1880.
-The communication is not the only usage, it can also be used to locate, it's only  possible by using different modules, those algorithms and technique will be treated in the next part (\ref{UWB_Algo}).
-In majority of cases, UWB is used for interior purpose, otherwise, it can be used for exterior purpose, but it's less shown in scientific paper.
+Ultra-Wideband (UWB) is a technology using radio frequency to exchange data created in 1880.
+Communication is not the only purpose, it can also be used to locate; it is only  possible by using different module, those algorithms and technique will be treated in the next part (\ref{UWB_Algo}).
+In the majority of cases, UWB is deployed for indoor purpose, otherwise, it can be used for outdoor purpose; but it is less shown in scientific papers.
 
 
 \subsection{Location algorithm}\label{UWB_Algo}
-In order to use the UWB as a location sensor. We have to use specific algorithm, in the followings of the subsection, we will explain and shown 2 diferents location algorithms. Firstly, the two way ranging (TWR) and secondly the double sided two way ranging (DS-TWR). And finally, we will explain TDOA, the most advanced algorithms.
+In order to use  UWB as a location sensor. We have to use specific algorithm; in the following subsection, we will explain and show 2 different location algorithms. Firstly,  two-way ranging (TWR) and secondly double sided two-way ranging (DS-TWR).Finally, we will describe TDOA, the most advanced algorithms.
 
 \subsubsection{Two way ranging (TWR)}
-The Two Way Ranging (TWR) algorithm is the easiest and the fastest to implement in a UWB system.
+The Two-Way Ranging (TWR) algorithm is the easiest and the fastest to implement in a UWB system.
 In order to explain this algorithm,  we will use 2 modules called $UWB_1$ and $UWB_2$.
 
 \begin{figure}[!ht]
@@ -54,19 +54,19 @@ With all those parameters, we can deduce those variables :
     \item Travel time : $t_{travel} = t_{tot} - t_{proc}$
 \end{itemize}
 The signal travels back and forth so it did twice the distance ($d$), and travel speed of a radio signal is equivalent to light speed ($c$). \\ 
-So, we can deduce this equation : 
+We can deduce this equation : 
 \begin{equation} \label{TWR_eq}
 \boxed{\frac{t_{travel}\times c}{2}=\frac{(t_{tot} - t_{proc}) \times c}{2}= \frac{((r_{x1} - t_{x1}) - (r_{x2} - t_{x2})) \times c}{2}}
 \end{equation}
 We can also determine the induced error of this algorithm.\\
-After calculation (describe in calculation part at page~\pageref{TWR-Error-calculation}), we obtain this equation: 
+After calculation (describe the in calculation part page~\pageref{TWR-Error-calculation}), we obtain this equation: 
 \begin{equation}
 \epsilon \approx \frac{t_ {proc}(e_a - e_b)}{2}
 \end{equation}
-As we can observe, the Time of processing is directly link to the error. The $t_{proc}$ is around 3,000,000 nanoseconds so, it's inducing a high error. 
+As we can observe, the Time of processing is directly linked to the error. The $t_{proc}$ is around 3,000,000 nanoseconds so, it is inducing a high error. 
  
 \subsubsection{Double Sided Two way ranging (DS-TWR)}
-The DS-TWR has for purpose to reduce the error introduce by the $t_{proc}$. This algorithm also use $UWB_1$ and $UWB_2$.
+DS-TWR has for main advantage to reduce the error introduced by the $t_{proc}$. This algorithm also uses $UWB_1$ and $UWB_2$.
 
 \begin{figure}[!ht]
 \centering
@@ -100,12 +100,12 @@ The DS-TWR has for purpose to reduce the error introduce by the $t_{proc}$. This
 \subsubsection{TDOA}
 
 \newpage
-\section{Measure treatment}
-In most cases, date measured by sensors are unclear. It could be a sensor offset, it can also come from crosstalk. Or others, exterior interaction. In order, to obtain cleans measurements, and to be able to used them for controlling or any other purpose. We have to develop some filter, in this section, we will explain three filters used for cleaning UWB signal, Firstly, we will explain the polynomial filter, and secondly, the Kalman filter, then finally the extended Kalman filter
+\section{Measure management}
+In most cases, date measured by sensors are unclear. It could be a sensor offset, it can also come from crosstalks. Or other, exterior interactions. In order, to obtain clean measurements, and to be able to use them for controlling or any other purpose. We have to develop some filter; in this section, we will describe three filters used for cleaning the UWB signal. Firstly, we will explain the polynomial filter, and secondly, the Kalman filter, then finally the extended Kalman filters
 \subsection{Polynomial Filter}
 
 
-\subsection{Kalman Filter}
+\subsection{Kalman Filters}
 
 \subsection{Extended Kalman Filter}
 
