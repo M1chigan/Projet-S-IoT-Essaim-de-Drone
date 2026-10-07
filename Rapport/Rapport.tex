@@ -139,15 +139,76 @@ The DS-TWR has for purpose to reduce the error introduce by the $t_{proc}$. This
 \label{fig:DS-TWR}
 \end{figure}
 
+\newpage
+
 \section{Data treatment}
 
-\subsection{Polynomiale Filter}
+\subsection{Polynomial Filter}
 
-\subsection{Filter}
+\color{blue}
+\subsection{Extended Kalman Filter for relative localisation  }
 
-\subsubsection{Kaalman Filter}
+In the context of navigating systems in noisy environments with sensors, the Kalman filter is the most relevant algorithm. 
+As Welch and Bishop \parencite{welch2006} point out, the Kalman filter is notable for its ability to "support estimations of past, present, and even future states [...] even when the precise nature of the modeled system is unknown.".
+In our study case, we deal with a drone swarm communicating using the UWB communication protocol, which gives us the relative distance between each pair of drones by using the time of flight of a radio wave. 
+This measure is non-linear (Euclidian distance calculated with a square root) which implies that an extended version of the filter should be used : it uses a typical technique of linearization around the current state using a Jacobian matrix.
+We are also considering an anchor-free systems which enhances the challenge of this project.
+In this section, we will first define the theory of the EKF (Extended Kalman Filter) and 
+then, we will study its application to our UWB drone swarm system.
 
-\subsubsection{Extended Kaalman Filter}
+
+\subsubsection{Theory of the Kalman filter}
+
+\paragraph{Origin of the theory}
+
+In his pioneering article of 1960 \parencite{kalman1960}, Rudolf Kalman describes state estimation as a recursive process in which at each time step, the current estimation and the uncertainty using only the past estimate and the newly available measure. When assuming a linear dynamical system and Gaussian noise, the Kalman filter minimizes the mean-square estimation error : in other words, the best possible estimate given the available measurements. Even when these assumptions do not hold exactly, the filter remains the best linear estimator achievable (known as the Best Linear Unbiased Estimator, or BLUE). This optimality is what established the Kalman filter as the standard approach for state estimation in noisy dynamic systems. While Kalman's filter optimality holds for linear dynamical systems, we have in our case, as mentionned earlier, a non-linearity with the use of the Euclidian distance. This is why we require an extended version of the filter that can handle the non-linearity, even at the cost of losing the strict optimality.
+
+
+\paragraph{Formalism of the discrete Kalman Filter}
+
+Let's note $x_k\in \mathbb{R}_n$ the current state of a discrete system governed by the following linear equation :
+$${\displaystyle \mathbf {x} _{k}=\mathbf {F} _{k}\mathbf {x} _{k-1}+\mathbf {B} _{k}\mathbf {u} _{k}+\mathbf {w} _{k}}$$
+
+In which we have :
+
+\begin{itemize}
+    \item $F_k$ is the state transition matrix, linking the previous state $x_{k-1}$ to the current state $x_k$
+    \item $B_k$ is the control-input matrix, linking the control vector $u_k$ to the current state $x_k$
+    \item $w_k$ is the process noise which is assumed to be Gaussian and centered, with a covariance matrix $Q_k$
+\end{itemize}
+
+At each time $k$, the measurement $z_k$ is written as follows :
+$${\displaystyle \mathbf {z} _{k}=\mathbf {H} _{k}\mathbf {x} _{k}+\mathbf {v} _{k}}$$
+
+\newpage
+With :
+\begin{itemize}
+    \item $H_k$ is the observation matrix
+    \item $w_k$ is the observation noise which is assumed to be Gaussian and centered, with a covariance matrix $R_k$
+\end{itemize}
+
+We can divide the Kalman filter process into 2 phases : the "prediction" phase and the "update" phase. 
+The first one does an estimate of the state at the next time step by using the estimate of 
+the current time step and the error covariance. The second phase can be thought of as a feedback : it 
+includes a new measurement in the current state to improve its estimate.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{kalman_2_phases.png}
+    \caption{Ongoing discrete Kalman filter cycle  (Welch and Bishop (2006, p. 5)) }
+    \label{fig:placeholder}
+\end{figure}
+
+\subsubsection{Extended Kalman filter}
+
+
+As mentionned earlier, the extended Kalman filter is used to deal with a non-linear state process defined as diffentiable function $f$. To do so, it essentially linearizes the nonlinear function around the current estimate by computing the Jacobian matrices of the nonlinear functions $f$ and $h$ in the following equations (with the same notations as before) :
+
+$$ {\displaystyle {\textbf {x}}_{k}=f({\textbf {x}}_{k-1},{\textbf {u}}_{k},{\textbf {w}}_{k})}$$
+$${\displaystyle {\textbf {z}}_{k}=h({\textbf {x}}_{k},{\textbf {v}}_{k})}$$
+
+\color{black}
+
 
 \newpage
 \chapter*{Caculations}
@@ -184,5 +245,8 @@ So we can ignore $T_f \times e_a$ cause $T_{f} \ll t_{proc}$, and we obtain :
 Error \approx \frac{t_{proc}(e_a - e_b)}{2}
 \end{equation}
 \subsection*{DS-TWR Error calculation : } \label{DS-TWR-Error-calculation}
+
+\cleardoublepage % Force le saut vers une nouvelle page
+\printbibliography[heading=bibintoc, title={References}]
 
 \end{document}

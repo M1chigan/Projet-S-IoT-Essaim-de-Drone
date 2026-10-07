@@ -21,6 +21,13 @@
 \usepackage{helvet}
 \usepackage{pdfpages}
 \usepackage[margin=2.5cm, headheight=1.4cm]{geometry}
-\usepackage[style=authoryear, backend=biber]{biblatex}
+\usepackage[style=ieee, backend=biber]{biblatex}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,     % Couleur des liens internes (sommaire, chapitres)
+    citecolor=blue,     % Couleur des liens de citation vers la bibliographie
+    urlcolor=blue       % Couleur des liens URL (DOI, sites web)
+}   
 \addbibresource{references.bib}
 \graphicspath{{image/}}
