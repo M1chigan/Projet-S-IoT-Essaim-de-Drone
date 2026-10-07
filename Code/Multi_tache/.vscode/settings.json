@@ -1,0 +1,7 @@
+{
+  "clangd.arguments": [
+    "--compile-commands-dir=${workspaceFolder}",
+    "--query-driver=C:/Users/*/.platformio/packages/toolchain-xtensa-esp32*/bin/*"
+  ],
+  "C_Cpp.intelliSenseEngine": "disabled"
+}

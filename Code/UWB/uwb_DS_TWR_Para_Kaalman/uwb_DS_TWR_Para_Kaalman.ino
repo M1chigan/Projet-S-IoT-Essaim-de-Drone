@@ -31,7 +31,7 @@ const uint8_t PIN_SS  = 4;
 #define MSG_TYPE_RESP       0x20
 #define MSG_TYPE_FINAL      0x30
 
-const uint16_t ANTENNA_DELAY_TICKS = 16436+23; 
+const uint16_t ANTENNA_DELAY_TICKS = 16436; 
 const float DISTANCE_PER_TICK      = 0.00469176368f;
 const int64_t MASK_40BIT           = 0xFFFFFFFFFFLL;
 
@@ -247,20 +247,30 @@ uint32_t getResponderDelayUs(uint8_t my_id, uint8_t initiator_id) {
     return BASE_DELAY_US + (slot_index * SLOT_DURATION_US);
 }
 
-// --- Empirical Correction (Polynomial Interpolation) ---
 float applyEmpiricalCorrection(float raw_m) {
-    // Tweak these coefficients based on your real-world calibration curve
-    // Equation: Error = a*x^2 + b*x + c
-    const float a = 0.0028f;   // Quadratic term (set to 0 by default until you measure it)
-    const float b = -0.0277f;   // Linear term
-    const float c = 0.0f;   // Constant bias
+    // 1. Convert input to centimeters because the coefficients were generated using cm
+    float raw_cm = raw_m * 100.0f;
+    
+    // 4th-degree polynomial empirical correction curve (fitted for cm)
+    // Equation: Error = a*x^4 + b*x^3 + c*x^2 + d*x + e
+    const float a = -1.004e-6f; 
+    const float b = 0.0005059f; 
+    const float c = -0.09263f;  
+    const float d = 7.398f;     
+    const float e = -221.7;    
 
-    float estimated_error = (a * raw_m * raw_m) + (b * raw_m) + c;
-    float corrected_m = raw_m - estimated_error;
+    // Horner's method evaluated in centimeters
+    float estimated_error_cm = e + raw_cm * (d + raw_cm * (c + raw_cm * (b + raw_cm * a)));
+    
+    // 2. Subtract the estimated error (in cm) from the raw distance (in cm)
+    float corrected_cm = raw_cm - estimated_error_cm;
 
-    if (corrected_m < 0.0f) corrected_m = 0.0f;
+    if (corrected_cm < 0.0f) {
+        corrected_cm = 0.0f;
+    }
 
-    return corrected_m;
+    // 3. Return the result safely converted back to meters for the rest of the code
+    return corrected_cm / 100.0f;
 }
 
 // --- Radio Transmission Functions ---

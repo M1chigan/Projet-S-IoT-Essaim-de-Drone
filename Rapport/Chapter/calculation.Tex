@@ -1,0 +1,34 @@
+\chapter*{Calculations}
+\subsection*{TWR Error calculation : } \label{TWR-Error-calculation}
+Let's set: 
+\begin{itemize}
+\item True time of flight : $T_{f}$
+\item True time of process : $t_{proc}$
+\item Clock drift errors : $e_a$ and $e_b$
+\end{itemize}
+The measured times are: 
+\begin{equation}
+R_a = (2T_f + t_{proc})(1 + e_a) \text{ and } t_{proc_b} = t_{proc}(1 + e_b)
+\end{equation}
+The calculated time of flight is:
+\begin{equation}
+\hat{T}_f = \frac{R_a -t_{proc_b}}{2}
+\end{equation}
+By replacing $R_a$ and $t_{proc_b}$, we obtain : 
+\begin{equation}
+\hat{T}_f = \frac{2T_f(1 + e_a) + t_{proc}(1 + e_a) - t_{proc}(1 + e_b)}{2}
+\end{equation}
+By simplifying, we obtain :
+\begin{equation}
+\hat{T}_f = T_f(1 + e_a) + \frac{t_{proc}(e_a - e_b)}{2}
+\end{equation}
+The error is $\hat{T}_f - T_f$, so: \\
+\begin{equation}
+Error = T_f \times e_a + \frac{t_{proc}(e_a - e_b)}{2}
+\end{equation}
+The time of flight is about 33 nanoseconds, however D is around $3,000,000$. \\
+So we can ignore $T_f \times e_a$ cause $T_{f} \ll t_{proc}$, and we obtain :
+\begin{equation}
+Error \approx \frac{t_{proc}(e_a - e_b)}{2}
+\end{equation}
+\subsection*{DS-TWR Error calculation : } \label{DS-TWR-Error-calculation}

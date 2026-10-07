@@ -1,61 +1,19 @@
-\documentclass[a4paper,11pt]{report}
-
-
-\input{inport.tex}
-
-%Site pour forme : https://tikzmaker.com/editor
-
-% Définitions espace avant chapitre
-\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter}{20pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{0pt}{15pt}
-
-% Définition du texte atténué
-\newcommand{\faintText}[1]{\textcolor{black!35}{\small #1}}
-\definecolor{insared}{RGB}{220, 20, 30}
-\definecolor{titlegray}{RGB}{145, 150, 155}
-\definecolor{authorgray}{RGB}{125, 130, 135}
-
-% Configuration globale de fancyhdr
-\pagestyle{fancy}
-\fancyhf{}
-
-% Haut de page
-\fancyhead[L]{$\vcenter{\hbox{\faintText{\leftmark}}}$}
-\fancyhead[C]{$\vcenter{\hbox{\faintText{S-IoT - Project Report : Drone swarm}}}$}
-\fancyhead[R]{$\vcenter{\hbox{\transparent{0.5}\includegraphics[height=1.2cm]{Logo INSA.png}}}$}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\headrule}{\hbox to\headwidth{\color{black!20}\leaders\hrule height \headrulewidth\hfill}}
-
-% Bas de page
-\fancyfoot[C]{\faintText{Page \thepage\ on \ref{TotPages}}}
-\renewcommand{\footrulewidth}{0pt}
-
-\fancypagestyle{plain}{
-    \fancyhf{}
-    \fancyhead[L]{$\vcenter{\hbox{\faintText{\leftmark}}}$}
-    \fancyhead[C]{$\vcenter{\hbox{\faintText{S-IoT - Project Report : Drone swarm}}}$}
-    \fancyhead[R]{$\vcenter{\hbox{\transparent{0.5}\includegraphics[height=1.2cm]{Logo INSA.png}}}$}
-    \fancyfoot[C]{\faintText{Page \thepage\ on \ref{TotPages}}}
-    \renewcommand{\headrulewidth}{0.4pt}
-    \renewcommand{\headrule}{\hbox to\headwidth{\color{black!20}\leaders\hrule height \headrulewidth\hfill}}
-}
-
-\begin{document}
-\includepdf[pages=1]{PrePage/PageDeGarde.pdf}
-\newpage
-\input{Chapter/Specifications.tex}
-\newpage
 \chapter*{Bibliographical Studies}
 \markboth{Bibliographical Studies}{Bibliographical Studies}
 
 \section{UWB}
 
-\subsection{Definitions}
-Explain what is UWB
-\subsection{Algorithm}
-Explain that we found and test different Algorithm
+\subsection{Definitions} 
+Ultra-Wideband (UWB) is a technology using radio frequency to exchange data created in 1880.
+Communication is not the only purpose, it can also be used to locate; it is only  possible by using different module, those algorithms and technique will be treated in the next part (\ref{UWB_Algo}).
+In the majority of cases, UWB is deployed for indoor purpose, otherwise, it can be used for outdoor purpose; but it is less shown in scientific papers.
+
+
+\subsection{Location algorithm}\label{UWB_Algo}
+In order to use  UWB as a location sensor. We have to use specific algorithm; in the following subsection, we will explain and show 2 different location algorithms. Firstly,  two-way ranging (TWR) and secondly double sided two-way ranging (DS-TWR).Finally, we will describe TDOA, the most advanced algorithms.
+
 \subsubsection{Two way ranging (TWR)}
-The Two Way Ranging (TWR) algorithm is the easiest and the fastest to implement in a UWB system.
+The Two-Way Ranging (TWR) algorithm is the easiest and the fastest to implement in a UWB system.
 In order to explain this algorithm,  we will use 2 modules called $UWB_1$ and $UWB_2$.
 
 \begin{figure}[!ht]
@@ -96,19 +54,19 @@ With all those parameters, we can deduce those variables :
     \item Travel time : $t_{travel} = t_{tot} - t_{proc}$
 \end{itemize}
 The signal travels back and forth so it did twice the distance ($d$), and travel speed of a radio signal is equivalent to light speed ($c$). \\ 
-So, we can deduce this equation : 
+We can deduce this equation : 
 \begin{equation} \label{TWR_eq}
 \boxed{\frac{t_{travel}\times c}{2}=\frac{(t_{tot} - t_{proc}) \times c}{2}= \frac{((r_{x1} - t_{x1}) - (r_{x2} - t_{x2})) \times c}{2}}
 \end{equation}
 We can also determine the induced error of this algorithm.\\
-After calculation (describe in calculation part at page~\pageref{TWR-Error-calculation}), we obtain this equation: 
+After calculation (describe the in calculation part page~\pageref{TWR-Error-calculation}), we obtain this equation: 
 \begin{equation}
 \epsilon \approx \frac{t_ {proc}(e_a - e_b)}{2}
 \end{equation}
-As we can observe, the Time of processing is directly link to the error. The $t_{proc}$ is around 3,000,000 nanoseconds so, it's inducing a high error. 
+As we can observe, the Time of processing is directly linked to the error. The $t_{proc}$ is around 3,000,000 nanoseconds so, it is inducing a high error. 
  
 \subsubsection{Double Sided Two way ranging (DS-TWR)}
-The DS-TWR has for purpose to reduce the error introduce by the $t_{proc}$. This algorithm also use $UWB_1$ and $UWB_2$.
+DS-TWR has for main advantage to reduce the error introduced by the $t_{proc}$. This algorithm also uses $UWB_1$ and $UWB_2$.
 
 \begin{figure}[!ht]
 \centering
@@ -139,50 +97,16 @@ The DS-TWR has for purpose to reduce the error introduce by the $t_{proc}$. This
 \label{fig:DS-TWR}
 \end{figure}
 
-\section{Data treatment}
-
-\subsection{Polynomiale Filter}
-
-\subsection{Filter}
-
-\subsubsection{Kaalman Filter}
-
-\subsubsection{Extended Kaalman Filter}
+\subsubsection{TDOA}
 
 \newpage
-\chapter*{Caculations}
-\subsection*{TWR Error calculation : } \label{TWR-Error-calculation}
-Let's set: 
-\begin{itemize}
-\item True time of flight : $T_{f}$
-\item True time of process : $t_{proc}$
-\item Clock drift errors : $e_a$ and $e_b$
-\end{itemize}
-The measured times are: 
-\begin{equation}
-R_a = (2T_f + t_{proc})(1 + e_a) \text{ and } t_{proc_b} = t_{proc}(1 + e_b)
-\end{equation}
-The calculated time of flight is:
-\begin{equation}
-\hat{T}_f = \frac{R_a -t_{proc_b}}{2}
-\end{equation}
-By replacing $R_a$ and $t_{proc_b}$, we obtain : 
-\begin{equation}
-\hat{T}_f = \frac{2T_f(1 + e_a) + t_{proc}(1 + e_a) - t_{proc}(1 + e_b)}{2}
-\end{equation}
-By simplifying, we obtain :
-\begin{equation}
-\hat{T}_f = T_f(1 + e_a) + \frac{t_{proc}(e_a - e_b)}{2}
-\end{equation}
-The error is $\hat{T}_f - T_f$, so: \\
-\begin{equation}
-Error = T_f \times e_a + \frac{t_{proc}(e_a - e_b)}{2}
-\end{equation}
-The time of flight is about 33 nanoseconds, however D is around $3,000,000$. \\
-So we can ignore $T_f \times e_a$ cause $T_{f} \ll t_{proc}$, and we obtain :
-\begin{equation}
-Error \approx \frac{t_{proc}(e_a - e_b)}{2}
-\end{equation}
-\subsection*{DS-TWR Error calculation : } \label{DS-TWR-Error-calculation}
+\section{Measure management}
+In most cases, date measured by sensors are unclear. It could be a sensor offset, it can also come from crosstalks. Or other, exterior interactions. In order, to obtain clean measurements, and to be able to use them for controlling or any other purpose. We have to develop some filter; in this section, we will describe three filters used for cleaning the UWB signal. Firstly, we will explain the polynomial filter, and secondly, the Kalman filter, then finally the extended Kalman filters
+\subsection{Polynomial Filter}
 
-\end{document}
+
+\subsection{Kalman Filters}
+
+\subsection{Extended Kalman Filter}
+
+\newpage
