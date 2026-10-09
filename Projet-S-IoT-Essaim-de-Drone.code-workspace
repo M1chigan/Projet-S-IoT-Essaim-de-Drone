@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "Multi_tache",
+			"path": "Code/Multi_tache"
+		}
+	],
+	"settings": {
+		"latex-workshop.view.pdf.viewer": "tab"
+	}
+}

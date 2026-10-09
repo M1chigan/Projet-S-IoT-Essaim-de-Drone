@@ -24,8 +24,8 @@ const uint8_t PIN_SS  = 4;
 #define DISPLAY_INTERVAL_MS 500
 #define REPLY_DELAY_US      2500   
 
-#define BASE_DELAY_US       3000 
-#define SLOT_DURATION_US    3000
+#define BASE_DELAY_US       1500 
+#define SLOT_DURATION_US    1500
 
 #define MSG_TYPE_POLL       0x10
 #define MSG_TYPE_RESP       0x20
@@ -224,7 +224,7 @@ float current_filtered_distances_m[MAX_DRONES] = {-1.0f, -1.0f, -1.0f, -1.0f, -1
 
 bool waiting_for_responses = false;
 uint32_t poll_sent_micros = 0;
-const uint32_t FINAL_TRIGGER_DELAY_US = 12000;
+const uint32_t FINAL_TRIGGER_DELAY_US = 8000;
 
 // --- Interrupt Handlers ---
 void IRAM_ATTR handleRxInterrupt() { rx_packet_ready = true; }
@@ -446,7 +446,7 @@ void loop() {
 
     if (now_ms - last_poll_time >= current_poll_interval) {
         last_poll_time = now_ms;
-        current_poll_interval = POLL_INTERVAL_MS + random(10, 80);
+        current_poll_interval = POLL_INTERVAL_MS + random(5, 30);
         
         if (!waiting_for_responses) {
             sendPoll();
