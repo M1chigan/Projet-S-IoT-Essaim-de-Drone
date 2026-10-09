@@ -151,8 +151,8 @@ The DS-TWR has for purpose to reduce the error introduce by the $t_{proc}$. This
 In the context of navigating systems in noisy environments with sensors, the Kalman filter is the most relevant algorithm. 
 As Welch and Bishop \parencite{welch2006} point out, the Kalman filter is notable for its ability to "support estimations of past, present, and even future states [...] even when the precise nature of the modeled system is unknown.".
 In our study case, we deal with a drone swarm communicating using the UWB communication protocol, which gives us the relative distance between each pair of drones by using the time of flight of a radio wave. 
-This measure is non-linear (Euclidian distance calculated with a square root) which implies that an extended version of the filter should be used : it uses a typical technique of linearization around the current state using a Jacobian matrix.
-We are also considering an anchor-free systems which enhances the challenge of this project.
+This measure is non-linear (Euclidian distance calculated with a square root) which implies that an extended version of the filter should be used : it resorts to a typical technique of linearization around the current state using a Jacobian matrix.
+We are also considering an anchor-free system which enhances the challenge of this project.
 In this section, we will first define the theory of the EKF (Extended Kalman Filter) and 
 then, we will study its application to our UWB drone swarm system.
 
@@ -163,7 +163,7 @@ then, we will study its application to our UWB drone swarm system.
 
 In his pioneering article of 1960 \parencite{kalman1960}, 
 Rudolf Kalman describes state estimation as a recursive process in which at each time step, 
-the current estimation and the uncertainty are computed using only the past estimate and the newly available measure. When assuming a linear dynamical system and Gaussian noise, the Kalman filter minimizes the mean-square estimation error : in other words, the best possible estimate given the available measurements. Even when these assumptions do not hold exactly, the filter remains the best linear estimator achievable (known as the Best Linear Unbiased Estimator, or BLUE). This optimality is what established the Kalman filter as the standard approach for state estimation in noisy dynamic systems. While Kalman's filter optimality holds for linear dynamical systems, we have in our case, as mentionned earlier, a non-linearity with the use of the Euclidian distance. This is why we require an extended version of the filter that can handle the non-linearity, even at the cost of losing the strict optimality.
+the current estimation and the uncertainty are computed using only the past estimate and the newly available measure. When assuming a linear dynamical system and Gaussian noise, the Kalman filter minimizes the mean-square estimation error : in other words, the best possible estimate given the available measurements. Even when these assumptions do not hold exactly, the filter remains the best linear estimator achievable (known as the Best Linear Unbiased Estimator, or BLUE). This optimality is what established the Kalman filter as the standard approach for state estimation in noisy dynamic systems. While Kalman filter's optimality holds for linear dynamical systems, we have in our case, as mentioned earlier, a non-linearity with the use of the Euclidian distance. This is why we require an extended version of the filter that can handle the non-linearity, even at the cost of losing the strict optimality.
 
 
 \paragraph{Formalism of the discrete Kalman Filter}
@@ -204,7 +204,7 @@ includes a new measurement in the current state to improve its estimate.
 \subsubsection{Extended Kalman filter}
 
 
-As mentionned earlier, the extended Kalman filter is used to deal with a non-linear state process defined as diffentiable function $f$. To do so, it essentially linearizes the nonlinear function around the current estimate by computing the Jacobian matrices of the nonlinear functions $f$ and $h$ in the following equations (with the same notations as before) :
+As mentioned earlier, the extended Kalman filter is used to deal with a non-linear state process defined as diffentiable function $f$. To do so, it essentially linearizes the nonlinear function around the current estimate by computing the Jacobian matrices of the nonlinear functions $f$ and $h$ in the following equations (with the same notations as before) :
 
 $$ {\displaystyle {\textbf {x}}_{k}=f({\textbf {x}}_{k-1},{\textbf {u}}_{k},{\textbf {w}}_{k})}$$
 $${\displaystyle {\textbf {z}}_{k}=h({\textbf {x}}_{k},{\textbf {v}}_{k})}$$
