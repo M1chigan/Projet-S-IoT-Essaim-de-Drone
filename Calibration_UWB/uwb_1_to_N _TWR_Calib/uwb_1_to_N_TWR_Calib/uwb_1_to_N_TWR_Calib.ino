@@ -41,7 +41,7 @@ struct MovingAvg {
 
 MovingAvg bench_stats[MAX_DRONES] = {0}; // Initialize to zero
 
-const uint16_t ANTENNA_DELAY_TICKS = 16436+9; 
+const uint16_t ANTENNA_DELAY_TICKS = 16436+4; 
 const float DISTANCE_PER_TICK      = 0.00469176368f;
 const int64_t MASK_40BIT           = 0xFFFFFFFFFFLL;
 
