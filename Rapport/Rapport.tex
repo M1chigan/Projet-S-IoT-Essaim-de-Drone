@@ -161,7 +161,9 @@ then, we will study its application to our UWB drone swarm system.
 
 \paragraph{Origin of the theory}
 
-In his pioneering article of 1960 \parencite{kalman1960}, Rudolf Kalman describes state estimation as a recursive process in which at each time step, the current estimation and the uncertainty using only the past estimate and the newly available measure. When assuming a linear dynamical system and Gaussian noise, the Kalman filter minimizes the mean-square estimation error : in other words, the best possible estimate given the available measurements. Even when these assumptions do not hold exactly, the filter remains the best linear estimator achievable (known as the Best Linear Unbiased Estimator, or BLUE). This optimality is what established the Kalman filter as the standard approach for state estimation in noisy dynamic systems. While Kalman's filter optimality holds for linear dynamical systems, we have in our case, as mentionned earlier, a non-linearity with the use of the Euclidian distance. This is why we require an extended version of the filter that can handle the non-linearity, even at the cost of losing the strict optimality.
+In his pioneering article of 1960 \parencite{kalman1960}, 
+Rudolf Kalman describes state estimation as a recursive process in which at each time step, 
+the current estimation and the uncertainty are computed using only the past estimate and the newly available measure. When assuming a linear dynamical system and Gaussian noise, the Kalman filter minimizes the mean-square estimation error : in other words, the best possible estimate given the available measurements. Even when these assumptions do not hold exactly, the filter remains the best linear estimator achievable (known as the Best Linear Unbiased Estimator, or BLUE). This optimality is what established the Kalman filter as the standard approach for state estimation in noisy dynamic systems. While Kalman's filter optimality holds for linear dynamical systems, we have in our case, as mentionned earlier, a non-linearity with the use of the Euclidian distance. This is why we require an extended version of the filter that can handle the non-linearity, even at the cost of losing the strict optimality.
 
 
 \paragraph{Formalism of the discrete Kalman Filter}
@@ -195,7 +197,7 @@ includes a new measurement in the current state to improve its estimate.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{kalman_2_phases.png}
-    \caption{Ongoing discrete Kalman filter cycle  (Welch and Bishop (2006, p. 5)) }
+    \caption{Ongoing discrete Kalman filter cycle  (Welch and Bishop (2006, p. 5) \parencite{welch2006}) }
     \label{fig:placeholder}
 \end{figure}
 
