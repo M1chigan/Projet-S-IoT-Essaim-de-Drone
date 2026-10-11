@@ -1,0 +1,251 @@
+\documentclass[11pt,a4paper]{article}
+% LTeX: language=fr
+% Character encoding and font configuration for standard pdflatex
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx} % Times New Roman clone for a professional academic look
+\usepackage{graphicx}
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{parskip}   % Automatically adds space between paragraphs and removes indentation
+\usepackage[colorlinks=true, urlcolor=black, linkcolor=black]{hyperref}
+\usepackage{circuitikz}
+\usepackage{float}
+
+\input{Tikz/Circuit.tex}
+
+\begin{document}
+
+\begin{minipage}[c]{0.30\textwidth}
+    \includegraphics[width=\linewidth,keepaspectratio]{Image/Logo_INSA.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.80\textwidth}
+    {\LARGE \textbf{Projet S-IoT : Essaim de drone}}\\[2pt]
+    {\large Protocole de calibration }
+\end{minipage}
+
+\vspace{0.4cm}
+\hrule height 1pt
+\vspace{0.8cm}
+
+\begin{center}
+    {\huge \textbf{Protocole de Test}} \\[5pt]
+    {\large\textit{du 09/10/2026}} \\[5pt]
+\end{center}
+
+\tableofcontents
+\newpage
+Le but de ce document est de définir les tests qui ont été fais sur les modules UWB DW1000. Et ensuite, d'exposer les résultats et les conclusions
+
+Les tests sont divisés en deux parties : Sans drone puis avec Drone.
+
+La quasi-totalité des tests ont été réalisés en salle topographie. 
+\section{Sans drone}
+\subsection{Orientation du module}
+Dans cette partie, 
+\subsubsection{Test à plat}
+Le test à plats a été réaliser un peu différement des autres car effectuer en Plateforme Génie électrique. 
+Voici les résultats qui ont été trouvés : 
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Distance réelle (cm)  & Distance mesurée & Erreur \\ \hline
+        69,4 & 61 & -8,4 \\ \hline
+        70 & 62,2 & -7,8 \\ \hline
+        75 & 69,6 & -5,4 \\ \hline
+        80 & 73,9 & -6,1 \\ \hline
+        82,6 & 76,1 & -6,5 \\ \hline
+        85 & 79,9 & -5,1 \\ \hline
+        90 & 86,6 & -3,4 \\ \hline
+        91 & 87 & -4 \\ \hline
+        95 & 92,2 & -2,8 \\ \hline
+        100 & 96,5 & -3,5 \\ \hline
+        100 & 96,8 & -3,2 \\ \hline
+        105 & 102,6 & -2,4 \\ \hline
+        107,3 & 106,4 & -0,9 \\ \hline
+        110 & 108,9 & -1,1 \\ \hline
+        115 & 113,4 & -1,6 \\ \hline
+        120,5 & 120,9 & 0,4 \\ \hline
+        125 & 126,4 & 1,4 \\ \hline
+        130 & 129,6 & -0,4 \\ \hline
+        132 & 133,7 & 1,7 \\ \hline
+        135 & 133,6 & -1,4 \\ \hline
+        140 & 138,6 & -1,4 \\ \hline
+        145 & 144,9 & -0,1 \\ \hline
+        147,4 & 150 & 2,6 \\ \hline
+        150 & 151,7 & 1,7 \\ \hline
+        155 & 160,3 & 5,3 \\ \hline
+        155,5 & 161 & 5,5 \\ \hline
+        160 & 165,7 & 5,7 \\ \hline
+        164,7 & 171,8 & 7,1 \\ \hline
+        165 & 172,2 & 7,2 \\ \hline
+        167 & 172,8 & 5,8 \\ \hline
+        170 & 177,2 & 7,2 \\ \hline
+        175 & 180,3 & 5,3 \\ \hline
+        176 & 183,8 & 7,8 \\ \hline
+        180 & 184,3 & 4,3 \\ \hline
+        185 & 188,3 & 3,3 \\ \hline
+        189,6 & 197,9 & 8,3 \\ \hline
+        190 & 191,9 & 1,9 \\ \hline
+    \end{tabular}
+    \caption{Mesure face à face de façon horizontale}
+\end{table}
+
+\subsubsection{Test en vertical}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Distance réelle (cm) & Distance mesurée (cm) & Erreur  \\ \hline
+        70 & 67 & 3 \\ \hline
+        80 & 78 & 2 \\ \hline
+        90 & 89,2 & 0,8 \\ \hline
+        100 & 100 & 0 \\ \hline
+        110 & 110,6 & -0,6 \\ \hline
+        120 & 120 & 0 \\ \hline
+        130 & 132,4 & -2,4 \\ \hline
+        140 & 143,6 & -3,6 \\ \hline
+        150 & 154,2 & -4,2 \\ \hline
+        160 & 165,7 & -5,7 \\ \hline
+        170 & 176,4 & -6,4 \\ \hline
+    \end{tabular}
+    \caption{Mesures pour module face à face avec une référence posé à 120cm}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Distance réelle (cm) & Distance mesurée (cm) & Erreur  \\ \hline
+        70 & 64 & 6 \\ \hline
+        80 & 76,2 & 3,8 \\ \hline
+        90 & 85,6 & 4,4 \\ \hline
+        100 & 97,4 & 2,6 \\ \hline
+        110 & 108,2 & 1,8 \\ \hline
+        120 & 119,6 & 0,4 \\ \hline
+        130 & 130 & 0 \\ \hline
+        140 & 140 & 0 \\ \hline
+        150 & 152,7 & -2,7 \\ \hline
+        160 & 162 & -2 \\ \hline
+        170 & 172,2 & -2,2 \\ \hline
+    \end{tabular}
+    \caption{Mesures pour module face à face avec une référence posé à 130cm}
+\end{table}
+\subsubsection{Conclusion sur l'orientation}
+D'après les essais précédents et les résultats, il est visible que l'orientation verticale semble avoir de meilleure performance de façon globale que le module à plat. 
+Dans la suite des essais, nous serons donc toujours avec un module vertical.
+\subsection{Influence de l'angle}
+Nous avons cherché à définir un semblant de diagramme de rayonnement, qui nous permettrait de déterminer la position optimale des drones. Pour cela, nous avons réalisé deux tests d'angles.
+
+\subsubsection{Module parallèle}
+\begin{figure}[H]
+  \centering
+  \SchemaParalleles
+  \caption{Schéma pour les essais des modules en parallèle}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+        Décalage (cm) & Angle(°) & Distance réelle (cm) & Distance mesurée (cm) & Erreur  \\ \hline
+        0 & 0 & 120 & 117 & 3 \\ \hline
+        10 & 4,78 & 121 & 118,4 & 2,6 \\ \hline
+        20 & 9,59 & 121,5 & 118,9 & 2,6 \\ \hline
+        30 & 14,48 & 122,5 & 119,1 & 3,4 \\ \hline
+        40 & 19,47 & 125,8 & 124,8 & 1 \\ \hline
+        50 & 24,62 & 128,5 & 128,7 & -0,2 \\ \hline
+        60 & 30,00 & 132,5 & 134,4 & -1,9 \\ \hline
+        70 & 35,69 & 137 & 142,6 & -5,6 \\ \hline
+    \end{tabular}
+    \caption{Mesure parallèle}
+\end{table}
+
+\subsubsection{Sur un rayon}
+\begin{figure}[H]
+  \centering
+  \Schemarayon
+  \caption{Schéma pour les essais sur un rayon}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Angle(°) & Distance réelle (cm) & Distance mesurée (cm) \\ \hline
+        10 & 120 & 116,7 \\ \hline
+        20 & 120 & 118,4 \\ \hline
+        30 & 120 & 119,5 \\ \hline
+        40 & 120 & 122,8 \\ \hline
+        50 & 120 & 125,9 \\ \hline
+        60 & 120 & 124,2 \\ \hline
+        70 & 120 & 123 \\ \hline
+        80 & 120 & 124 \\ \hline
+        90 & 120 & 130 \\ \hline
+    \end{tabular}
+    \caption{Mesure rayon}
+\end{table}
+
+\subsection{Avant/arrière}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Distance réelle (cm) & Distance mesurée (cm) & Erreur  \\ \hline
+        70 & 97 & -27 \\ \hline
+        80 & 109,8 & -29,8 \\ \hline
+        90 & 122,8 & -32,8 \\ \hline
+        100 & 133,3 & -33,3 \\ \hline
+        110 & 143,5 & -33,5 \\ \hline
+        120 & 152 & -32 \\ \hline
+        130 & 161,6 & -31,6 \\ \hline
+        140 & 177,2 & -37,2 \\ \hline
+        150 & 188 & -38 \\ \hline
+        160 & 192,2 & -32,2 \\ \hline
+        170 & 208,8 & -38,8 \\ \hline
+    \end{tabular}
+    \caption{Mesure face dos }
+\end{table}
+
+\section{Sur drone}
+
+\subsection{Orientation du module}
+Aucun test à plat n'a été réalisé car prouvez moins bien lors des essais sans drone, par efficacité de temps, le module posé verticalement a été conservé. 
+\subsubsection{Test en vertical}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Distance réelle (cm) & Distance mesurée (cm) & Erreur  \\ \hline
+        100 & 92,6 & 7,4 \\ \hline
+        110 & 104,3 & 5,7 \\ \hline
+        120 & 115 & 5 \\ \hline
+        130 & 124,1 & 5,9 \\ \hline
+        140 & 134,6 & 5,4 \\ \hline
+    \end{tabular}
+    \caption{Mesure sur drone face à face  }
+\end{table}
+\subsection{Influence de l'angle}
+Les essais sont faits à 1m20 de distance. 
+\subsubsection{Module parallèle}
+\input{Tikz/Circuit.tex}
+\subsubsection{Sur un rayon}
+
+\subsection{Avant/arrière}
+
+
+
+\vspace{0.4cm}
+
+% --------------------------------------------------
+% Bottom Decorative Rule
+% --------------------------------------------------
+\vfill
+\hrule height 1pt
+
+\end{document}

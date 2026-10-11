@@ -1,0 +1,61 @@
+\providecommand{\SchemaParalleles}{
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\fontsize{10.2pt}{13.3pt}\selectfont]
+\draw [dash dot dot] (17.75,14) -- (22.125,14);
+\draw  (19.125,10.75) rectangle (20.75,10.25);
+\draw  (22.25,14.25) rectangle (23.875,13.75);
+\node [font=\fontsize{10.2pt}{13.3pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (24.25,14) {Fixe};
+\node [font=\fontsize{14.8pt}{19.2pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (23.125,14.625) {$UWB_1$};
+\node [font=\fontsize{14.8pt}{19.2pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (20,9.875) {$UWB_2$};
+\draw [short] (23.25,13.25) -- (23.25,13.25);
+\draw [short] (22.75,13.75) -- (22.75,13.75);
+\draw [dotted] (23.125,13.625) -- (23.125,10);
+\draw [-{Stealth[open,scale=1.5]}, dash dot dot] (20.875,10.5) -- (27,10.5);
+\draw [short] (23,13.125) -- (23,13.125);
+\draw [short] (23,12.75) -- (23,12.75);
+\draw [densely dotted] (22.875,11.75) -- (22.875,11.75);
+\draw [densely dotted] (23,12.125) -- (23,12.125);
+\draw [densely dotted] (23,12.125) -- (23,12.125);
+\draw [{Stealth[scale=1.5]}-{Stealth[scale=1.5]}, ] (20,10.875) -- (23,13.625);
+\draw [short] (23,12.25) arc[start angle=-74.74, end angle=-164.74, radius=0.7126];
+\node [font=\fontsize{10.2pt}{13.3pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (22.375,12.125) {$\theta$};
+\draw [dash dot dot] (24.625,14) -- (27,14);
+\draw [{Stealth[open,scale=1.5]}-, dash dot dot] (17.625,10.5) -- (19,10.5);
+\node [font=\fontsize{10.2pt}{13.3pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (23.375,10.25) {y};
+\draw [short] (21.375,11.125) -- (21.375,11.125);
+\draw [short] (20.75,11.625) -- (20.75,11.625);
+\draw [line width=1.2pt, short] (19.625,10.75) -- (20.25,10.75);
+\draw [line width=1.2pt, short] (22.75,13.75) -- (23.375,13.75);
+\end{circuitikz}
+}
+
+\providecommand{\Schemarayon}{
+\begin{circuitikz}
+\draw [dash dot dot] (25.375,7.875) -- (29.75,7.875);
+\draw [ rotate around={-45:(27.3125, 4.5)}] (26.5,4.75) rectangle (28.125,4.25);
+\draw  (29.875,8.125) rectangle (31.5,7.625);
+\node [font=\fontsize{10.2pt}{13.3pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (31.875,7.875) {Fixe};
+\node [font=\fontsize{14.8pt}{19.2pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (30.75,8.5) {$UWB_1$};
+\node [font=\fontsize{14.8pt}{19.2pt}\selectfont, rotate around={-45:(0,0)}, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (26.875,4) {$UWB_2$};
+\draw [short] (30.875,7.125) -- (30.875,7.125);
+\draw [short] (30.375,7.625) -- (30.375,7.625);
+\draw [dotted] (30.75,7.5) -- (30.75,3.875);
+\draw [short] (30.625,7) -- (30.625,7);
+\draw [short] (30.625,6.625) -- (30.625,6.625);
+\draw [densely dotted] (30.5,5.625) -- (30.5,5.625);
+\draw [densely dotted] (30.625,6) -- (30.625,6);
+\draw [densely dotted] (30.625,6) -- (30.625,6);
+\draw [{Stealth[scale=1.5]}-{Stealth[scale=1.5]}, ] (27.625,4.75) -- (30.625,7.5);
+\draw [short] (30.625,5.75) arc[start angle=-74.74, end angle=-164.74, radius=0.7126];
+\node [font=\fontsize{10.2pt}{13.3pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (30,6) {$\theta$};
+\draw [dash dot dot] (32.25,7.875) -- (34.625,7.875);
+\node [font=\fontsize{10.2pt}{13.3pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.000cm] at (31,4.125) {y};
+\draw [short] (29,5) -- (29,5);
+\draw [short] (28.375,5.5) -- (28.375,5.5);
+\draw [line width=1.2pt, short] (27.25,4.875) -- (27.75,4.375);
+\draw [line width=1.2pt, short] (30.375,7.625) -- (31,7.625);
+\node [font=\fontsize{14.8pt}{19.2pt}\selectfont, rotate around={41:(0,0)}, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.010cm] at (29,6.375) {$d$};
+\draw [dash dot dot] (30.625,2.75) arc[start angle=-95.88, end angle=-130.52, radius=4.7969];
+\draw [dash dot dot] (26.625,5.25) arc[start angle=-138.76, end angle=-173.32, radius=4.1447];
+\end{circuitikz}
+}
