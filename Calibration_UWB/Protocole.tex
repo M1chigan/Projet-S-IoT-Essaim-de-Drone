@@ -10,6 +10,7 @@
 \usepackage[colorlinks=true, urlcolor=black, linkcolor=black]{hyperref}
 \usepackage{circuitikz}
 \usepackage{float}
+\usepackage{subcaption}  % pour subtable
 
 \input{Tikz/Circuit.tex}
 
@@ -47,53 +48,79 @@ Dans cette partie,
 Le test à plats a été réaliser un peu différement des autres car effectuer en Plateforme Génie électrique. 
 Voici les résultats qui ont été trouvés : 
 
+\begin{figure}[H]
+  \centering
+  \FtFhorizontale
+  \caption{Schéma pour les essais en face à face orienté horizontalement}
+\end{figure}
+
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l|l|l|}
-    \hline
-        Distance réelle (cm)  & Distance mesurée & Erreur \\ \hline
-        69,4 & 61 & -8,4 \\ \hline
-        70 & 62,2 & -7,8 \\ \hline
-        75 & 69,6 & -5,4 \\ \hline
-        80 & 73,9 & -6,1 \\ \hline
-        82,6 & 76,1 & -6,5 \\ \hline
-        85 & 79,9 & -5,1 \\ \hline
-        90 & 86,6 & -3,4 \\ \hline
-        91 & 87 & -4 \\ \hline
-        95 & 92,2 & -2,8 \\ \hline
-        100 & 96,5 & -3,5 \\ \hline
-        100 & 96,8 & -3,2 \\ \hline
-        105 & 102,6 & -2,4 \\ \hline
+    \small
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+        \centering
+        \begin{tabular}{|c|c|c|}
+        \hline
+        Réelle (cm) & Mesurée (cm) & Erreur (cm) \\ \hline
+        69,4  & 61    & -8,4 \\ \hline
+        70    & 62,2  & -7,8 \\ \hline
+        75    & 69,6  & -5,4 \\ \hline
+        80    & 73,9  & -6,1 \\ \hline
+        82,6  & 76,1  & -6,5 \\ \hline
+        85    & 79,9  & -5,1 \\ \hline
+        90    & 86,6  & -3,4 \\ \hline
+        91    & 87    & -4   \\ \hline
+        95    & 92,2  & -2,8 \\ \hline
+        100   & 96,5  & -3,5 \\ \hline
+        100   & 96,8  & -3,2 \\ \hline
+        105   & 102,6 & -2,4 \\ \hline
         107,3 & 106,4 & -0,9 \\ \hline
-        110 & 108,9 & -1,1 \\ \hline
-        115 & 113,4 & -1,6 \\ \hline
-        120,5 & 120,9 & 0,4 \\ \hline
-        125 & 126,4 & 1,4 \\ \hline
-        130 & 129,6 & -0,4 \\ \hline
-        132 & 133,7 & 1,7 \\ \hline
-        135 & 133,6 & -1,4 \\ \hline
-        140 & 138,6 & -1,4 \\ \hline
-        145 & 144,9 & -0,1 \\ \hline
-        147,4 & 150 & 2,6 \\ \hline
-        150 & 151,7 & 1,7 \\ \hline
-        155 & 160,3 & 5,3 \\ \hline
-        155,5 & 161 & 5,5 \\ \hline
-        160 & 165,7 & 5,7 \\ \hline
-        164,7 & 171,8 & 7,1 \\ \hline
-        165 & 172,2 & 7,2 \\ \hline
-        167 & 172,8 & 5,8 \\ \hline
-        170 & 177,2 & 7,2 \\ \hline
-        175 & 180,3 & 5,3 \\ \hline
-        176 & 183,8 & 7,8 \\ \hline
-        180 & 184,3 & 4,3 \\ \hline
-        185 & 188,3 & 3,3 \\ \hline
-        189,6 & 197,9 & 8,3 \\ \hline
-        190 & 191,9 & 1,9 \\ \hline
-    \end{tabular}
+        110   & 108,9 & -1,1 \\ \hline
+        115   & 113,4 & -1,6 \\ \hline
+        120,5 & 120,9 & 0,4  \\ \hline
+        125   & 126,4 & 1,4  \\ \hline
+        130   & 129,6 & -0,4 \\ \hline
+        132   & 133,7 & 1,7  \\ \hline
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \vspace{0pt}
+        \centering
+        \begin{tabular}{|c|c|c|}
+        \hline
+        Réelle (cm) & Mesurée (cm) & Erreur (cm) \\ \hline
+        135   & 133,6 & -1,4 \\ \hline
+        140   & 138,6 & -1,4 \\ \hline
+        145   & 144,9 & -0,1 \\ \hline
+        147,4 & 150   & 2,6  \\ \hline
+        150   & 151,7 & 1,7  \\ \hline
+        155   & 160,3 & 5,3  \\ \hline
+        155,5 & 161   & 5,5  \\ \hline
+        160   & 165,7 & 5,7  \\ \hline
+        164,7 & 171,8 & 7,1  \\ \hline
+        165   & 172,2 & 7,2  \\ \hline
+        167   & 172,8 & 5,8  \\ \hline
+        170   & 177,2 & 7,2  \\ \hline
+        175   & 180,3 & 5,3  \\ \hline
+        176   & 183,8 & 7,8  \\ \hline
+        180   & 184,3 & 4,3  \\ \hline
+        185   & 188,3 & 3,3  \\ \hline
+        189,6 & 197,9 & 8,3  \\ \hline
+        190   & 191,9 & 1,9  \\ \hline
+        \end{tabular}
+    \end{minipage}
     \caption{Mesure face à face de façon horizontale}
 \end{table}
 
 \subsubsection{Test en vertical}
+
+\begin{figure}[H]
+  \centering
+  \FtFVertical
+  \caption{Schéma pour les essais en face à face orienté verticalement}
+\end{figure}
 
 \begin{table}[H]
     \centering
@@ -190,6 +217,12 @@ Nous avons cherché à définir un semblant de diagramme de rayonnement, qui nou
 \end{table}
 
 \subsection{Avant/arrière}
+
+\begin{figure}[H]
+  \centering
+  \FtB
+  \caption{Schéma pour les essais face vers le dos}
+\end{figure}
 
 \begin{table}[H]
     \centering
