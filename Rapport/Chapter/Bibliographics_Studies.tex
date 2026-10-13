@@ -268,3 +268,50 @@ $$ {\displaystyle {\textbf {x}}_{k}=f({\textbf {x}}_{k-1},{\textbf {u}}_{k},{\te
 $${\displaystyle {\textbf {z}}_{k}=h({\textbf {x}}_{k},{\textbf {v}}_{k})}$$
 
 \newpage
+Like the original filter, it is recursive: only the current estimate and its covariance are stored, which keeps memory and computation low enough for embedded platforms, while the covariance provides a measure of uncertainty that can be used to reject inconsistent measurements. However, this comes with a drawback. The linearization is a first-order approximation, so the optimality of the linear Gaussian case is lost, and the filter may diverge if the initial estimate is poor or the system is strongly nonlinear (Boutayeb et al., 1997). Its performance also depends on the tuning of the noise covariances. Alternatives such as the unscented Kalman filter (Julier and Uhlmann, 2004), particle filters (Arulampalam et al., 2002) or optimization-based estimators differ in accuracy, robustness and computational cost. The EKF nevertheless remains the standard approach in navigation, including in open-source flight controllers (ArduPilot, [year])
+\newpage
+
+\section{UWB localization : benefits and limits }
+
+As described in the previous section, UWB ranging enables centimeter-level accuracy via time of flight calculations. However, the data gives us only the relative distances between each drone which lacks information, particularly about orientation. In this section, we will discuss the viability of a distance-only approach and the topic of observability.
+
+\subsection{Range-only system}
+
+In their paper entitled "Dynamic Range-Only Localization for Multi-Robot Systems", Cao et al. (2018) propose a method to perform robot localization via range measurement only. To do so, they present a method based on successive stages which allows to dynamically localize multiple robots by using trilateration and an EKF recursive estimation. While this article shows a functional multi-agent system with relative localization without anchors, it has been demonstrated only in simulation and in a 2D environment. However, it does not address an experimental validation and three-dimensional flight. Moreover, their approach uses a coordinate system built by the robots themselves while drones are usually localized in an Earth-fixed frame via their flight controllers. The authors acknowledge the question of a global frame but consider it outside the scope of their work, mentioning that a swarm deployed in an unknown environment might no have access to global positioning.
+
+\subsection{Observability}
+
+As defined in [5] (book control for engineers), we say that "a system is \textit{observable} if for every $T>0$, it is possible to determine the state of the system $x(T)$ through measurements of the $y(t)$ and $u(t)$ in the interval $[0,T]$" where $y(t)$ and $u(t)$ are respectively the output and the input of the process at time $t$. Observability plays an important role in control theory because it is common that is all the states are not accesible through measurement : it is therefore possible to build an \textit{observer}, a dynamical system represented by a mathematical model capable of recreating the states of the system. 
+
+In relation of our project, observability constitutes a 
+
+\section{Data fusion}
+
+\subsection{Data fusion with an EFK in drone swarm applications}
+In the context of our project, the most relevant article is most likely "Onboard Ranging-Based Relative Localization and Stability for Lightweight Aerial Swarms" by Li et al. (2025) from TU Delft in the Netherlands. In their paper, they share an autonomous relative localization technique fusing UWB distance measurements and state information like velocity, yaw rate, height from neighbours. The following illustration shows their scheme of work : 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\linewidth]{Li_2025.png}
+    \caption{Enter Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+By using the data of 3 sensors (IMU, optical flow, laser), they retrieve the 3-axis velocity $\overline{v_i}$, the pitch $\theta$ and the roll $\phi$ in the body frame of the drone. The yaw rate $\overline{r}$, the range $d$ (distance between 2 drones) and the height $h$ are respectively given by the gyroscope, the UWB sensors and the laser. One of the main aspects of their project is that they work with tiny lightweight (33 grams) drones which are ressource-constrained. Therefore, an Extended Kalman filter is exploited to combine the data, particularly because it has a low computational overhead. The article is particulary appropriate because it deals with every aspect of our project. It brings up the fusion of multiple sensors through an EFK, the use of Ultra-wide band for both ranging and communication as well as observability considerations and hardware ressource constraints. Nevertheless, they do not implement GPS when merging data which differs from the context of our work. 
+
+\subsection{GPS consideration}
+
+The papers mentioned previously didn't include GPS localization in their architecture but our drones does include a GPS tracker which we would like to take advantage of. We are working on an outdoor system and it is possible through the flight controller to use the GPS data to get more accurate state estimate of the drone. The details about the hardware will be given in the next section. 
+
+In an article of 2020, Chen et al. studies the complimentarity of UWB measurements with GPS localization to get a better accuracy. They show a great improvement of devices localization with an accuracy up to 10 centimeters. This approach is different from ours as the GPS data is directly combined through a cost function with the UWB measurements while we are planning to use an Extended Kalman filter. Their experiments were made on static objects and the final localization is obtained in a 2D plane while we deal with moving UAVs in a 3D frame which may add more challenges. 
+\\
+
+A closer reasearch to our context of study was made by Yang et Lee in 2023 in which they implemented an Extended Kalman Filter using GNSS and INSS with complementary UWB measurements in a flight controller firmware. They used the flight controller "Pixhawk 4" and successfully carried out a field test which, however, did not include a moving drone formation. 
+
+
+\section{Drone formation control ?}
+\section{Synthesis and positioning of the project }
+
+In this bibliographical study, we studied the topic of relative localization in a drone swarm with data fusion.
+
+\newpage
