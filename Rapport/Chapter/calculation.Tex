@@ -7,28 +7,58 @@ Let's set:
 \item Clock drift errors : $e_a$ and $e_b$
 \end{itemize}
 The measured times are: 
-\begin{equation}
+\begin{equation*}
 R_a = (2T_f + t_{proc})(1 + e_a) \text{ and } t_{proc_b} = t_{proc}(1 + e_b)
-\end{equation}
+\end{equation*}
 The calculated time of flight is:
-\begin{equation}
+\begin{equation*}
 \hat{T}_f = \frac{R_a -t_{proc_b}}{2}
-\end{equation}
+\end{equation*}
 By replacing $R_a$ and $t_{proc_b}$, we obtain : 
-\begin{equation}
+\begin{equation*}
 \hat{T}_f = \frac{2T_f(1 + e_a) + t_{proc}(1 + e_a) - t_{proc}(1 + e_b)}{2}
-\end{equation}
+\end{equation*}
 By simplifying, we obtain :
-\begin{equation}
+\begin{equation*}
 \hat{T}_f = T_f(1 + e_a) + \frac{t_{proc}(e_a - e_b)}{2}
-\end{equation}
+\end{equation*}
 The error is $\hat{T}_f - T_f$, so: \\
-\begin{equation}
+\begin{equation*}
 Error = T_f \times e_a + \frac{t_{proc}(e_a - e_b)}{2}
-\end{equation}
-The time of flight is about 33 nanoseconds, however D is around $3,000,000$. \\
+\end{equation*}
+The time of flight is about 33 nanoseconds, however $t_{proc}$ is around $3,000,000$ns. \\
 So we can ignore $T_f \times e_a$ cause $T_{f} \ll t_{proc}$, and we obtain :
 \begin{equation}
-Error \approx \frac{t_{proc}(e_a - e_b)}{2}
+Error \approx \frac{t_{proc}(e_a - e_b)}{2} \label{error_TWR}
 \end{equation}
-\subsection*{DS-TWR Error calculation : } \label{DS-TWR-Error-calculation}
+
+\subsection*{DS-TWR Error calculation : } \label{DSTWR-Error-calculation}
+Let's set: 
+\begin{itemize}
+\item True time of flight : $T_{f}$
+\item True times of process : $t_{pa}$ and $t_{pb}$
+\item Clock drift errors : $e_a$ and $e_b$
+\end{itemize}
+The measured times are: 
+\begin{equation*}
+R_a = (2T_f + t_{pb})(1 + e_a), \quad D_a = t_{pa}(1 + e_a)
+\end{equation*}
+\begin{equation*}
+R_b = (2T_f + t_{pa})(1 + e_b), \quad D_b = t_{pb}(1 + e_b)
+\end{equation*}
+The calculated time of flight is:
+\begin{equation*}
+\hat{T}_f = \frac{R_a R_b - D_a D_b}{R_a + R_b + D_a + D_b}
+\end{equation*}
+By replacing the measured times, we obtain :
+\begin{equation*}
+\hat{T}_f = \frac{(1+e_a)(1+e_b) \times 2T_f(2T_f + t_{pa} + t_{pb})}{(2 + e_a + e_b)(2T_f + t_{pa} + t_{pb})}
+\end{equation*}
+By simplifying, we obtain :
+\begin{equation*}
+\hat{T}_f = \frac{2T_f(1+e_a)(1+e_b)}{2 + e_a + e_b} \approx T_f\left(1 + \frac{e_a + e_b}{2}\right)
+\end{equation*}
+The error is $\hat{T}_f - T_f$, so: \\
+\begin{equation}
+Error \approx  T_f \times \frac{e_a + e_b}{2} \label{error_DSTWR}
+\end{equation}

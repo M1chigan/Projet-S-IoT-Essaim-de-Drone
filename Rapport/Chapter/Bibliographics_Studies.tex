@@ -9,7 +9,7 @@ Communication is not the only purpose, it can also be used to locate; it is only
 In the majority of cases, UWB is deployed for indoor purpose, otherwise, it can be used for outdoor purpose; but it is less shown in scientific papers.
 
 
-\subsection{Location algorithm}\label{UWB_Algo}
+\subsection{Location algorithm}\label{UWB_Algo_localisation}
 In order to use  UWB as a location sensor. We have to use specific algorithm; in the following subsection, we will explain and show 2 different location algorithms. Firstly,  two-way ranging (TWR) and secondly double sided two-way ranging (DS-TWR).Finally, we will describe TDOA, the most advanced algorithms.
 
 \subsubsection{Two way ranging (TWR)}
@@ -59,14 +59,15 @@ We can deduce this equation :
 \boxed{\frac{t_{travel}\times c}{2}=\frac{(t_{tot} - t_{proc}) \times c}{2}= \frac{((r_{x1} - t_{x1}) - (r_{x2} - t_{x2})) \times c}{2}}
 \end{equation}
 We can also determine the induced error of this algorithm.\\
-After calculation (describe the in calculation part page~\pageref{TWR-Error-calculation}), we obtain this equation: 
+After calculation (\ref{TWR-Error-calculation}), we obtain this equation: 
 \begin{equation}
 \epsilon \approx \frac{t_ {proc}(e_a - e_b)}{2}
 \end{equation}
 As we can observe, the Time of processing is directly linked to the error. The $t_{proc}$ is around 3,000,000 nanoseconds so, it is inducing a high error. 
  
 \subsubsection{Double Sided Two way ranging (DS-TWR)}
-DS-TWR has for main advantage to reduce the error introduced by the $t_{proc}$. This algorithm also uses $UWB_1$ and $UWB_2$.
+In the TWR algorithm, the main inconvenient is the error and misprecision.
+To erase that error, the DS-TWR has been thinked. This algorithm is also using $UWB_1$ and $UWB_2$.
 
 \begin{figure}[!ht]
 \centering
@@ -97,10 +98,109 @@ DS-TWR has for main advantage to reduce the error introduced by the $t_{proc}$. 
 \label{fig:DS-TWR}
 \end{figure}
 
-\subsubsection{TDOA}
+\noindent The algorithm works in 6 steps :  
+\begin{enumerate}
+    \item $UWB_1$ sends a \textbf{POLL} to $UWB_2$. The time of emission
+          $t_{x1}$ is memorized by $UWB_1$.
+    \item $UWB_2$ receives the \textbf{POLL} and memorizes the time of
+          arrival $r_{x2}$.
+    \item $UWB_2$ processes the \textbf{POLL} and precisely plans the time
+          of emission $t_{x2}$ of the \textbf{RESP}, so that the reply
+          delay $D_b = t_{x2} - r_{x2}$ is known.
+    \item $UWB_1$ receives the \textbf{RESP} and memorizes the time of
+          arrival $r_{x1}$.
+    \item $UWB_1$ processes the \textbf{RESP} and precisely plans the time
+          of emission $t_{x12}$ of the \textbf{FINAL}, so that the reply
+          delay $D_a = t_{x12} - r_{x1}$ is known. The \textbf{FINAL}
+          contains $(t_{x1},\, r_{x1},\, t_{x12})$.
+    \item $UWB_2$ receives the \textbf{FINAL} and memorizes the time of
+          arrival $r_{x22}$.
+\end{enumerate}
 
-\newpage
-\section{Measure management}
+\noindent With all those parameters, we compute four time intervals :
+\begin{itemize}
+    \item Response time for $UWB_1 : t_1 = r_{x1} - t_{x1}$
+    \item Response time for $UWB_2 : t_2 = r_{x22} - t_{x2}$
+    \item Processing time of $UWB_1 : t_{proc_1} = t_{x12} - r_{x1}$
+    \item Processing time of $UWB_2 : t_{proc_2} = r_{x2} - t_{x2}$
+\end{itemize}
+
+\noindent We can deduce the travel time: 
+
+\begin{equation}
+\boxed{t_{travel} = \frac{t_1 \times t_2 - t_{proc_1} \times t_{proc_2}}{ t_1 +t_2+t_{proc_1}+t_{proc_2}}}
+\end{equation}
+
+\noindent And then find distance : 
+ \begin{equation}
+    d = c \times t_{travel}
+\end{equation}         
+
+\noindent Now let's compare the induced error. After calculation (\ref{DSTWR-Error-calculation}), we obtain this equation  : 
+\begin{equation}
+\epsilon \approx T_f \times \frac{e_a + e_b}{2}
+\end{equation}
+As we can see, the error is not multiplie by $t_{proc}$, so the error is reduced.\\
+With this algorithm, we are note dependant of the processor any more. That the algorithm currently use in our project.
+
+\subsection{Timing algorithm}\label{UWB_Algo_timings}
+When working on swarm drone, there is not only two UWB modules. There is multiple UWB trying to communicate. One weakness of the UWB is it sensibility to noise and interference. The way should be clear before emiting otehrwise that create colision and damaged the singal and corrupt distance estimation.
+For this purpose, we need to look on how to divide time to avoid collision, in our specifif case, we are working with 3 to 4 drone.
+\subsubsection{ALOHA}
+This method is named after the first ALOHAnet system, which introduced it in 1977. It provides a simple approach to channel access control without requiring any time synchronization. Instead of planning transmissions, a module sends its data packet immediately, regardless of whether the medium is currently busy or free.
+The primary advantage of  ALOHA lies in its ease of implementation and full decentralization, allowing independent nodes or drones to join the network dynamically without prior initialization. 
+However, its major drawback is its susceptibility to collisions caused by uncoordinated simultaneous transmissions. As demonstrated in foundational studies, the maximum theoretical throughput (channel capacity) of  ALOHA is limited to approximately $18.4\%$ (\textcolor{red}{ref du papier}). This low efficiency makes it unsuitable for high-frequency localization and critical communication applications.
+
+
+\subsubsection{Time-division multiple access (TDMA)}
+This method has for idea to divide a fixed period of time in trame, and cut it in different tranches. Each tranche is for each drone. Those trames and  tranches  are fixed in the hardware and are stricly respected. 
+\begin{figure}[H]
+    \centering
+    \resizebox{0.7\textwidth}{!}{
+    \begin{circuitikz}
+    \draw  (0.5,12.875) rectangle (2.5,11.25);
+    \draw  (2.5,12.875) rectangle (4.5,11.25);
+    \draw  (4.5,12.875) rectangle (6.5,11.25);
+    \draw  (6.5,12.875) rectangle (8.5,11.25);
+    \draw  (8.5,12.875) rectangle (10.5,11.25);
+    \draw [short] (0.5,13.25) -- (10.5,13.25);
+    \draw [short] (0.25,13) arc[start angle=178.78, end angle=91.22, radius=0.2555];
+    \draw [short] (10.5,13.25) arc[start angle=90.00, end angle=0.00, radius=0.2500];
+    \draw [short] (10.625,13.625) -- (10.625,13.625);
+    \draw [short] (10.625,13.625) -- (10.625,13.625);
+    \draw [short] (5.75,14) -- (5.75,14);
+    \draw [short] (5.75,14) -- (5.75,14);
+    \draw [short] (5.875,13.875) -- (5.875,13.875);
+    \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (5.5,13.625) {Trame};
+    \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (1.5,12) {T1};
+    \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (3.5,12) {T2};
+    \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (5.5,12) {T3};
+    \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (7.5,12) {T4};
+    \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (9.5,12) {T5};
+    \end{circuitikz}
+    }
+    \caption{TDMA explanation diagram}
+\end{figure}
+
+For exemple if we have 3 drone, trame of $UWB_1$ when is looking for distance in DS-TWR algorithm is divided by 5.
+\begin{enumerate}
+    \item T1: $UWB_1$ send the \textbf{POLL}  to $UWB_2$ and  $UWB_3$
+    \item T2: $UWB_2$ send the \textbf{RESP}  to $UWB_1$
+    \item T3: $UWB_1$ send the \textbf{FINAL} to  $UWB_2$
+    \item T4: $UWB_3$ send the \textbf{RESP}  to $UWB_1$
+    \item T5: $UWB_1$ send the \textbf{FINAL} to $UWB_3$
+\end{enumerate}
+
+\noindent This method has an advantage: there is no collision at all due to strict time period. And also permit to shut down the module when we do not need it.
+But there is inconvenient, firstly  if we hade one more drone, we have to add two other tranches, when we reach 10 drone, there is no time anymore to get information at a high frequency. And, it needs a synchronization to make all clock working at same speed and avoid collision perfectly.
+
+\subsubsection{Slotted ALOHA}
+
+This method combines the features of both the ALOHA and TDMA protocols. Time is divided into tranches, and UWB modules are only allowed to start their transmissions at the beginning of a slot boundary. If a module has data ready to transmit, but a slot has already started, it must wait for the next available slot.
+
+This approach preserves the flexibility of ALOHA while doubling the maximum theoretical throughput to approximately $36.8\%$ (\textcolor{red}{ref du papier}). However, it still remains less deterministic and efficient than TDMA due to potential collisions when multiple nodes choose the same slot.
+
+\section{Measure processing}
 In most cases, date measured by sensors are unclear. It could be a sensor offset, it can also come from crosstalks. Or other, exterior interactions. In order, to obtain clean measurements, and to be able to use them for controlling or any other purpose. We have to develop some filter; in this section, we will describe three filters used for cleaning the UWB signal. Firstly, we will explain the polynomial filter, and secondly, the Kalman filter, then finally the extended Kalman filters
 \subsection{Polynomial Filter}
 
@@ -141,8 +241,6 @@ In which we have :
 
 At each time $k$, the measurement $z_k$ is written as follows :
 $${\displaystyle \mathbf {z} _{k}=\mathbf {H} _{k}\mathbf {x} _{k}+\mathbf {v} _{k}}$$
-
-\newpage
 With :
 \begin{itemize}
     \item $H_k$ is the observation matrix
