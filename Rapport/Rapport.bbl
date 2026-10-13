@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.3 $
+% $ biblatex bbl format version 3.2 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -18,41 +18,8 @@
 
 
 \refsection{0}
-  \datalist[entry]{none/global//global/global/global}
-    \entry{welch2006}{report}{}{}
-      \name{author}{2}{}{%
-        {{hash=19eb8ef0f1cf49ad4375a0a4acc3a385}{%
-           family={Welch},
-           familyi={W\bibinitperiod},
-           given={Greg},
-           giveni={G\bibinitperiod}}}%
-        {{hash=e4f38e96180c309ad00c07afe4fbac50}{%
-           family={Bishop},
-           familyi={B\bibinitperiod},
-           given={Gary},
-           giveni={G\bibinitperiod}}}%
-      }
-      \list{institution}{1}{%
-        {University of North Carolina at Chapel Hill}%
-      }
-      \strng{namehash}{124b6b88ade76463f9b17a4f14042fca}
-      \strng{fullhash}{124b6b88ade76463f9b17a4f14042fca}
-      \strng{fullhashraw}{124b6b88ade76463f9b17a4f14042fca}
-      \strng{bibnamehash}{124b6b88ade76463f9b17a4f14042fca}
-      \strng{authorbibnamehash}{124b6b88ade76463f9b17a4f14042fca}
-      \strng{authornamehash}{124b6b88ade76463f9b17a4f14042fca}
-      \strng{authorfullhash}{124b6b88ade76463f9b17a4f14042fca}
-      \strng{authorfullhashraw}{124b6b88ade76463f9b17a4f14042fca}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{number}{TR 95-041}
-      \field{title}{An {Introduction} to the {Kalman} {Filter}}
-      \field{type}{techreport}
-      \field{year}{2006}
-    \endentry
-    \entry{kalman1960}{article}{}{}
+  \datalist[entry]{none/global//global/global}
+    \entry{kalman1960}{article}{}
       \name{author}{1}{}{%
         {{hash=2bdc83bc7a4c09a9020f492d9e1b5c92}{%
            family={Kalman},
@@ -65,14 +32,12 @@
       }
       \strng{namehash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
       \strng{fullhash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
-      \strng{fullhashraw}{2bdc83bc7a4c09a9020f492d9e1b5c92}
       \strng{bibnamehash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
       \strng{authorbibnamehash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
       \strng{authornamehash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
       \strng{authorfullhash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
-      \strng{authorfullhashraw}{2bdc83bc7a4c09a9020f492d9e1b5c92}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The classical filtering and prediction problem is re-examined using the Bode-Shannon representation of random processes and the “state-transition” method of analysis of dynamic systems. New results are: (1) The formulation and methods of solution of the problem apply without modification to stationary and nonstationary statistics and to growing-memory and infinite-memory filters. (2) A nonlinear difference (or differential) equation is derived for the covariance matrix of the optimal estimation error. From the solution of this equation the co-efficients of the difference (or differential) equation of the optimal linear filter are obtained without further calculations. (3) The filtering problem is shown to be the dual of the noise-free regulator problem. The new method developed here is applied to two well-known problems, confirming and extending earlier results. The discussion is largely self-contained and proceeds from first principles; basic concepts of the theory of random processes are reviewed in the Appendix.}
@@ -98,6 +63,530 @@
       \endverb
       \verb{url}
       \verb https://asmedigitalcollection.asme.org/fluidsengineering/article/82/1/35/397706/A-New-Approach-to-Linear-Filtering-and-Prediction
+      \endverb
+    \endentry
+    \entry{welch2006}{report}{}
+      \name{author}{2}{}{%
+        {{hash=19eb8ef0f1cf49ad4375a0a4acc3a385}{%
+           family={Welch},
+           familyi={W\bibinitperiod},
+           given={Greg},
+           giveni={G\bibinitperiod}}}%
+        {{hash=e4f38e96180c309ad00c07afe4fbac50}{%
+           family={Bishop},
+           familyi={B\bibinitperiod},
+           given={Gary},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {University of North Carolina at Chapel Hill}%
+      }
+      \strng{namehash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{fullhash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{bibnamehash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{authorbibnamehash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{authornamehash}{124b6b88ade76463f9b17a4f14042fca}
+      \strng{authorfullhash}{124b6b88ade76463f9b17a4f14042fca}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{TR 95-041}
+      \field{title}{An {Introduction} to the {Kalman} {Filter}}
+      \field{type}{techreport}
+      \field{year}{2006}
+    \endentry
+    \entry{boutayeb_convergence_1997}{article}{}
+      \name{author}{3}{}{%
+        {{hash=3d889cb1f144725083be6de71f5c0e33}{%
+           family={Boutayeb},
+           familyi={B\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=bcf7b77e5a1ba69dca4ca8f670753f2f}{%
+           family={Rafaralahy},
+           familyi={R\bibinitperiod},
+           given={H.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=9f37ec4c242f9673bb467d79b49bb8ad}{%
+           family={Darouach},
+           familyi={D\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{f754170426d0994f858efa90a57bf51d}
+      \strng{fullhash}{f754170426d0994f858efa90a57bf51d}
+      \strng{bibnamehash}{f754170426d0994f858efa90a57bf51d}
+      \strng{authorbibnamehash}{f754170426d0994f858efa90a57bf51d}
+      \strng{authornamehash}{f754170426d0994f858efa90a57bf51d}
+      \strng{authorfullhash}{f754170426d0994f858efa90a57bf51d}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00189286}
+      \field{journaltitle}{IEEE Transactions on Automatic Control}
+      \field{month}{4}
+      \field{number}{4}
+      \field{title}{Convergence analysis of the extended {Kalman} filter used as an observer for nonlinear deterministic discrete-time systems}
+      \field{urlday}{6}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{42}
+      \field{year}{1997}
+      \field{urldateera}{ce}
+      \field{pages}{581\bibrangedash 586}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/9.566674
+      \endverb
+      \verb{urlraw}
+      \verb http://ieeexplore.ieee.org/document/566674/
+      \endverb
+      \verb{url}
+      \verb http://ieeexplore.ieee.org/document/566674/
+      \endverb
+    \endentry
+    \entry{julier_new_1997}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=80d83e3d56bc4413658bfad461dc4586}{%
+           family={Julier},
+           familyi={J\bibinitperiod},
+           given={Simon\bibnamedelima J.},
+           giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=5c26b146559462ed5dfeb7fcccc1030b}{%
+           family={Uhlmann},
+           familyi={U\bibinitperiod},
+           given={Jeffrey\bibnamedelima K.},
+           giveni={J\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=7b704fc0a28053bb266d11dd0b255e67}{%
+           family={Kadar},
+           familyi={K\bibinitperiod},
+           given={Ivan},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Orlando, FL, USA}%
+      }
+      \strng{namehash}{46be1162cd4bd01e4c1abbf265a0be7d}
+      \strng{fullhash}{46be1162cd4bd01e4c1abbf265a0be7d}
+      \strng{bibnamehash}{46be1162cd4bd01e4c1abbf265a0be7d}
+      \strng{authorbibnamehash}{46be1162cd4bd01e4c1abbf265a0be7d}
+      \strng{authornamehash}{46be1162cd4bd01e4c1abbf265a0be7d}
+      \strng{authorfullhash}{46be1162cd4bd01e4c1abbf265a0be7d}
+      \strng{editorbibnamehash}{7b704fc0a28053bb266d11dd0b255e67}
+      \strng{editornamehash}{7b704fc0a28053bb266d11dd0b255e67}
+      \strng{editorfullhash}{7b704fc0a28053bb266d11dd0b255e67}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{7}
+      \field{title}{New extension of the {Kalman} filter to nonlinear systems}
+      \field{urlday}{13}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{year}{1997}
+      \field{urldateera}{ce}
+      \field{pages}{182}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1117/12.280797
+      \endverb
+      \verb{urlraw}
+      \verb http://proceedings.spiedigitallibrary.org/proceeding.aspx?doi=10.1117/12.280797
+      \endverb
+      \verb{url}
+      \verb http://proceedings.spiedigitallibrary.org/proceeding.aspx?doi=10.1117/12.280797
+      \endverb
+    \endentry
+    \entry{arulampalam_tutorial_2002}{article}{}
+      \name{author}{4}{}{%
+        {{hash=92be5acd369ea256256f77693546ddab}{%
+           family={Arulampalam},
+           familyi={A\bibinitperiod},
+           given={M.S.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=26c6aa603a2c4ce496a57aeee2e8f83c}{%
+           family={Maskell},
+           familyi={M\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d0b5c9dbb3f74a586974af6016fccab7}{%
+           family={Gordon},
+           familyi={G\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=77931271ad9b5f23f2180d9e7e5df9b2}{%
+           family={Clapp},
+           familyi={C\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{7354f0485100887aadcfd62fa98733ed}
+      \strng{fullhash}{47ecdaed0871c7416b884d2cf62d3243}
+      \strng{bibnamehash}{47ecdaed0871c7416b884d2cf62d3243}
+      \strng{authorbibnamehash}{47ecdaed0871c7416b884d2cf62d3243}
+      \strng{authornamehash}{7354f0485100887aadcfd62fa98733ed}
+      \strng{authorfullhash}{47ecdaed0871c7416b884d2cf62d3243}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1053587X}
+      \field{journaltitle}{IEEE Transactions on Signal Processing}
+      \field{month}{2}
+      \field{number}{2}
+      \field{title}{A tutorial on particle filters for online nonlinear/non-{Gaussian} {Bayesian} tracking}
+      \field{urlday}{13}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{50}
+      \field{year}{2002}
+      \field{urldateera}{ce}
+      \field{pages}{174\bibrangedash 188}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/78.978374
+      \endverb
+      \verb{urlraw}
+      \verb http://ieeexplore.ieee.org/document/978374/
+      \endverb
+      \verb{url}
+      \verb http://ieeexplore.ieee.org/document/978374/
+      \endverb
+    \endentry
+    \entry{cao_dynamic_2018}{article}{}
+      \name{author}{5}{}{%
+        {{hash=020cf66b73a8192ff17ac07341d306d2}{%
+           family={Cao},
+           familyi={C\bibinitperiod},
+           given={Yanjun},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=122748fbd1766f07a1685dde181113ca}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Meng},
+           giveni={M\bibinitperiod}}}%
+        {{hash=53d51d632e7a4765d43f51326d38942c}{%
+           family={Svogor},
+           familyi={S\bibinitperiod},
+           given={Ivan},
+           giveni={I\bibinitperiod}}}%
+        {{hash=557abc80f36ae6d55cc6cd9989e7053b}{%
+           family={Wei},
+           familyi={W\bibinitperiod},
+           given={Shaoming},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0447a47c3901adcce2c4cf4fe3f89287}{%
+           family={Beltrame},
+           familyi={B\bibinitperiod},
+           given={Giovanni},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{0abecb67ddd9c3c0812a5f57287f7346}
+      \strng{fullhash}{2d374bb8b75614bf3bcd567709f72652}
+      \strng{bibnamehash}{2d374bb8b75614bf3bcd567709f72652}
+      \strng{authorbibnamehash}{2d374bb8b75614bf3bcd567709f72652}
+      \strng{authornamehash}{0abecb67ddd9c3c0812a5f57287f7346}
+      \strng{authorfullhash}{2d374bb8b75614bf3bcd567709f72652}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2169-3536}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Dynamic {Range}-{Only} {Localization} for {Multi}-{Robot} {Systems}}
+      \field{urlday}{6}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{6}
+      \field{year}{2018}
+      \field{urldateera}{ce}
+      \field{pages}{46527\bibrangedash 46537}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2018.2866259
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:C\:\\Users\\Noé\\Zotero\\storage\\MHGV4452\\Cao et al. - 2018 - Dynamic Range-Only Localization for Multi-Robot Systems.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/8443328/
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/8443328/
+      \endverb
+    \endentry
+    \entry{astrom_feedback_2021}{book}{}
+      \name{author}{2}{}{%
+        {{hash=f0f3bc9540d4770c9cd66454728924ca}{%
+           family={Åström},
+           familyi={Å\bibinitperiod},
+           given={Karl\bibnamedelima Johan},
+           giveni={K\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=22ec7dc3434ec7866e28d570204999f8}{%
+           family={Murray},
+           familyi={M\bibinitperiod},
+           given={Richard\bibnamedelima M.},
+           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Princeton}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{fa7f86455a25ce59a738c32d8c2f74eb}
+      \strng{fullhash}{fa7f86455a25ce59a738c32d8c2f74eb}
+      \strng{bibnamehash}{fa7f86455a25ce59a738c32d8c2f74eb}
+      \strng{authorbibnamehash}{fa7f86455a25ce59a738c32d8c2f74eb}
+      \strng{authornamehash}{fa7f86455a25ce59a738c32d8c2f74eb}
+      \strng{authorfullhash}{fa7f86455a25ce59a738c32d8c2f74eb}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{"In this updated and revised edition of the classic Feedback Systems (which Princeton University Press first published in 2008), Astrom and Murray provide a complete one-volume resource for students and researchers in mathematics and engineering. One of the primary comments from users of the first edition was that the use of control tools for design purposes occurred only after several chapters of analytical tools, leaving the instructor having to try to convince students that the techniques would soon be useful. Accordingly, the authors have re-structured the text to introduce design principles upfront. The text also includes a new chapter on fundamental limits, as well as additional updated material throughout. Drawing on examples from physics, computer science, and operations research, and more to introduce the basic principles and tools of feedback systems, the second edition of Feedback Systems will continue to serve as the ideal textbook for undergraduate and graduate students, as well as an indispensable reference for researchers"--}
+      \field{edition}{Second edition}
+      \field{isbn}{978-0-691-19398-4}
+      \field{shorttitle}{Feedback systems}
+      \field{title}{Feedback systems: an introduction for scientists and engineers}
+      \field{year}{2021}
+    \endentry
+    \entry{van_der_helm_-board_2020}{article}{}
+      \name{author}{4}{}{%
+        {{hash=6a243b620bb699307a1eb1fd4ba039ad}{%
+           family={Van\bibnamedelimb Der\bibnamedelima Helm},
+           familyi={V\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim H\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod}}}%
+        {{hash=be080beefb92ffca25145c90d7e89e7d}{%
+           family={Coppola},
+           familyi={C\bibinitperiod},
+           given={Mario},
+           giveni={M\bibinitperiod}}}%
+        {{hash=3636449af25a043631ad482efc496ae3}{%
+           family={McGuire},
+           familyi={M\bibinitperiod},
+           given={Kimberly\bibnamedelima N.},
+           giveni={K\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=2ce6c1d6ffa919e9fbf6ea9365c4f513}{%
+           family={De\bibnamedelima Croon},
+           familyi={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={Guido\bibnamedelimb C.\bibnamedelimi H.\bibnamedelimi E.},
+           giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{801d1607f5b77b3cbfc0a28ee8e35387}
+      \strng{fullhash}{0f4107447fc119b73982deff87e15ddb}
+      \strng{bibnamehash}{0f4107447fc119b73982deff87e15ddb}
+      \strng{authorbibnamehash}{0f4107447fc119b73982deff87e15ddb}
+      \strng{authornamehash}{801d1607f5b77b3cbfc0a28ee8e35387}
+      \strng{authorfullhash}{0f4107447fc119b73982deff87e15ddb}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0929-5593, 1573-7527}
+      \field{journaltitle}{Autonomous Robots}
+      \field{month}{3}
+      \field{number}{3-4}
+      \field{title}{On-board range-based relative localization for micro air vehicles in indoor leader–follower flight}
+      \field{urlday}{13}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{44}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \field{pages}{415\bibrangedash 441}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.1007/s10514-019-09843-6
+      \endverb
+      \verb{file}
+      \verb Texte intégral:C\:\\Users\\Noé\\Zotero\\storage\\QXDH3JGR\\Van Der Helm et al. - 2020 - On-board range-based relative localization for micro air vehicles in indoor leader–follower flight.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.1007/s10514-019-09843-6
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1007/s10514-019-09843-6
+      \endverb
+    \endentry
+    \entry{li_onboard_2025}{article}{}
+      \name{author}{6}{}{%
+        {{hash=17d1751aab152fbe8bbc32a8dd18e784}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Shushuai},
+           giveni={S\bibinitperiod}}}%
+        {{hash=e6291876ce919d000f432ebcc73df696}{%
+           family={Shan},
+           familyi={S\bibinitperiod},
+           given={Feng},
+           giveni={F\bibinitperiod}}}%
+        {{hash=92fe5bed5d83b1322e8e2c95c5d513b7}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Jiangpeng},
+           giveni={J\bibinitperiod}}}%
+        {{hash=be080beefb92ffca25145c90d7e89e7d}{%
+           family={Coppola},
+           familyi={C\bibinitperiod},
+           given={Mario},
+           giveni={M\bibinitperiod}}}%
+        {{hash=edb22d8cead9be6011fcbf158923335c}{%
+           family={De\bibnamedelima Wagter},
+           familyi={D\bibinitperiod\bibinitdelim W\bibinitperiod},
+           given={Christophe},
+           giveni={C\bibinitperiod}}}%
+        {{hash=2ce6c1d6ffa919e9fbf6ea9365c4f513}{%
+           family={De\bibnamedelima Croon},
+           familyi={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={Guido\bibnamedelimb C.\bibnamedelimi H.\bibnamedelimi E.},
+           giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{08631b0bbf0120864d8c2a45863653a9}
+      \strng{fullhash}{1cecf18eeea9922da52e2639ca90a8cf}
+      \strng{bibnamehash}{1cecf18eeea9922da52e2639ca90a8cf}
+      \strng{authorbibnamehash}{1cecf18eeea9922da52e2639ca90a8cf}
+      \strng{authornamehash}{08631b0bbf0120864d8c2a45863653a9}
+      \strng{authorfullhash}{1cecf18eeea9922da52e2639ca90a8cf}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2377-3766, 2377-3774}
+      \field{journaltitle}{IEEE Robotics and Automation Letters}
+      \field{month}{10}
+      \field{number}{10}
+      \field{title}{Onboard {Ranging}-{Based} {Relative} {Localization} and {Stability} for {Lightweight} {Aerial} {Swarms}}
+      \field{urlday}{9}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{10}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \field{pages}{10066\bibrangedash 10073}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/LRA.2025.3597039
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/11119828/
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/11119828/
+      \endverb
+    \endentry
+    \entry{chen_uwb-assisted_2020}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=a0572c817cd435c09bbeee7b63926f77}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Yu-Chih},
+           giveni={Y\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=b32ffe690e7550576a3d90f59f0064c4}{%
+           family={Lai},
+           familyi={L\bibinitperiod},
+           given={Alexsander\bibnamedelima I-Chi},
+           giveni={A\bibinitperiod\bibinitdelim I\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=cfa9c272601c04d068d54fb72c60cbc7}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Ruey-Beei},
+           giveni={R\bibinithyphendelim B\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {San Antonio, TX, USA}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{bd45194c8735306b8851c4bb065dfb5d}
+      \strng{fullhash}{bd45194c8735306b8851c4bb065dfb5d}
+      \strng{bibnamehash}{bd45194c8735306b8851c4bb065dfb5d}
+      \strng{authorbibnamehash}{bd45194c8735306b8851c4bb065dfb5d}
+      \strng{authornamehash}{bd45194c8735306b8851c4bb065dfb5d}
+      \strng{authorfullhash}{bd45194c8735306b8851c4bb065dfb5d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2020 {IEEE} {Topical} {Conference} on {Wireless} {Sensors} and {Sensor} {Networks} ({WiSNeT})}
+      \field{isbn}{978-1-7281-3355-3}
+      \field{month}{1}
+      \field{title}{{UWB}-{Assisted} {High}-{Precision} {Positioning} in a {UTM} {Prototype}}
+      \field{urlday}{13}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \field{pages}{42\bibrangedash 45}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1109/WiSNeT46826.2020.9037604
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/9037604/
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/9037604/
+      \endverb
+    \endentry
+    \entry{yang_ultrawideband_2023}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6704ed7e2baceb869c99c27244c724aa}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Jeonggi},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1b5b5161eeb2240b7d3c522a0387f1e2}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Soojeon},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{9c2e73936cbcdeec14f2d5abe01a5117}
+      \strng{fullhash}{9c2e73936cbcdeec14f2d5abe01a5117}
+      \strng{bibnamehash}{9c2e73936cbcdeec14f2d5abe01a5117}
+      \strng{authorbibnamehash}{9c2e73936cbcdeec14f2d5abe01a5117}
+      \strng{authornamehash}{9c2e73936cbcdeec14f2d5abe01a5117}
+      \strng{authorfullhash}{9c2e73936cbcdeec14f2d5abe01a5117}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Abstract In this study, we introduce a loosely coupled relative position estimation method that utilizes a decentralized ultrawideband (UWB), Global Navigation Support System and inertial navigation system for flight controllers (FCs). Key obstacles to multidrone collaboration include relative position errors and the absence of communication devices. To address this, we provide an extended Kalman filter‐based algorithm and module that correct distance errors by fusing UWB data acquired through random communications. Via simulations, we confirm the feasibility of the algorithm and verify its distance error correction performance according to the amount of communications. Real‐world tests confirm the algorithm's effectiveness on FCs and the potential for multidrone collaboration in real environments. This method can be used to correct relative multidrone positions during collaborative transportation and simultaneous localization and mapping applications.}
+      \field{issn}{1225-6463, 2233-7326}
+      \field{journaltitle}{ETRI Journal}
+      \field{month}{10}
+      \field{number}{5}
+      \field{title}{Ultrawideband coupled relative positioning algorithm applicable to flight controller for multidrone collaboration}
+      \field{urlday}{12}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{45}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{758\bibrangedash 767}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.4218/etrij.2023-0128
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/10.4218/etrij.2023-0128
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/10.4218/etrij.2023-0128
       \endverb
     \endentry
   \enddatalist
