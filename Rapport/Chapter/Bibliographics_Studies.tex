@@ -4,17 +4,17 @@
 \section{UWB}
 
 \subsection{Definitions} 
-Ultra-Wideband (UWB) is a technology using radio frequency to exchange data created in 1880.
-Communication is not the only purpose, it can also be used to locate; it is only  possible by using different module, those algorithms and technique will be treated in the next part (\ref{UWB_Algo}).
-In the majority of cases, UWB is deployed for indoor purpose, otherwise, it can be used for outdoor purpose; but it is less shown in scientific papers.
+Ultra-Wideband (UWB) is a technology using radio frequency to exchange data.
+Communication is not the only purpose; UWB can also be used to locate, which is only possible by using different modules. These algorithms and techniques will be treated in the next part (\ref{UWB_Algo_localisation}).
+In the majority of cases, UWB is deployed for indoor purposes; otherwise, it can be used for outdoor purposes, but this is less present in scientific papers.
 
 
 \subsection{Location algorithm}\label{UWB_Algo_localisation}
-In order to use  UWB as a location sensor. We have to use specific algorithm; in the following subsection, we will explain and show 2 different location algorithms. Firstly,  two-way ranging (TWR) and secondly double sided two-way ranging (DS-TWR).Finally, we will describe TDOA, the most advanced algorithms.
+In order to use UWB as a location sensor, we have to use specific algorithms. In the following subsections, we will explain and show 2 different location algorithms: firstly, two-way ranging (TWR), and secondly, double-sided two-way ranging (DS-TWR). Finally, we will describe TDOA, the most advanced algorithm.
 
 \subsubsection{Two way ranging (TWR)}
 The Two-Way Ranging (TWR) algorithm is the easiest and the fastest to implement in a UWB system.
-In order to explain this algorithm,  we will use 2 modules called $UWB_1$ and $UWB_2$.
+In order to explain this algorithm, we will use 2 modules called $UWB_1$ and $UWB_2$.
 
 \begin{figure}[!ht]
 \centering
@@ -40,31 +40,31 @@ In order to explain this algorithm,  we will use 2 modules called $UWB_1$ and $U
 \caption{TWR explanation diagram}
 \label{fig:TWR}
 \end{figure}
-\noindent The algorithm works in 4 steps :  
+\noindent The algorithm works in 4 steps:  
 \begin{enumerate}
     \item $UWB_1$ sends a \textbf{POLL} to $UWB_2$. The time of emission $t_{x1}$ is memorized by $UWB_1$.
     \item $UWB_2$ receives the \textbf{POLL} and memorizes the time of arrival $r_{x2}$.
-    \item $UWB_2$ processes the \textbf{POLL}, and precisely plans the time of emission $t_{x2}$ for the \textbf{RESP}. It contains ($t_{x2},r_{x2}$).
-    \item $UWB_1$ receives the \textbf{RESP} and memorizes the $r_{x1}$.
+    \item $UWB_2$ processes the \textbf{POLL} and precisely plans the time of emission $t_{x2}$ for the \textbf{RESP}. It contains ($t_{x2},r_{x2}$).
+    \item $UWB_1$ receives the \textbf{RESP} and memorizes $r_{x1}$.
 \end{enumerate}
-With all those parameters, we can deduce those variables :
+With all these parameters, we can deduce these variables:
 \begin{itemize}
-    \item Total time : $t_{tot} = r_{x1} - t_{x1}$
-    \item Processing time of $UWB_2 : t_{proc} = r_{x2} - t_{x2}$
-    \item Travel time : $t_{travel} = t_{tot} - t_{proc}$
+    \item Total time: $t_{tot} = r_{x1} - t_{x1}$
+    \item Processing time of $UWB_2$: $t_{proc} = r_{x2} - t_{x2}$
+    \item Travel time: $t_{travel} = t_{tot} - t_{proc}$
 \end{itemize}
-The signal travels back and forth so it did twice the distance ($d$), and travel speed of a radio signal is equivalent to light speed ($c$). \\ 
-We can deduce this equation : 
+The signal travels back and forth, so it covers twice the distance ($d$), and the travel speed of a radio signal is equivalent to the speed of light ($c$). \\ 
+We can deduce this equation: 
 \begin{equation} \label{TWR_eq}
 \boxed{\frac{t_{travel}\times c}{2}=\frac{(t_{tot} - t_{proc}) \times c}{2}= \frac{((r_{x1} - t_{x1}) - (r_{x2} - t_{x2})) \times c}{2}}
 \end{equation}
-We can also determine the induced error of this algorithm.\\
+We can also determine the error induced by this algorithm.\\
 After calculation (\ref{TWR-Error-calculation}), we obtain this equation: 
 \begin{equation}
 \epsilon \approx \frac{t_ {proc}(e_a - e_b)}{2}
 \end{equation}
-As we can observe, the Time of processing is directly linked to the error. The $t_{proc}$ is around 3,000,000 nanoseconds so, it is inducing a high error. 
- 
+As we can observe, the processing time is directly linked to the error. The $t_{proc}$ is around 3,000,000 nanoseconds, so it induces a high error.
+
 \subsubsection{Double Sided Two way ranging (DS-TWR)}
 In the TWR algorithm, the main inconvenient is the error and misprecision.
 To erase that error, the DS-TWR has been thinked. This algorithm is also using $UWB_1$ and $UWB_2$.
@@ -201,8 +201,7 @@ This method combines the features of both the ALOHA and TDMA protocols. Time is 
 This approach preserves the flexibility of ALOHA while doubling the maximum theoretical throughput to approximately $36.8\%$ (\textcolor{red}{ref du papier}). However, it still remains less deterministic and efficient than TDMA due to potential collisions when multiple nodes choose the same slot.
 
 \section{Measure processing}
-In most cases, date measured by sensors are unclear. It could be a sensor offset, it can also come from crosstalks. Or other, exterior interactions. In order, to obtain clean measurements, and to be able to use them for controlling or any other purpose. We have to develop some filter; in this section, we will describe three filters used for cleaning the UWB signal. Firstly, we will explain the polynomial filter, and secondly, the Kalman filter, then finally the extended Kalman filters
-\subsection{Polynomial Filter}
+In most cases, data measured by sensors are unclear. It could be a sensor offset, or it can also come from crosstalk or other exterior interactions. In order to obtain clean measurements and to be able to use them for controlling or any other purpose, we have to develop some filters. In this section, we will describe three filters used for cleaning the UWB signal. Firstly, we will explain the polynomial filter, secondly the Kalman filter, and finally the extended Kalman filter.\subsection{Polynomial Filter}
 
 \newpage
 
