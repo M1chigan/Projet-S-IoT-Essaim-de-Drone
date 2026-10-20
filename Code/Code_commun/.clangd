@@ -1,0 +1,5 @@
+CompileFlags:
+  Remove: [-m*, -f*]
+
+Diagnostics:
+  Suppress: [ovl_no_viable_member_function_in_call, member_function_call_bad_type]

@@ -1,6 +1,7 @@
 {
   "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.latex.outDir": "%DIR%",
+  "latex-workshop.latex.build.forceRecipeUsage": true,
   "latex-workshop.latex.recipe.default": "latexmk (aux dans build)",
   "latex-workshop.latex.tools": [
     {

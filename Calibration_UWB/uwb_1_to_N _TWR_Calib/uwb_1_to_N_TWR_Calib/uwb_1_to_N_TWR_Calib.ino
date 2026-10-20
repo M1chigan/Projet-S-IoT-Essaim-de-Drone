@@ -253,7 +253,7 @@ void setup() {
     DW1000.setDeviceAddress(SELF_DRONE_ID);
     DW1000.setNetworkId(0xDECA);
     DW1000.enableMode(DW1000.MODE_LONGDATA_FAST_ACCURACY);
-    DW1000.setAntennaDelay(ANTENNA_DELAY_TICKS);
+    DW1000.setAntennaDelay(ANTENNA_DELAY_TICKS);    
     DW1000.commitConfiguration();
 
     DW1000.attachReceivedHandler(handleRxInterrupt);
