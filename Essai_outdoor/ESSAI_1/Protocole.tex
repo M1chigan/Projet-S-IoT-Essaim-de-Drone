@@ -1,0 +1,77 @@
+\documentclass[11pt,a4paper]{article}
+% LTeX: language=fr
+% Character encoding and font configuration for standard pdflatex
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx} % Times New Roman clone for a professional academic look
+\usepackage{graphicx}
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{parskip}   % Automatically adds space between paragraphs and removes indentation
+\usepackage[colorlinks=true, urlcolor=black, linkcolor=black]{hyperref}
+\usepackage{circuitikz}
+\usepackage{float}
+\usepackage{subcaption}  % pour subtable
+
+
+\input{Tikz/schema.tex}
+
+\begin{document}
+
+\begin{minipage}[c]{0.30\textwidth}
+    \includegraphics[width=\linewidth,keepaspectratio]{Image/Logo_INSA.png}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.80\textwidth}
+    {\LARGE \textbf{Projet S-IoT : Essaim de drone}}\\[2pt]
+    {\large Protocole de calibration }
+\end{minipage}
+
+\vspace{0.4cm}
+\hrule height 1pt
+\vspace{0.8cm}
+
+\begin{center}
+    {\huge \textbf{Protocole de Test}} \\[5pt]
+    {\large\textit{du 13/11/2026}} \\[5pt]
+\end{center}
+
+\tableofcontents
+
+\newpage
+Le but de ce document est de définir les tests qui seront réalisés durant la première journée de test en extérieur le 13/11/26. 
+
+Les tests a réalisé sont (par ordre de priorité) : 
+\begin{itemize}
+    \item Étude de l'angle à 3 drones pour établir la meilleure réception (Précision de 5°)    \item Essai des hauteurs de placement du module UWB pour meilleure réception
+    \item Essai de range pour ESP-NOW
+    \item Suivi d'un drone avec l'UWB/Communication (pour Z)
+    \item Essai de correcteur (Plusieurs valeurs/correcteur)
+\end{itemize}
+
+
+\section{Étude de l'angle : }
+Cette étude a pour objectif d'étudier des dispositions angulaires des modules  dans une disposition en triangle pour les drones. 
+
+
+
+
+\section{Étude de la hauteur : }
+
+\section{Essai de range ESP-NOW : }
+
+\section{Suivi d'un drone maître : }
+
+\section{Essai des correcteurs}
+
+
+
+
+
+% --------------------------------------------------
+% Bottom Decorative Rule
+% --------------------------------------------------
+\vspace{0.4cm}
+\vfill
+\hrule height 1pt
+
+\end{document}

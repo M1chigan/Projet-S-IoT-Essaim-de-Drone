@@ -1,8 +1,9 @@
 #pragma once
 #include <stdint.h>
 
-constexpr uint8_t DRONE_ID   = 1;  
+constexpr uint8_t DRONE_ID   = 2;  
 const uint32_t PIXHAWK_BAUDRATE = 57600;
+constexpr float max_speed = 6; //(m/s)
 
 // Gestion des PINS :
 constexpr uint8_t UWB_PIN_SCK  = 18;

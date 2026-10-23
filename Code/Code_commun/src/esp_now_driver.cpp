@@ -31,6 +31,7 @@ typedef struct __attribute__((packed)) {
   uint8_t  id;
   uint32_t t_ms;
   float d;
+  float z;
   GPS gps; 
   Attitude a;
 } Pkt;
@@ -76,11 +77,14 @@ bool initcom() {
   return true; 
 }
 
-void send2drone(uint8_t id, float d) {
-Pkt p;
-p.id = DRONE_ID;
-p.t_ms = millis();
-p.d = d;
+void send2drone(uint8_t id, float d,float z,Attitude a, GPS gps) {
+    Pkt p;
+    p.id = DRONE_ID;
+    p.t_ms = millis();
+    p.d = d;
+    p.z = z;
+    p.gps = gps;
+    p.a = a;
 
 switch (id) {
     case 1:
@@ -96,21 +100,25 @@ switch (id) {
 }
 
 
-void send2base(float d, Attitude a, GPS gps) {
+void send2base(float d,float z,Attitude a, GPS gps) {
     Pkt p;
     p.id = DRONE_ID;
     p.t_ms = millis();
     p.d = d;
+    p.z = z;
     p.gps = gps;
     p.a = a;
     esp_now_send(BASE_MAC, (uint8_t*)&p, sizeof(p));
 }
 
-void send2all(float d ) {
-  Pkt p;
-  p.id = DRONE_ID;
-  p.t_ms = millis();
-  p.d = d;
+void send2all(float d,float z,Attitude a, GPS gps) {
+    Pkt p;
+    p.id = DRONE_ID;
+    p.t_ms = millis();
+    p.d = d;
+    p.z = z;
+    p.gps = gps;
+    p.a = a;
 
   esp_now_send(BCAST, (uint8_t*)&p, sizeof(p));
 

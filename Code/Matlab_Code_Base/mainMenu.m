@@ -1,6 +1,7 @@
 function mainMenu()
 % Main entry point script/function
 clear; close all;
+addpath('Simulation_onglets');
 
 mainFig = uifigure('Name', 'Menu Principal', 'Position', [500, 400, 400, 250], 'Color', [0.15, 0.15, 0.15]);
 mainLayout = uigridlayout(mainFig, [3, 1]);

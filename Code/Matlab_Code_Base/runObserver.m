@@ -10,7 +10,7 @@ function runObserver()
     
     % Create UI window for UART monitoring
     monitorFig = uifigure('Name', 'UART Terminal & Data Observer', 'Position', [150, 150, 850, 550], 'Color', [0.15, 0.15, 0.15]);
-    
+   
     layout = uigridlayout(monitorFig, [3, 1]);
     layout.RowHeight = {'1x', 60};
     layout.BackgroundColor = [0.15, 0.15, 0.15];

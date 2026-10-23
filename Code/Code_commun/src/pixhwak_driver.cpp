@@ -18,6 +18,8 @@ static constexpr uint32_t HEARTBEAT_TIMEOUT_MS  = 3000;
 static constexpr uint32_t ATTITUDE_TIMEOUT_MS   = 1000;  
 static constexpr uint32_t REQUEST_PERIOD_MS     = 2000; 
 static constexpr uint16_t MAX_BYTES_PER_UPDATE  = 256;
+static constexpr float    ALTITUDE_RATE_HZ    = 5.0f;
+static constexpr uint32_t ALTITUDE_TIMEOUT_MS = 1000;
 
 static bool     s_connected = false;
 static uint8_t  s_target_sys  = 1;
@@ -27,12 +29,19 @@ static uint32_t s_last_heartbeat_ms = 0;
 static uint32_t s_last_attitude_ms  = 0;
 static uint32_t s_last_gps_ms  = 0;
 static uint32_t s_last_request_ms   = 0;
+static uint32_t s_last_alt_ms         = 0;
+static uint32_t s_last_request_alt_ms = 0;
+
+
  
 static Attitude s_att = {0, 0, 0};
 static bool     s_att_new = false;
 
 static GPS s_gps = {0, 0, 0};
 static bool s_gps_new = false;
+
+static Altitude s_alt = {0};
+static bool     s_alt_new = false;
 
 static void requestMessage(uint16_t message_id, float frequency_hz) {
     float interval_us = 1000000.0f / frequency_hz;
@@ -108,6 +117,15 @@ void pixhawk_update() {
 
                 break;
             }
+            case MAVLINK_MSG_ID_GLOBAL_POSITION_INT: {
+                mavlink_global_position_int_t gp;
+                mavlink_msg_global_position_int_decode(&msg, &gp);
+
+                s_alt.amsl_m  = gp.alt / 1000.0f;   // mm -> m
+                s_alt_new     = true;
+                s_last_alt_ms = millis();
+                break;
+}
             default:
                 break;
         }
@@ -124,6 +142,12 @@ void pixhawk_update() {
         requestMessage(MAVLINK_MSG_ID_ATTITUDE, ATTITUDE_RATE_HZ);
         s_last_request_ms = now;
     }
+    if (s_connected &&
+        now - s_last_alt_ms         > ALTITUDE_TIMEOUT_MS &&
+        now - s_last_request_alt_ms >= REQUEST_PERIOD_MS) {
+        requestMessage(MAVLINK_MSG_ID_GLOBAL_POSITION_INT, ALTITUDE_RATE_HZ);
+        s_last_request_alt_ms = now;
+}
 }
  
 bool pixhawk_connected() {
@@ -141,5 +165,12 @@ bool pixhawk_get_gps (GPS* gps) {
     if (!s_gps_new) return false;
     s_gps_new = false;
     *gps = s_gps;
+    return true;
+}
+
+bool pixhawk_get_altitude(Altitude* alt) {
+    if (!s_alt_new) return false;
+    s_alt_new = false;
+    *alt = s_alt;
     return true;
 }
