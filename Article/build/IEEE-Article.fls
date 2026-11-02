@@ -183,6 +183,10 @@ INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.fd
 INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.fd
 INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.fd
 INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\courier\pcrr7t.tfm
+INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
+INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
+INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\courier\pcrr7t.vf
+INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\courier\pcrr8r.tfm
 INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmrc7t.tfm
 INPUT .\image\fig1.png
 INPUT .\image\fig1.png
@@ -194,10 +198,6 @@ INPUT .\image\fig1.png
 INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsptm.fd
 INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsptm.fd
 INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omsptm.fd
-INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
-INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
-INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\courier\pcrr7t.vf
-INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\courier\pcrr8r.tfm
 INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\liene\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmrc7t.vf

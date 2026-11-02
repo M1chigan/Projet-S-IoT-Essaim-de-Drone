@@ -13,47 +13,23 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Conference Paper Title*\\
+\title{S-IoT Project : Swarm drone \\
 {\footnotesize \textsuperscript{*}Note: Sub-titles are not captured for https://ieeexplore.ieee.org  and
 should not be used}
-\thanks{Identify applicable funding agency here. If none, delete this.}
+\thanks{INSA}
 }
 
-\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address or ORCID}
+\author{\IEEEauthorblockN{1\textsuperscript{st} PEYON Emilien}
+\IEEEauthorblockA{\textit{Electrical Engineering} \\
+\textit{INSA Strasbourg}\\
+Strasbourg, France \\
+emilien.peyon@insa-strasbourg.fr}
 \and
-\IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address or ORCID}
-\and
-\IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address or ORCID}
-\and
-\IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address or ORCID}
-\and
-\IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address or ORCID}
-\and
-\IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address or ORCID}
+\IEEEauthorblockN{2\textsuperscript{nd} RAMDANNI Noé}
+\IEEEauthorblockA{\textit{Electrical Engineering} \\
+\textit{INSA Strasbourg}\\
+Strasbourg, France \\
+noe.ramdanni@insa-strasbourg.fr}
 }
 
 \maketitle
@@ -69,9 +45,72 @@ component, formatting, style, styling, insert.
 \end{IEEEkeywords}
 
 \section{Introduction}
+
+\subsection{Objectives}
 This document is a model and instructions for \LaTeX.
 Please observe the conference page limits. For more information about how to become an IEEE Conference author or how to write your paper, please visit   IEEE Conference Author Center website: https://conferences.ieeeauthorcenter.ieee.org/.
 
+\subsection{Software and tools}
+
+\section{UltraWide Band (UWB)}
+The UWB is a technology which use electromagnetic signal to transmit information. Firstly, used for communication purpose. In 2002, industrial and scientist work together to write a norme for localisation purpose \textcolor{red}{(Ajouter ref article)}.
+
+\subsection{Localisation algorithm}
+To locate two different algorithm can be used : Two Ray Ranging (TWR) and Double Sided Two Way Ranging (DS-TWR) describe in the next figure \textcolor{red}{(Ajouter figure)}. 
+
+We have implemented both algorithm using C++ language in the ESP-32. Based on our testing (face to face configuration) 
+\begin{itemize}
+    \item DS-TWR is 5\% more precise than the TWR
+    \item DS-TWR is more reliable 
+    \item Full TWR is 33 \% faster than DS-TWR
+    \item TWR is simplier to implement
+\end{itemize}
+In conclusion, in a 3 drone-swarm, accuracy is more needed than measure's frequency. 
+So DS-TWR is recommended. \\
+With DS-TWR, we reach 4 cm measure precision around the measure reference (here 130cm). 
+To observe the error evolution and the protocol, look at the measure processing part \textcolor{red}{(Ajouter ref part)}.
+
+\subsection{Time management algorithm}
+If multiple electromagnetic signal are emited at the same time, they will interfere with each others and the measure precision will fell down. To avoid interference, we have to implement a timing management algorithm.
+Three algorithms exists : ALOHA, TDMA and ALOHA-TDMA. 
+
+\begin{itemize}
+    \item ALOHA is the simpliest one based on aleatory. Each module emit whenever they are ready. This algorithm create a lot of interference and losing lot of precision.\textcolor{red}{(Ajouter ref article)} 
+    \item Time Division Multiple Access (TDMA) is the strictiest one. Each module has his time to emit or respond. It reach 0\% loss.  \textcolor{red}{(Ajouter ref article)}
+    \item ALOHA-TDMA is a mix between the two previous algorithm. Module can start emiting on specific time. This algorithm permit to get 40\% loss. \textcolor{red}{(Ajouter ref article)}
+\end{itemize}
+The TDMA is the most efficient algorithm otherwise, it is very strict and add new module is not possible and the time management is not optimized. In our case, with a 3 swarm drone and no added drone. We can use this algorithm and be able to reach a 0\% loss. 
+
+ 
+\section{Communication Protocol}
+
+\subsection{Xbee}
+
+\subsection{UWB}
+
+\subsection{ESP-NOW}
+
+\section{Controller}
+Parler de Kaalman et des filtres pre kaalman.
+\section{Simulation}
+
+\section{Implementation}
+
+\subsection{Component}
+
+\subsection{Core Management}
+
+\section{Test}
+
+\subsubsection{Calibration}
+
+\subsection{First Outdoor Test}
+
+\section{Conclusion}
+
+\section*{References}
+
+\newpage
 \subsection{Maintaining the Integrity of the Specifications}
 
 The IEEEtran class file is used to format your paper and style the text. All margins, 
