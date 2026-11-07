@@ -1,6 +1,6 @@
 \documentclass[a4paper,11pt]{report}
 
-\input{Chapter/import.tex}
+\input{Chapter/00-import.tex}
 
 %Site pour forme : https://tikzmaker.com/editor
 
@@ -39,14 +39,38 @@
     \renewcommand{\headrule}{\hbox to\headwidth{\color{black!20}\leaders\hrule height \headrulewidth\hfill}}
 }
 
+%Définition des chapters en forme romains
+\renewcommand{\thechapter}{\Roman{chapter}} 
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\makeatletter
+\renewcommand\subsection{\@startsection{subsection}{2}{1.5em}
+  {-3.25ex plus -1ex minus -.2ex}{1.5ex plus .2ex}%
+  {\normalfont\large\bfseries}}
+\makeatother
+
+\input{Chapter/Figure.tex}
+
 \begin{document}
 \includepdf[pages=1]{PrePage/PageDeGarde.pdf}
 \newpage
-\input{Chapter/Specifications.tex}
+\tableofcontents
 \newpage
-\input{Chapter/Bibliographics_Studies.tex}
+\listoftables
 \newpage
-\input{Chapter/calculation.Tex}
+%\input{Chapter/01-Introduction.tex}
+%\newpage
+%\input{Chapter/02-Constraints.tex}
+%\newpage
+%\input{Chapter/03-Specifications.tex}
+%\newpage
+%\input{Chapter/04-Bibliographics_Studies.tex}
+%\newpage
+\input{Chapter/05-Main.tex}
+\newpage
+%\input{Chapter/06-Conclusion.tex}
+%\newpage
+%\input{Chapter/07-Calculations.Tex}
 
 \cleardoublepage % Force le saut vers une nouvelle page
 \printbibliography[heading=bibintoc, title={References}]

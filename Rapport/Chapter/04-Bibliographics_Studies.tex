@@ -1,4 +1,4 @@
-\chapter*{Bibliographical Studies}
+\chapter{Bibliographical Studies}
 \markboth{Bibliographical Studies}{Bibliographical Studies}
 
 \section{UWB}
@@ -259,7 +259,7 @@ As mentioned earlier, the extended Kalman filter is used to deal with a non-line
 $$ {\displaystyle {\textbf {x}}_{k}=f({\textbf {x}}_{k-1},{\textbf {u}}_{k},{\textbf {w}}_{k})}$$
 $${\displaystyle {\textbf {z}}_{k}=h({\textbf {x}}_{k},{\textbf {v}}_{k})}$$
 
-\color{blue}
+
 Like the original filter, it is recursive: only the current estimate and its covariance are stored, which keeps memory and computation low enough for embedded platforms, while the covariance provides a measure of uncertainty that can be used to reject inconsistent measurements. However, this comes with a drawback. The linearization is a first-order approximation, so the optimality of the linear Gaussian case is lost, and the filter may diverge if the initial estimate is poor or the system is strongly nonlinear \parencite{boutayeb_convergence_1997}. Its performance also depends on the tuning of the noise covariances. Alternatives such as the unscented Kalman filter \parencite{julier_new_1997}, particle filters \parencite{arulampalam_tutorial_2002} or optimization-based estimators differ in accuracy, robustness and computational cost. The EKF nevertheless remains the standard approach in navigation, including in open-source flight controllers (like in the ArduPilot firmware).
 \newpage
 
@@ -302,6 +302,5 @@ In an article of 2020, Chen et al. \parencite{chen_uwb-assisted_2020} studied th
 
 A closer reasearch to our situation was made by Yang et Lee in 2023 \parencite{yang_ultrawideband_2023} in which they implemented an Extended Kalman Filter using GNSS and INS (Inertial Navigation System) with complementary UWB measurements in a flight controller firmware. They used the flight controller "Pixhawk 4" (the same as us) and successfully carried out a field test which, however, did not include a moving drone formation. 
 
-\color{black}
 
 \newpage

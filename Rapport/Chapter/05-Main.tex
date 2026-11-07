@@ -1,0 +1,63 @@
+\chapter{Main}
+\markboth{Main}{Main}
+
+\section{UWB}
+
+\section{data processing}
+
+\section{Communication}
+
+\section{Visualitation}
+
+\newpage
+\section{Simulation}
+
+On this project, outdoor tests are very rare due to logistical problem. However, we need to verify our work such as the corrector. To do so, we developed a simulation protocol using the real MAVLink messages, and same data as our drone.  \\
+In this part, we will first present the main simulation tools, ArduPilot and Mission planer, second, explain the implementation, then present the result we obtained and finally the simulation possibilities.
+
+\subsection{ArduPilot and Mission Planer}
+
+To do drone simulation, we have to select the same architecture as our drone on the pixhwak 4. In the drone industry, two differents architectures are existing: Ardupilot and PX4. In our case, pixhwak 4 is using the ArduPilot architectures. \\
+Then, after selecting the architecture, we have to use a software to visualise and simulate drone. We choose mission planer because we have already work with it on different project. \\
+Let's present both tools:
+
+\subsubsection{\href{https://github.com/ArduPilot/ardupilot}{ArduPilot}}
+
+ ArduPilot was created in 2007 by the DIY Drones community. Originally developed for Arduino boards, it has since become a general-purpose, open-source autopilot. It can control many types of vehicles (copters, planes, rovers, submarines, etc.). ArduPilot provides autopilot functions, receives data from sensors, and fuses it using an Extended Kalman Filter (EKF) [ref]. It also allows users to create pre-planned missions. To operate, it uses the MAVLink protocol to communicate with the drone and facilitate control. In our case, an ESP32 uses the MAVLink library to send MAVLink messages that command the drone’s movements.
+
+\subsubsection{\href{https://ardupilot.org/planner/}{Mission planer}}
+
+Mission planer is a representative tool for copters such as drone. Created by  Michael Oborne to help users of ArduPilot architecture to vizualise their drone and command them. The software also permits to declare  multiple drone so create a swarm. For our project, it will be used as a simulation field. 
+
+\subsection{Architecture}
+
+The simulation works with a very specific architecture cause tools like ArduPilot works under Linux system. The architecture is exposed in the figure below. 
+
+\begin{figure}[H]
+  \centering
+   \resizebox{0.9\textwidth}{!}{\SchSimulation}
+  \caption{Simulation architecture}
+\end{figure}
+
+Let's explain each different bloc and its role : 
+\begin{itemize}
+    \item $ESP-32_{Base}$ : Represent order send from the base for exemple takeoff
+    \item $ESP-32_{Drone}$: Represent the main drone where code we want to test is running
+    \item ArduPilot : Represent the pixhawk of our drone. Here, we are simulating 3 of them. 
+    \item Bridge.py : Code made to redirect data from the UART connection to UDP connection 
+    \item MAVProxy : Manage all entries and exit permit to link the drone entries redirect them to the Ardupilot and also permit to redirect exit from ArduPilot (GPS, speed, etc) to Mission Planer.
+    \item Mission Planer : Use to visualise our swarm drone based on data from ArduPilot
+    \item Simulation.py : Python scrip to simulate $Drone_2$ and $Drone_3$
+\end{itemize}
+
+
+Explain all the different code (main part) and link to the Github
+
+\subsection{Result}
+
+\subsection{Simulation possibilities}
+
+
+
+\section{Outdoor Test}
+
