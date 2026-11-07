@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1793629889.87188 "c:/Users/liene/Documents/INSA/S9/Projet S-IoT/Projet-S-IoT-Essaim-de-Drone/Article/IEEE-Article.tex" "IEEE-Article.pdf" "IEEE-Article" 1793629890.44171 0
+["pdflatex"] 1793695320.71409 "c:/Users/liene/Documents/INSA/S9/Projet S-IoT/Projet-S-IoT-Essaim-de-Drone/Article/IEEE-Article.tex" "IEEE-Article.pdf" "IEEE-Article" 1793695321.21211 0
   "C:/Users/liene/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1792790412 82684 3a87f55ef758bc5fe6abfed9a40cca26 ""
   "C:/Users/liene/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1775876026 13333487 fab82c18348b60bfe9324c4b31c32b31 ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -23,16 +23,12 @@
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1233951854 908 2921f8a10601f252058503cc6570e581 ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1233951854 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1233951854 940 228d6584342e91276bf566bcf9716b83 ""
-  "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmex10.tfm" 1136765053 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
-  "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi10.tfm" 1136765053 1528 abec98dbc43e172678c11b3b9031252a ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi6.tfm" 1136765053 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi8.tfm" 1136765053 1520 eccf95517727cb11801f4f1aee3a21b4 ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmmi9.tfm" 1136765053 1524 d89e2d087a9828407a196f428428ef4a ""
-  "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmr10.tfm" 1136765053 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmr6.tfm" 1136765053 1300 b62933e007d01cfd073f79b963c01526 ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmr8.tfm" 1136765053 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmr9.tfm" 1136765053 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
-  "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy10.tfm" 1136765053 1124 6c73e740cf17375f03eec0ee63599741 ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy9.tfm" 1136765053 1116 25a7bf822c58caf309a702ef79f4afbb ""
@@ -83,9 +79,9 @@
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ot1pcr.fd" 1585253778 1025 1ed784d7bfe47179f3550d2303b073f8 ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ot1ptm.fd" 1585253778 1007 15056f4a61917ceed3a44e4ac11fcc52 ""
   "C:/Users/liene/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "IEEE-Article.tex" 1793629889 18205 511cb1b78d7a070dbccd0a66d765b318 ""
-  "build/IEEE-Article.aux" 1793629890 4547 f522a274c67846ffcf9262a8f3dba6c8 "pdflatex"
-  "c:/Users/liene/Documents/INSA/S9/Projet S-IoT/Projet-S-IoT-Essaim-de-Drone/Article/IEEE-Article.tex" 1793629889 18205 511cb1b78d7a070dbccd0a66d765b318 ""
+  "IEEE-Article.tex" 1793695319 19517 238108492703dace3eb5f540c184e5fd ""
+  "build/IEEE-Article.aux" 1793695321 4221 12eb9d8faef6b548f706166bcee8d770 "pdflatex"
+  "c:/Users/liene/Documents/INSA/S9/Projet S-IoT/Projet-S-IoT-Essaim-de-Drone/Article/IEEE-Article.tex" 1793695319 19517 238108492703dace3eb5f540c184e5fd ""
   "image/fig1.png" 1792790248 13815 016052f2e09fbe31a21f6dc821b31ed9 ""
   (generated)
   "IEEE-Article.pdf"

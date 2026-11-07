@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.11)  2 NOV 2026 15:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.11)  3 NOV 2026 09:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -271,34 +271,31 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Users\liene\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 35.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 38.
  (C:\Users\liene\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 35.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
  (C:\Users\liene\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 35.
- [1{C:/Users/liene/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
+) [1
 
-
-]
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 166.
+{C:/Users/liene/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 182.
  (C:\Users\liene\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [2]
 <image/fig1.png, id=17, 249.3315pt x 189.22694pt>
 File: image/fig1.png Graphic file (type png)
 <use image/fig1.png>
-Package pdftex.def Info: image/fig1.png  used on input line 271.
+Package pdftex.def Info: image/fig1.png  used on input line 287.
 (pdftex.def)             Requested size: 249.33087pt x 189.22647pt.
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 282.
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 298.
  (C:\Users\liene\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 282.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 298.
  [3 <./image/fig1.png (PNG copy)>]
 
 ** Conference Paper **
@@ -320,15 +317,15 @@ L3 programming layer <2025-12-24>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4314 strings out of 467871
- 68710 string characters out of 5418376
+ 4282 strings out of 467871
+ 68207 string characters out of 5418376
  488652 words of memory out of 5000000
- 33138 multiletter control sequences out of 15000+600000
- 678826 words of font info for 141 fonts, out of 8000000 for 9000
+ 33110 multiletter control sequences out of 15000+600000
+ 670665 words of font info for 123 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,11n,65p,672b,318s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,11n,65p,672b,310s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "c:\Users\liene\Documents\INSA\S9\Projet S-IoT\Projet-S-IoT-Essaim-de-Drone\Article\build\IEEE-Article.pdf" (4 pages, 159367 bytes).
+Output written on "c:\Users\liene\Documents\INSA\S9\Projet S-IoT\Projet-S-IoT-Essaim-de-Drone\Article\build\IEEE-Article.pdf" (4 pages, 158811 bytes).
 PDF statistics:
  72 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

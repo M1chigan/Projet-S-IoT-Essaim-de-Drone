@@ -32,7 +32,7 @@ Strasbourg, France \\
 noe.ramdanni@insa-strasbourg.fr}
 }
 
-\maketitle
+
 
 \begin{abstract}
 This document is a model and instructions for \LaTeX.
@@ -82,16 +82,32 @@ Three algorithms exists : ALOHA, TDMA and ALOHA-TDMA.
 The TDMA is the most efficient algorithm otherwise, it is very strict and add new module is not possible and the time management is not optimized. In our case, with a 3 swarm drone and no added drone. We can use this algorithm and be able to reach a 0\% loss. 
 
  
-\section{Communication Protocol}
-
-\subsection{Xbee}
-
-\subsection{UWB}
-
-\subsection{ESP-NOW}
 
 \section{Controller}
 Parler de Kaalman et des filtres pre kaalman.
+
+\section{Communication Protocol}
+To form a swarm it is needs coordination between drones. The main key is the communication. \\
+To get an efficient communication, it has to respond three needs : 
+\textcolor{red}{(Être des infos qu'on a besoin (et faire un tableaux)}
+\begin{itemize}
+    \item Transmission of many parameters as position, speed, acceleration 
+    \item Transmission distance higher than 150 meters.
+    \item Transmission frequency has to be enough to respond to controller needs 
+    \item Easily implemented on the drone
+\end{itemize}
+Many protocols currently exists, we have chosen to works on three different protocol : 
+\begin{itemize}
+    \item Xbee protocol 
+    \item UWB protocol
+    \item ESP-NOW Protocol 
+\end{itemize}
+The Xbee protocol was the communication already in place. This protocol has a range of kilometers, mainly used in those type of works. But
+The Xbee protocol was created in [Ajouter date], by [Ajouter nom] \textcolor{red}{(Ajouter ref article ou boite de sortie)}.
+We choose the ESP-NOW as our communication protocol. For different reason, firstly, it don't need others component only the ESP-32 is needed. Secondly, it reachs a 150m range (needed for swarm drone and a base) and last reason, it works in a different frequency than the UWB and doesn't interfere with it. 
+
+The second problematic of the communication is the communication organisation. We currently
+
 \section{Simulation}
 
 \section{Implementation}
