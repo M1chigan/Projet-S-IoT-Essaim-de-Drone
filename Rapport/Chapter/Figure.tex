@@ -71,3 +71,36 @@
 \node  at (46.125,-11.375) {$(Windows)$};
 \end{circuitikz}
 }
+
+
+
+\providecommand{\SchVisualisation}{
+\begin{circuitikz}
+\draw [ line width=1pt ] (53.75,7.5) rectangle (70,0);
+\node [font=\fontsize{14.4pt}{18.7pt}\selectfont] at (50.125,1.875) {$ESP32_{Base}$};
+\draw [ rotate around={-90:(49.875, 3.625)}] (48.75,3.75) rectangle (51,3.5);
+\draw [ rotate around={-90:(49.6875, 3.3125)}] (49.25,3.375) rectangle (50.125,3.25);
+\draw [ rotate around={-90:(49.6875, 4.4375)}] (49.375,4.5) rectangle (50,4.375);
+\draw [line width=0.6pt, {Stealth[scale=1.5]}-{Stealth[scale=1.5]}, ] (50.5,3.625) -- (53.5,3.625);
+\node  at (52.5,4) {$UART$};
+\node [font=\fontsize{14.4pt}{18.7pt}\selectfont] at (63.25,0.5) {$Matlab$};
+\draw [line width=0.6pt, short] (47.5,4.125) arc[start angle=89.96, end angle=-89.96, radius=0.6250];
+\draw [line width=0.6pt, short] (47.5,4.5) arc[start angle=90.27, end angle=-90.27, radius=1.0000];
+\draw [line width=0.6pt, short] (47.5,4.875) arc[start angle=90.02, end angle=-90.02, radius=1.3750];
+\draw [ line width=0.6pt ] (47.5,3.5) circle (0.125cm);
+\node [font=\fontsize{14.4pt}{18.7pt}\selectfont] at (60.625,-0.5) {$Computer$};
+\draw [ line width=1pt ] (56.875,6.75) rectangle (69.5,1);
+\draw [ line width=1pt ] (57.75,4.75) rectangle (61.5,2.625);
+\draw [ line width=1pt ] (62.625,6.5) rectangle (68.875,4.375);
+\draw [ line width=1pt ] (62.625,3.75) rectangle (68.875,1.625);
+\node [font=\fontsize{14.4pt}{18.7pt}\selectfont] at (59.5,3.625) {$mainMenu.m$};
+\node [font=\fontsize{14.4pt}{18.7pt}\selectfont] at (65.75,5.5) {$runObserver.m$};
+\node [font=\fontsize{14.4pt}{18.7pt}\selectfont] at (65.75,2.625) {$runSimulation.m$};
+\draw [ line width=1pt ] (54.125,4.75) rectangle (56,2.625);
+\draw [line width=0.6pt, {Stealth[scale=1.5]}-{Stealth[scale=1.5]}, dotted] (56.25,3.625) -- (57.5,3.625);
+\node  at (55,4) {$PORT :$};
+\node [font=\fontsize{10pt}{13.0pt}\selectfont] at (55,3.375) {$COM$};
+\draw [line width=0.6pt, {Stealth[scale=1.5]}-{Stealth[scale=1.5]}, densely dotted] (61.75,3.75) -- (62.375,5.375);
+\draw [line width=0.6pt, {Stealth[scale=1.5]}-{Stealth[scale=1.5]}, densely dotted] (61.75,3.75) -- (62.375,2.5);
+\end{circuitikz}
+}

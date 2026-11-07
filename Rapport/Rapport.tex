@@ -19,9 +19,10 @@
 \fancyhf{}
 
 % Haut de page
+\setlength{\headheight}{1.5cm}
 \fancyhead[L]{$\vcenter{\hbox{\faintText{\leftmark}}}$}
 \fancyhead[C]{$\vcenter{\hbox{\faintText{S-IoT - Project Report : Drone swarm}}}$}
-\fancyhead[R]{$\vcenter{\hbox{\transparent{0.5}\includegraphics[height=1.2cm]{Logo INSA.png}}}$}
+\fancyhead[R]{$\vcenter{\hbox{\transparent{0.5}\includegraphics[height=1cm]{Logo INSA.png}}}$}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\color{black!20}\leaders\hrule height \headrulewidth\hfill}}
 
@@ -40,14 +41,38 @@
 }
 
 %Définition des chapters en forme romains
-\renewcommand{\thechapter}{\Roman{chapter}} 
+% Numérotation
+\renewcommand{\thechapter}{\Roman{chapter}}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thesubsection}{\Alph{subsection}}
-\makeatletter
-\renewcommand\subsection{\@startsection{subsection}{2}{1.5em}
-  {-3.25ex plus -1ex minus -.2ex}{1.5ex plus .2ex}%
-  {\normalfont\large\bfseries}}
-\makeatother
+
+  
+% Chapitres : "I - Titre"
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\bfseries}
+  {\thechapter\ -}{0.2em}{}
+\titlespacing*{\chapter}{0pt}{-40pt}{20pt}
+
+\titleformat{name=\chapter,numberless}[hang]
+  {\normalfont\huge\bfseries}
+  {}{0pt}{}
+\titlespacing*{\chapter}{0pt}{-25pt}{20pt}
+
+% Sections : "1 - Titre"
+\titleformat{\section}[hang]
+  {\normalfont\Large\bfseries}
+  {\thesection\ -}{0.2em}{}
+\titlespacing*{\section}{1.5em}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+
+
+% Sous-sections : "A - Titre", avec retrait de 1,5em
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}
+  {\thesubsection\ -}{0.2em}{}
+\titlespacing*{\subsection}{2.5em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+
 
 \input{Chapter/Figure.tex}
 
@@ -56,7 +81,7 @@
 \newpage
 \tableofcontents
 \newpage
-\listoftables
+\listoffigures
 \newpage
 %\input{Chapter/01-Introduction.tex}
 %\newpage

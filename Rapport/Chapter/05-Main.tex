@@ -2,12 +2,36 @@
 \markboth{Main}{Main}
 
 \section{UWB}
-
-\section{data processing}
-
+\newpage
+\section{Data processing}
+\newpage
 \section{Communication}
+\newpage\section{Visualization}
+Visualization permit to obtain precise measurement and result from test in major case drone will fly outdoor at 10 meters away from us. So, vizualise permit to precisely see the attitude of the drone, the real shape positioning. It can permit to detect error, or problematic point. \\
+To visualise, we choose the sofware Matlab. And had the objectif to be able to see the attitude, the shape position and also look at the data coming from the drone. 
 
-\section{Visualitation}
+\subsection{Matlab}
+
+Matlab is a general tool developped by the MathWorks. It has many functions such as mathematics calculator, simulator, and also a corrector designer. Based on add-on and toolbox, it can be usefull for many differents purpose. It also permits to generate an interface. 
+
+\subsection{Architecture}
+
+The visualization follow the next architecture : 
+\begin{figure}[H]
+  \centering
+   \resizebox{0.9\textwidth}{!}{\SchVisualisation}
+  \caption{Visualization architecture}
+\end{figure}
+
+Let's explain each different bloc and its role : 
+
+\begin{itemize}
+    \item ESP32 : Relay between ESP-NOW protocol and the UART Port of the computer, which permit to make it visible for the matlab code.
+    \item COM PORT: Physical bridge between the computer and the ESP32
+    \item mainMenu : General window which redirect for the next window
+    \item runObserver : Window to observe UART communication on the PORT (Debug utility)
+    \item runSimulation : Main Window where we visualise attitude of the drone, shape placement and data reader
+\end{itemize}
 
 \newpage
 \section{Simulation}
@@ -44,20 +68,19 @@ Let's explain each different bloc and its role :
     \item $ESP-32_{Base}$ : Represent order send from the base for exemple takeoff
     \item $ESP-32_{Drone}$: Represent the main drone where code we want to test is running
     \item ArduPilot : Represent the pixhawk of our drone. Here, we are simulating 3 of them. 
-    \item Bridge.py : Code made to redirect data from the UART connection to UDP connection 
+    \item \href{https://github.com/M1chigan/Projet-S-IoT-Essaim-de-Drone/blob/main/Simulation/Script%20d'essai/Bridge.py}{Bridge.py} : Code made to redirect data from the UART connection to UDP connection 
     \item MAVProxy : Manage all entries and exit permit to link the drone entries redirect them to the Ardupilot and also permit to redirect exit from ArduPilot (GPS, speed, etc) to Mission Planer.
     \item Mission Planer : Use to visualise our swarm drone based on data from ArduPilot
-    \item Simulation.py : Python scrip to simulate $Drone_2$ and $Drone_3$
+    \item \href{https://github.com/M1chigan/Projet-S-IoT-Essaim-de-Drone/blob/main/Simulation/Script%20d'essai/Simulation.py}{Simulation.py}  : Python scrip to simulate $Drone_2$ and $Drone_3$
 \end{itemize}
 
-
-Explain all the different code (main part) and link to the Github
-
 \subsection{Result}
-
+\textcolor{red}{Add after fist Test}
 \subsection{Simulation possibilities}
+\textcolor{red}{Add after fist Test}
 
 
 
+\newpage
 \section{Outdoor Test}
 
