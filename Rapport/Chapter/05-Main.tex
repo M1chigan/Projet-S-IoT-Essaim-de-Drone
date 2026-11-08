@@ -2,8 +2,205 @@
 \markboth{Main}{Main}
 
 \section{UWB}
-\newpage
-\section{Data processing}
+
+\subsection{Algorithm}
+Say that we take DS-TWR et TDMA
+
+\subsection{Calibration}
+Tableau avec les références
+\subsection{Test}
+
+\subsubsection{Face to Face horizontaly}
+\begin{figure}[H]
+  \centering
+
+  % --- Schéma ---
+  \resizebox{0.5\linewidth}{!}{\FtFhorizontale}
+  \captionof{figure}{Schéma de la configuration face à face horizontale}
+
+  \vspace{1em}
+
+  % --- Tableau en deux moitiés ---
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \centering
+    \begin{tabular}{|c|c|c|}
+      \hline
+      Réelle (cm) & Mesurée (cm) & Erreur (cm) \\ \hline
+      69,4  & 61    & -8,4 \\ \hline
+      70    & 62,2  & -7,8 \\ \hline
+      75    & 69,6  & -5,4 \\ \hline
+      80    & 73,9  & -6,1 \\ \hline
+      82,6  & 76,1  & -6,5 \\ \hline
+      85    & 79,9  & -5,1 \\ \hline
+      90    & 86,6  & -3,4 \\ \hline
+      91    & 87    & -4   \\ \hline
+      95    & 92,2  & -2,8 \\ \hline
+      100   & 96,5  & -3,5 \\ \hline
+      100   & 96,8  & -3,2 \\ \hline
+      105   & 102,6 & -2,4 \\ \hline
+      107,3 & 106,4 & -0,9 \\ \hline
+      110   & 108,9 & -1,1 \\ \hline
+      115   & 113,4 & -1,6 \\ \hline
+      120,5 & 120,9 & 0,4  \\ \hline
+      125   & 126,4 & 1,4  \\ \hline
+      130   & 129,6 & -0,4 \\ \hline
+      132   & 133,7 & 1,7  \\ \hline
+    \end{tabular}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \vspace{0pt}
+    \centering
+    \begin{tabular}{|c|c|c|}
+      \hline
+      Réelle (cm) & Mesurée (cm) & Erreur (cm) \\ \hline
+      135   & 133,6 & -1,4 \\ \hline
+      140   & 138,6 & -1,4 \\ \hline
+      145   & 144,9 & -0,1 \\ \hline
+      147,4 & 150   & 2,6  \\ \hline
+      150   & 151,7 & 1,7  \\ \hline
+      155   & 160,3 & 5,3  \\ \hline
+      155,5 & 161   & 5,5  \\ \hline
+      160   & 165,7 & 5,7  \\ \hline
+      164,7 & 171,8 & 7,1  \\ \hline
+      165   & 172,2 & 7,2  \\ \hline
+      167   & 172,8 & 5,8  \\ \hline
+      170   & 177,2 & 7,2  \\ \hline
+      175   & 180,3 & 5,3  \\ \hline
+      176   & 183,8 & 7,8  \\ \hline
+      180   & 184,3 & 4,3  \\ \hline
+      185   & 188,3 & 3,3  \\ \hline
+      189,6 & 197,9 & 8,3  \\ \hline
+      190   & 191,9 & 1,9  \\ \hline
+    \end{tabular}
+  \end{minipage}
+
+  \captionof{table}{Mesure face à face de façon horizontale}
+\end{figure}
+
+\subsubsection{Paralel module}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[c]{0.38\textwidth}
+    \centering
+    \resizebox{\linewidth}{!}{\SchemaParalleles}
+    \captionof{figure}{Schema of the paralel configuration}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.58\textwidth}
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \resizebox{\linewidth}{!}{%
+    \begin{tabular}{|c|c|c|c|c|}
+      \hline
+      Décalage (cm) & Angle (°) & Dist. réelle (cm) & Dist. mesurée (cm) & Erreur \\ \hline
+      0 & 0 & 120 & 117 & 3 \\ \hline
+      10 & 4,78 & 121 & 118,4 & 2,6 \\ \hline
+      20 & 9,59 & 121,5 & 118,9 & 2,6 \\ \hline
+      30 & 14,48 & 122,5 & 119,1 & 3,4 \\ \hline
+      40 & 19,47 & 125,8 & 124,8 & 1 \\ \hline
+      50 & 24,62 & 128,5 & 128,7 & -0,2 \\ \hline
+      60 & 30,00 & 132,5 & 134,4 & -1,9 \\ \hline
+      70 & 35,69 & 137 & 142,6 & -5,6 \\ \hline
+    \end{tabular}}
+    \captionof{table}{Measure of the paralel configuration}
+  \end{minipage}
+\end{figure}
+
+
+\subsubsection{Rayon configuration}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[c]{0.38\textwidth}
+    \centering
+    \resizebox{\linewidth}{!}{\Schemarayon}
+    \captionof{figure}{Schema of the paralel configuration}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.58\textwidth}
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \resizebox{\linewidth}{!}{%
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Angle(°) & Distance réelle (cm) & Distance mesurée (cm) \\ \hline
+        10 & 120 & 116,7 \\ \hline
+        20 & 120 & 118,4 \\ \hline
+        30 & 120 & 119,5 \\ \hline
+        40 & 120 & 122,8 \\ \hline
+        50 & 120 & 125,9 \\ \hline
+        60 & 120 & 124,2 \\ \hline
+        70 & 120 & 123 \\ \hline
+        80 & 120 & 124 \\ \hline
+        90 & 120 & 130 \\ \hline
+    \end{tabular}}
+    \captionof{table}{Measure of the rayon configuration}
+  \end{minipage}
+\end{figure}
+
+\subsubsection{Face to Back}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[c]{0.38\textwidth}
+    \centering
+    \resizebox{\linewidth}{!}{\FtB}
+    \captionof{figure}{Schema of the paralel configuration}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.58\textwidth}
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \resizebox{\linewidth}{!}{%
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Distance réelle (cm) & Distance mesurée (cm) & Erreur  \\ \hline
+        70 & 97 & -27 \\ \hline
+        80 & 109,8 & -29,8 \\ \hline
+        90 & 122,8 & -32,8 \\ \hline
+        100 & 133,3 & -33,3 \\ \hline
+        110 & 143,5 & -33,5 \\ \hline
+        120 & 152 & -32 \\ \hline
+        130 & 161,6 & -31,6 \\ \hline
+        140 & 177,2 & -37,2 \\ \hline
+        150 & 188 & -38 \\ \hline
+        160 & 192,2 & -32,2 \\ \hline
+        170 & 208,8 & -38,8 \\ \hline
+    \end{tabular}}
+    \captionof{table}{Measure of the rayon configuration}
+  \end{minipage}
+\end{figure}
+
+
+Test de positionement, ajouter les tableaux et les schéma (cote à cote)
+\subsection{Filter}
+\subsubsection{Polynomial filter}
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.8\textwidth}{!}{\includegraphics{Polynomial_Filter.png}}
+   \caption{Code for NLOS Filter}
+\end{figure}
+
+\subsubsection{NLOS Filter}
+
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.8\textwidth}{!}{\includegraphics{NLOS Filter.png}}
+   \caption{Code for NLOS Filter}
+\end{figure}
+
+
+\subsubsection{Innovation Gate Filter}
+\begin{figure}[H]
+   \centering
+   \resizebox{0.8\textwidth}{!}{\includegraphics{Innovation_Gate.png}}
+   \caption{Code for NLOS Filter}
+\end{figure}
+
 \newpage
 
 \section{Communication}
