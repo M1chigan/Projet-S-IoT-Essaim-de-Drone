@@ -1,0 +1,15 @@
+Fonction :
+[1] => status
+[2] => mode
+    [1] = guided
+    [2] = land
+    [3] = rtl
+    [4] = stabilize
+    [5] = loiter
+    [6] = mode auto
+[3] => takeoff
+[4] => armement
+[5] => parameters
+[6] =>
+[7] =>
+[8] =>

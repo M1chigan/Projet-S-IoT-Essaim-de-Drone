@@ -36,12 +36,25 @@ typedef struct __attribute__((packed)) {
   Attitude a;
 } Pkt;
 
+typedef struct __attribute__((packed)) {
+  uint8_t  id;
+  uint32_t t_ms;
+  uint8_t commande;
+  float variable;
+} Pkt_base;
+
 static void onRecv(const uint8_t* mac, const uint8_t* data, int len) {
 
   if (len == sizeof(Pkt)) {
     Pkt p;
     memcpy(&p, data, sizeof(p));
     Serial.printf("id=%u t=%lu ms d=%.3f\n", p.id, (unsigned long)p.t_ms, p.d);
+  }
+
+  if (len == sizeof(Pkt_base)) {
+    Pkt_base p;
+    memcpy(&p, data, sizeof(p));
+    process_order(p.commande, p.variable);
   }
 
 }
@@ -123,6 +136,7 @@ void send2all(float d,float z,Attitude a, GPS gps) {
   esp_now_send(BCAST, (uint8_t*)&p, sizeof(p));
 
 }
+
 
 
 

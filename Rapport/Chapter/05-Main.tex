@@ -5,8 +5,54 @@
 \newpage
 \section{Data processing}
 \newpage
+
 \section{Communication}
-\newpage\section{Visualization}
+In the project, we have to differents use for communication, first communication is used to made each drone talk with each other to maintain the shape but also adapt themselves to the other. Second communication is the data's descent from the drone to the base to permit visualition of the swarm and command drone.
+\subsection{Type of communication}
+We have studied and made research of 3 different communication protocol. 
+\subsubsection{Xbee}
+The first communication protocol, we make research about is Xbee because it was recommended by the subject.
+It works well for large range purpose (multiple km range). It has been already implemented by others groups, and by the research team. So, the pipeline was already desin. 
+Otherwise, it needed a supplementary module. Which complexifie the communication management. And, it is in the contrary of the lighweight solution we want to create. 
+\subsubsection{UWB}
+Second communication protocol was to use the UWB as a sensor and also as communication module. It has been researched and implemented in real life. But during the first test, we have seen some capability reduction due to extension of the message which create a reduction of the frequency. Otherwise, it still a good idea cause it only use the UWB module, that reduce the complexity of the system. 
+\subsubsection{ESP-NOW}
+The third communication protocol is ESP-NOW. A specific communication protocol made by Espressif (ESP32 manufacturer) for ESP32. It uses the Wi-Fi antenna and it bandwith of 2.4Ghz. Optimize for ESP because code his handled by the manufacturer, and it pass before every other task on the Wi-Fi instruction pile. It is range can reach more than 150m.
+
+\subsection{Choice}
+We choose ESP-NOW has the protocol for two main raison : it doesn't need new hardware implementation. And, it responds to both communication purpose of the project. Then, has said during the presentation, the code has been optimized and write by the manufacturer which facilitate it implementation. For exemple, send data is only this command :
+\begin{figure}[H]
+   \centering
+   \resizebox{0.7\textwidth}{!}{\includegraphics{ESP-NOW_send.png}}
+   \caption{Code for send messsage using ESP-NOW}
+\end{figure}
+
+Has said before, range reach 150 meters allows us to create a base. It only ask  us, to have a ESP32, connect to our computer.
+
+\subsection{ESP-NOW implementation}
+To implement ESP-NOW, we had to think about the data we want to exchange. For our first test, we are using two different packages for two different purpose. \\
+First for inter-drone communication : 
+\begin{figure}[H]
+   \centering
+   \resizebox{0.6\textwidth}{!}{\includegraphics{Drone_package.png}}
+   \caption{Drone communication package}
+\end{figure}
+
+And for the base to drone communcation we have this package : 
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.6\textwidth}{!}{\includegraphics{base_package.png}}
+   \caption{Drone communication package}
+\end{figure}
+
+
+\newpage
+
+\section{Data processing}
+\newpage
+
+\section{Visualization}
 Visualization permit to obtain precise measurement and result from test in major case drone will fly outdoor at 10 meters away from us. So, vizualise permit to precisely see the attitude of the drone, the real shape positioning. It can permit to detect error, or problematic point. \\
 To visualise, we choose the sofware Matlab. And had the objectif to be able to see the attitude, the shape position and also look at the data coming from the drone. 
 

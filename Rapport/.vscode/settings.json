@@ -11,6 +11,7 @@
         "-interaction=nonstopmode",
         "-file-line-error",
         "-pdf",
+        "-shell-escape",
         "-auxdir=%DIR%/build",
         "-outdir=%DIR%",
         "%DOC%"

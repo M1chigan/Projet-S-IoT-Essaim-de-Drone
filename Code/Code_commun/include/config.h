@@ -2,7 +2,7 @@
 #include <stdint.h>
 
 constexpr uint8_t DRONE_ID   = 2;  
-const uint32_t PIXHAWK_BAUDRATE = 57600;
+const uint32_t PIXHAWK_BAUDRATE = 115200;
 constexpr float max_speed = 6; //(m/s)
 
 // Gestion des PINS :
@@ -14,3 +14,7 @@ constexpr uint8_t UWB_PIN_RST  = 27;
 constexpr uint8_t UWB_PIN_IRQ  = 34;
 constexpr int8_t  PIXHAWK_RX_PIN   = 21;
 constexpr int8_t  PIXHAWK_TX_PIN   = 22; 
+
+#define TARGET_SYSID  1
+#define OUR_SYSID     200
+#define SIM_MODE 1

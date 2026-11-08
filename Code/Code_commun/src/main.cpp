@@ -1,73 +1,74 @@
-//Fichier locaux
+// Fichiers locaux
 #include "config.h"
 #include "filtre.h"
 #include "pixhawk_driver.h"
 #include "uwb_driver.h"
 #include "esp_now_driver.h"
 
-//Librairie externe
+// Librairies externes
 #include <Arduino.h>
 #include <HardwareSerial.h>
 
-static float last_distances[UWB_MAX_DRONES + 1] = {0.0f};
+// ------------------------------------------------------------
+//  Logs : en simulation l'USB transporte du MAVLink binaire,
+//  donc AUCUN texte ne doit y passer. Utilise LOG/LOGF partout
+//  (dans ce fichier ET dans uwb_driver, esp_now_driver, filtre...).
+// ------------------------------------------------------------
+#if SIM_MODE
+  #define LOG(x)
+  #define LOGF(...)
+#else
+  #define LOG(x)    Serial.println(x)
+  #define LOGF(...) Serial.printf(__VA_ARGS__)
+#endif
+
+static float    last_distances[UWB_MAX_DRONES + 1] = {0.0f};
 static uint32_t last_time_ms = 0;
 
-void setup (){
-    Serial.begin(115200);
+static Attitude s_att;
+static GPS      s_gps;
+static uint32_t s_last_send2base = 0;
+
+void setup() {
+#if !SIM_MODE
+    Serial.begin(115200);          // logs USB (en simulation, c'est initMAVLINK qui ouvre Serial)
+#endif
+
+    // MAVLink en PREMIER : le heartbeat doit partir quoi qu'il arrive
+    if (!initMAVLINK()) { LOG("MAVLINK Down"); } else { LOG("MAVLINK UP"); }
 
     if (!initUWB()) {
-        Serial.println("UWB KO (ID invalide)");
+        LOG("UWB KO (ID invalide)");
+#if !SIM_MODE
         ESP.restart();
+#endif
     }
 
-    if (!initcom()) {
-        Serial.println("ESP-NOW Down");
-    } else Serial.println("ESP-NOW Up");
+    if (!initcom()) { LOG("ESP-NOW Down"); } else { LOG("ESP-NOW Up"); }
 
-    if (!initMAVLINK()){
-        Serial.println("MAVLINK Down");
-    } else {
-        Serial.println("ESP-MAVLINK UP");
-    }
-    Serial.println("Pret");
+    LOG("Pret");
     last_time_ms = millis();
 }
 
 void loop() {
-    /*
+    // 1) Pixhawk : heartbeat + lecture. A appeler A CHAQUE TOUR, sans delay().
     pixhawk_update();
 
-   if (pixhawk_connected()) {
-        
-        Attitude att;
-        if (pixhawk_get_attitude(&att)) {
-            Serial.print("C'est parti ! ");
-        }
+    if (pixhawk_connected()) {
+        pixhawk_get_attitude(&s_att);   // met a jour s_att si nouvelle donnee
+        pixhawk_get_gps(&s_gps);
 
-        GPS gpsData;
-        if (pixhawk_get_gps(&gpsData)) {
-            Serial.print("[GPS] Lat: ");
-            Serial.print(gpsData.lat_e7 / 1e7, 7);
-            Serial.print(" | Lon: ");
-            Serial.print(gpsData.lon_e7 / 1e7, 7);
-            Serial.print(" | Alt: ");
-            Serial.print(gpsData.alt_mm / 1000.0);
-            Serial.print("m | Sats: ");
-            Serial.println(gpsData.satellites);
+        // Envoi a la base a 5 Hz max (au lieu d'un delay(50) bloquant)
+        if (millis() - s_last_send2base >= 200) {
+            s_last_send2base = millis();
         }
-        send2base(2.5,att,gpsData);
-
-    } else {
-        Serial.println("Recherche de la Pixhawk (pas de Heartbeat)...");
-        delay(1000);
     }
-    
-    delay(50);
-    */
 
+    // 2) Communication + UWB
     scheduler_update();
     uwb_update();
 
+    // 3) Traitement des distances UWB
     uint8_t from_id = 0;
     float raw_dist = 0.0f;
 
@@ -75,38 +76,25 @@ void loop() {
         uint32_t current_time_ms = millis();
         float dt = (current_time_ms - last_time_ms) / 1000.0f;
         last_time_ms = current_time_ms;
-
-        // Prevent dt from being zero or negative on fast loops
-        if (dt <= 0.0f) dt = 0.02f; 
-
-        // --- FILTER CHAIN ---
+        if (dt <= 0.0f) dt = 0.02f;
 
         float processed_dist = raw_dist;
         polynomial_filter(&processed_dist);
 
         if (from_id >= 1 && from_id <= UWB_MAX_DRONES) {
             float prev_d = last_distances[from_id];
+            if (prev_d == 0.0f) prev_d = processed_dist;
 
-            if (prev_d == 0.0f) {
-                prev_d = processed_dist;
-            }
-
-            float max_relative_speed = 3.0f; 
+            float max_relative_speed = 3.0f;
 
             if (innovationGate_filter(processed_dist, prev_d, max_relative_speed, dt)) {
                 last_distances[from_id] = processed_dist;
-
-                Serial.printf("From ID: %d | Raw: %.3f m -> Filtered: %.3f m\n", 
-                              from_id, raw_dist, processed_dist);
-                
+                LOGF("From ID: %d | Raw: %.3f m -> Filtered: %.3f m\n",
+                     from_id, raw_dist, processed_dist);
             } else {
-                // Measurement rejected by the gate (sudden unrealistic jump)
-                Serial.printf("REJECTED by Gate: From ID %d tried to jump to %.3f m (prev: %.3f m)\n", 
-                              from_id, processed_dist, prev_d);
+                LOGF("REJECTED by Gate: From ID %d -> %.3f m (prev: %.3f m)\n",
+                     from_id, processed_dist, prev_d);
             }
         }
     }
-    
-
 }
-
