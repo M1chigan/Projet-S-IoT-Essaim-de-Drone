@@ -50,13 +50,13 @@ void polynomial_filter(float* d) {
 
 bool NLOS_filter(UWB_Diagnostics diag) {
 
-    float min_fpp_threshold = -85.0f; // dBm (adjust based on your hardware calibration)
+    float min_fpp_threshold = -85.0f; 
     if (diag.firstPathPower < min_fpp_threshold) {
         return false; 
     }
 
     float power_diff = fabsf(diag.receivePower - diag.firstPathPower);
-    float max_power_diff = 6.0f; // dB max expected difference in clear LOS
+    float max_power_diff = 6.0f; 
 
     if (power_diff > max_power_diff) {
         return false; 
@@ -78,7 +78,7 @@ bool innovationGate_filter(float current_d, float prev_d, float max_speed, float
         return false; 
     }
 
-    return true; // Variation cohérente (acceptée)
+    return true; 
 }
 
 

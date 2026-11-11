@@ -1,0 +1,36 @@
+\chapter{Hardware presentation and project specifications}
+\markboth{Hardware}{Hardware}
+\addcontentsline{toc}{chapter}{Hardware}
+
+\subsection{Drone specifications}
+
+In order to carry out this project, we use the quad-copter drones built at INSA Strasbourg. It is primordial to understand how drones work and what they are made of to successfully achieve our end goal. 
+
+The acronym UAV for \textit{Unmanned Aerial Vehicle} defines an aircraft with no humans onboard and which therefore either autonomous or remotely controlled. Basically, it is a powered aerial vehicle that uses aerodynamic forces to lift itself and fly. There are many types of drones and as many different applications but some components are present in almost all of them. We can divide them roughly into two categories : mechanical and electrical.
+
+
+\subsection{Drone mechanical components}
+
+\subsubsection{Structure}
+
+A drone's mechanical structure is essentially made of three parts. The frame is the skeleton of the drone and what supports all the elements. It needs to be resistant to withstand shocks but also light enough to fly longer. Carbon fibre is a commonly used material for drone frames due to its resistance and lightweight even though plastic is also used to limit costs. The size of the frame is measured from one corner to the other in a diagonal and be used to categorize drones. The \textit{arms} link the main body part to the motors, placed at the extremities. They should robust enough to support the thrust force created by the propellers. Most drones are quad-copters with 4 arms and motors to have a good compromise between weight and manoeuvrability (6 and 8-motor drones also exist). Finally, the landing gear allows the drone to be land safely and not be damaged. They help absorb the shocks but also preserve the components from dusts when it is static on the ground. They can be fixed or folding and should also benefit from the right choice of material.
+
+\subsubsection{Propulsion system}
+
+Electric motors are necessary to generate lift with propellers and therefore to make the drone fly. The most common type of motors on drones are 3-phased DC brushless motors which offer a high power to weight ratio while preventing heat or mechanical losses normally induced by brushes. An important parameter to consider when choosing a motor is its KV which defines the number of RPM per ESC power supply volt. The rotor size can also be seen on motors noted as "xxyy" where "xx" is the diameter of the rotor and "yy" its height. 
+
+The propellers can be chosen depending on 3 main factors. First of all, one should be cautious because props either made to turn clockwise (CW) or counter-clockwise (CCW). Secondly, the diameter and the pitch of the blade will influence the quantity of air moved by it. Therefore, it is importance to choose wisely depending on the size of the frame of the drone as well as its category (long-range, filming, racing..). Finally, the number of blades' choice has to be made according to a tradeoff between thrust and efficiency. Three-blade propellers are the most common as they provide a good ratio between trust and efficiency. 
+
+\subsection{Drone electrical system}
+
+\subsubsection{Flight controller}
+
+The flight controller or FC is the "brain" of the drone : it receives data from the different onboard sensors and send commands to the motors through the ESCs to maintain the drone's stability. It usually features a 32-bit microcontroller and sensors such as 3-axis gyro-meter and accelerometer. Other optional sensors can be connected to it like a GNSS, a magnetometer or a barometer. It is also linked to a RC receiver to be controlled remotely using high-frequency radio-communication. Common flight controller firmwares include Betaflight, Ardupilot and PX4. 
+
+\subsubsection{ESC (Electronic Speed Controllers)}
+
+ESCs may not be the first components that come to mind when thinking about drones but they are essential for its proper functioning. They serve as bridges between the flight controller's commands and the motors : they help converting the DC power from the battery to timed AC signals to control the brushless motors. It uses a MCU to decode the information from the FC and a MOSFET 3-phase inverter to ensure the DC-AC conversion. Each motor require one ESC even if today, 4-1 ESC single boards exist.
+
+\subsubsection{Power supply}
+
+On most drones, the only power supply available is a battery. The choice of the battery is paramount because its capacity will dictate the time of flight of the drone. The main chemical technology for drone batteries is Lithium-Polymer (LiPo). Its two important parameters are its capacity C measured in mAh as well as its peak current measured in multiple of C. The number of S indicates the number of LiPo cells in series with one cell having a maximum charge of 4.2 V.

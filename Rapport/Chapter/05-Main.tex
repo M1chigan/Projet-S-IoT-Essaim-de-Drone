@@ -2,13 +2,25 @@
 \markboth{Main}{Main}
 
 \section{UWB}
+In swarm drone project, one information is central and will determine the achievement of the shaping.
+This information is the position. In our case, we are measuring the relative position between drone. \\ 
+To achieve this needed, professor imposed UWB localisation sensors. Those sensors are based on electromagnetic signal and needed two modules to interact with others (More information in the bibliographic studies \fcolorbox{red}{white}{\textcolor{red}{ Ajouter \textbf{ref}}}).
 
-\subsection{Algorithm}
-Say that we take DS-TWR et TDMA
+\subsection{Algorithm choice}
+As expose in the bibliographic studies, there are differents algorithms which respond to multiples needs. In the project, we need precise localisation data and no interference, furthermore we = have maximun 3 drone in the swarm. \\
+With those caracterestic, we choose the DS-TWR location algorithm and the TDMA timing algorithm (\ref{TDMA}). \\
+We have implemented them into the ESP32-DW1000 module. The $\href{https://github.com/M1chigan/Projet-S-IoT-Essaim-de-Drone/blob/main/Code/Code_commun/src/uwb_driver.cpp}{code}$ is using C/C++ as software language. 
 
 \subsection{Calibration}
-Tableau avec les références
+
+In general, sensors need a calibration to use them efficiently. For UWB module, we need to establish a reference. For this project, the reference is the expected distance between drones: 1.20m.
+Afterward, we had to adapt the Antenna Delay parameters which represent signal's time in antenna's PCB. Each module has different time. To calibrate, we had to choose a module as the reference one, here UWB 1. And modify Antenna Delay of each drone to make them find 1.20m at 1.20m in real life. 
+After this step, all drones are calibrated for each other. 
+After doing some tests, we had to modify the reference to 1.30m, this modification is explained in the next part \fcolorbox{red}{white}{\textcolor{red}{Ajouter \textbf{ref}}}.
+\newpage
 \subsection{Test}
+We have done some tests using the previous described algorithm. During the last year project, our colleagues find out that UWB should be vertically installed to optimize there performance. So we have repeated the same test as in order to verify there result. 
+\subsubsection{Face to Face verticaly}
 
 \subsubsection{Face to Face horizontaly}
 \begin{figure}[H]
@@ -79,6 +91,8 @@ Tableau avec les références
 
   \captionof{table}{Mesure face à face de façon horizontale}
 \end{figure}
+\textcolor{red}{COnclude sur les tests de base}
+Normally, in the documentation, there is a antenna diagram which describe the efficient area of the antenna. We were looking for this diagram in order to choose the shape of the drone. Because, we were looking for the best shape to get the best distance result. After research, we have not found it, therefore we had to realize some tests in different disposition.
 
 \subsubsection{Paralel module}
 
@@ -117,7 +131,7 @@ Tableau avec les références
   \begin{minipage}[c]{0.38\textwidth}
     \centering
     \resizebox{\linewidth}{!}{\Schemarayon}
-    \captionof{figure}{Schema of the paralel configuration}
+    \captionof{figure}{Schema of the rayon configuration}
   \end{minipage}\hfill
   \begin{minipage}[c]{0.58\textwidth}
     \centering
@@ -147,7 +161,7 @@ Tableau avec les références
   \begin{minipage}[c]{0.38\textwidth}
     \centering
     \resizebox{\linewidth}{!}{\FtB}
-    \captionof{figure}{Schema of the paralel configuration}
+    \captionof{figure}{Schema of the face to back configuration}
   \end{minipage}\hfill
   \begin{minipage}[c]{0.58\textwidth}
     \centering
@@ -169,23 +183,39 @@ Tableau avec les références
         160 & 192,2 & -32,2 \\ \hline
         170 & 208,8 & -38,8 \\ \hline
     \end{tabular}}
-    \captionof{table}{Measure of the rayon configuration}
+    \captionof{table}{Measure of the face to back configuration}
   \end{minipage}
 \end{figure}
 
 
-Test de positionement, ajouter les tableaux et les schéma (cote à cote)
 \subsection{Filter}
+Electromagnetics signals are sensitive to exterior noise and can be interfered easily. Therefore, we have to filter the raw data. We have implemented three differents filter.  
 \subsubsection{Polynomial filter}
+During calibration and test, we have discovered that the errors is linked to the real distance and variate following a polynomial equation.
 
 \begin{figure}[H]
    \centering
+   \resizebox{0.6\textwidth}{!}{\includegraphics{Polynomial.png}}
+   \caption{Diagram of the error based on real distance}
+\end{figure}
+
+\noindent With the calibration results and using the Excel linearization tool, we got this equation: 
+
+\begin{equation}
+   f(x) = -1{,}004 \times 10^{-6}\, x^4 + 0{,}0005059\, x^3 - 0{,}09263\, x^2 + 7{,}398\, x - 221{,}7
+\end{equation}
+Every measure pass through the equation and recalibrate it based on this equation. That permit to reduce the error when we are at more $\pm \alpha$ 10 cm from the reference.\\
+We have implemented it in C/C++: 
+\begin{figure}[H]
+   \centering
    \resizebox{0.8\textwidth}{!}{\includegraphics{Polynomial_Filter.png}}
-   \caption{Code for NLOS Filter}
+   \caption{Code for polynomial filter}
 \end{figure}
 
 \subsubsection{NLOS Filter}
+Electromagnetic signal are very sensitive to obstacle. After doing research, we have discovered that the signal will lost power if it encounters an obstacle. Based on that, we can verify that the power receives is strong enough otherwise the value cannot be considered as feasible so we can dennied it.\\
 
+We have implemented it in C/C++: 
 
 \begin{figure}[H]
    \centering
@@ -195,10 +225,14 @@ Test de positionement, ajouter les tableaux et les schéma (cote à cote)
 
 
 \subsubsection{Innovation Gate Filter}
+UWB has tendencies to be noisy, that create some absurd value very high or very low. This data can affect the corrector and create some discontinuity in the drone control. Based on the max speed of the drone, we can determine absurdity. Calculate the difference $d_{-1}$ and $d$, then determine if the difference can be reach at the max speed, if not the measure is ignored, otherwise, we accepted it.\\
+
+We have implemented it in C/C++: 
+
 \begin{figure}[H]
    \centering
    \resizebox{0.8\textwidth}{!}{\includegraphics{Innovation_Gate.png}}
-   \caption{Code for NLOS Filter}
+   \caption{Code for innovation gate filter}
 \end{figure}
 
 \newpage
@@ -250,8 +284,10 @@ And for the base to drone communcation we have this package :
 \newpage
 
 \section{Visualization}
-Visualization permit to obtain precise measurement and result from test in major case drone will fly outdoor at 10 meters away from us. So, vizualise permit to precisely see the attitude of the drone, the real shape positioning. It can permit to detect error, or problematic point. \\
-To visualise, we choose the sofware Matlab. And had the objectif to be able to see the attitude, the shape position and also look at the data coming from the drone. 
+In outdoor test, drone are flying at more than 10 meters away from us. That constratint reduce our visibility and comprehension of the drone movements, attitude and position. To prevent this problematic we need to develop a visualization system. That would increase our error detection efficiency and give the opportunity to enregistrate test and simulate them afterward to analyse and detect friction point.\\
+Visualization would also allow us to observe in real time differents parameters as: attitude, shape positionning on 3D, and also RAW data coming from the drone.\\
+
+In order to achieve this system, we choose the sofware Matlab as a visualizer and software language.  
 
 \subsection{Matlab}
 
@@ -278,9 +314,11 @@ Let's explain each different bloc and its role :
 
 \newpage
 \section{Simulation}
+\label{Simulation}
 
-On this project, outdoor tests are very rare due to logistical problem. However, we need to verify our work such as the corrector. To do so, we developed a simulation protocol using the real MAVLink messages, and same data as our drone.  \\
-In this part, we will first present the main simulation tools, ArduPilot and Mission planer, second, explain the implementation, then present the result we obtained and finally the simulation possibilities.
+Due to logistical problem, outdoor test are rare, and INSA Strasborug does not have indoor test room. Howewer our work need to be tested and confronte reality. To achieve this purpose, we had to develop a simulation protocol which is the nearest possible from the reality. \\
+To do so, we had to choose same firmware as our flight controler and an UAV simulation tool. \\
+In this part, we will first present both firmware : ArduPilot and Mission planer, second, explain the simulation architecture, then present the result we obtained and finally the simulation possibilities.
 
 \subsection{ArduPilot and Mission Planer}
 
@@ -295,7 +333,7 @@ Let's present both tools:
 \subsubsection{\href{https://ardupilot.org/planner/}{Mission planer}}
 
 Mission planer is a representative tool for copters such as drone. Created by  Michael Oborne to help users of ArduPilot architecture to vizualise their drone and command them. The software also permits to declare  multiple drone so create a swarm. For our project, it will be used as a simulation field. 
-
+\newpage
 \subsection{Architecture}
 
 The simulation works with a very specific architecture cause tools like ArduPilot works under Linux system. The architecture is exposed in the figure below. 
@@ -316,14 +354,68 @@ Let's explain each different bloc and its role :
     \item Mission Planer : Use to visualise our swarm drone based on data from ArduPilot
     \item \href{https://github.com/M1chigan/Projet-S-IoT-Essaim-de-Drone/blob/main/Simulation/Script%20d'essai/Simulation.py}{Simulation.py}  : Python scrip to simulate $Drone_2$ and $Drone_3$
 \end{itemize}
+\newpage
+\section{Test}
+Test is the main part of technical project, reality is always different from the theory.Therefore, we have to carry out them through two different environement : simulation and outdoor test.
+\subsection{Simulation}
+Using the architecture describe in the part \ref{Simulation}, we did and planned to do different test for different axes of the project.  
+\subsubsection{Ongoing : }
 
-\subsection{Result}
-\textcolor{red}{Add after fist Test}
-\subsection{Simulation possibilities}
-\textcolor{red}{Add after fist Test}
+\underline{Console control :} \\
+This test has for purpose to test MAVLink function, communication and drone control. It follows the next schema : \\
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.7\linewidth}{!}{\LevelUN}
+   \caption{Architecture of the first level of simulation}
+\end{figure}
+
+\noindent The drone is for now capable of this function (lexicon below) : 
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.3\textwidth}{!}{\includegraphics{lexique.png}}
+   \caption{Drone capability at level 1}
+\end{figure}
+
+\noindent We obtain : \fcolorbox{red}{white}{\textcolor{red}{Ajouter \textbf{photo, linked vidéo (preview)}}} \\
 
 
+We can conclude that our communication between base and drone, is well-designed and the MAVLink procedure is well send to the drone. 
+
+\subsubsection{Planned :}
+
+\noindent  \underline{Level 2:} \\ 
+Objective of this level 1 in addition a drone need to follow the slave drone in this movement, based on communication, attitude and GPS data. Possibly, an integration of the simulation of UWB to make a full test, closest to the real situation.   
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.8\linewidth}{!}{\LevelDeux}
+   \caption{Architecture of the second level of simulation}
+\end{figure}
+
+\noindent \underline{Level 3:} \\ 
+Objective of this level is to reach 3 drone and introduce swarm drone. On the 3 drone, two of them would be control by a python script. The third drone is the tested drone. It permits to test corrector and attitude corrector. 
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.8\linewidth}{!}{\LevelTrois}
+   \caption{Architecture of the third level of simulation}
+\end{figure}
 
 \newpage
-\section{Outdoor Test}
+\noindent \underline{Level 4:} \\
+Objective of this level is to reach a full simulation environement where all the three drone are working on it ESP32. Mission planer and Ardupilot are strictly an environement simulation. It is the closest simulation to the objective of the project.
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.8\linewidth}{!}{\LevelQuatre}
+   \caption{Architecture of the fourth level of simulation}
+\end{figure}
+
+\subsection{Outdoor}
+
+\subsubsection{Planned}
+
+
 

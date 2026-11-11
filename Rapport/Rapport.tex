@@ -2,23 +2,23 @@
 
 \input{Chapter/00-import.tex}
 
-%Site pour forme : https://tikzmaker.com/editor
+% Site pour forme : https://tikzmaker.com/editor
 
-% Définitions espace avant chapitre
-\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter}{20pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{0pt}{15pt}
 
-% Définition du texte atténué
+\setlength{\cftfigindent}{0pt}      % pas d'indentation
+\setlength{\cftfignumwidth}{3.4em}  % largeur du champ du numéro (augmente si ça colle encore)
+\setlength{\cftbeforefigskip}{0.3em}
+
+% ---------- Texte atténué et couleurs ----------
 \newcommand{\faintText}[1]{\textcolor{black!35}{\small #1}}
 \definecolor{insared}{RGB}{220, 20, 30}
 \definecolor{titlegray}{RGB}{145, 150, 155}
 \definecolor{authorgray}{RGB}{125, 130, 135}
 
-% Configuration globale de fancyhdr
+% ---------- fancyhdr ----------
 \pagestyle{fancy}
 \fancyhf{}
 
-% Haut de page
 \setlength{\headheight}{1.5cm}
 \fancyhead[L]{$\vcenter{\hbox{\faintText{\leftmark}}}$}
 \fancyhead[C]{$\vcenter{\hbox{\faintText{S-IoT - Project Report : Drone swarm}}}$}
@@ -26,7 +26,6 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\color{black!20}\leaders\hrule height \headrulewidth\hfill}}
 
-% Bas de page
 \fancyfoot[C]{\faintText{Page \thepage\ on \ref{TotPages}}}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -40,39 +39,34 @@
     \renewcommand{\headrule}{\hbox to\headwidth{\color{black!20}\leaders\hrule height \headrulewidth\hfill}}
 }
 
-%Définition des chapters en forme romains
-% Numérotation
+% ---------- Numérotation ----------
 \renewcommand{\thechapter}{\Roman{chapter}}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thesubsection}{\Alph{subsection}}
 
-  
-% Chapitres : "I - Titre"
+% ---------- Chapitres : "I - Titre" ----------
 \titleformat{\chapter}[hang]
   {\normalfont\huge\bfseries}
   {\thechapter\ -}{0.2em}{}
-\titlespacing*{\chapter}{0pt}{-40pt}{20pt}
 
 \titleformat{name=\chapter,numberless}[hang]
   {\normalfont\huge\bfseries}
   {}{0pt}{}
+
+% Un seul titlespacing (il s'applique aux chapitres numérotés ET non numérotés)
 \titlespacing*{\chapter}{0pt}{-25pt}{20pt}
 
-% Sections : "1 - Titre"
+% ---------- Sections : "1 - Titre" ----------
 \titleformat{\section}[hang]
   {\normalfont\Large\bfseries}
   {\thesection\ -}{0.2em}{}
 \titlespacing*{\section}{1.5em}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 
-
-% Sous-sections : "A - Titre", avec retrait de 1,5em
+% ---------- Sous-sections : "A - Titre" ----------
 \titleformat{\subsection}
   {\normalfont\large\bfseries}
   {\thesubsection\ -}{0.2em}{}
 \titlespacing*{\subsection}{2.5em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-
-
-
 
 \input{Chapter/Figure.tex}
 
@@ -83,21 +77,21 @@
 \newpage
 \listoffigures
 \newpage
-%\input{Chapter/01-Introduction.tex}
-%\newpage
-%\input{Chapter/02-Constraints.tex}
-%\newpage
-%\input{Chapter/03-Specifications.tex}
-%\newpage
-%\input{Chapter/04-Bibliographics_Studies.tex}
-%\newpage
+\input{Chapter/01-Introduction.tex}
+\newpage
+\input{Chapter/02-Hardware.tex}
+\newpage
+\input{Chapter/03-Specifications.tex}
+\newpage
+\input{Chapter/04-Bibliographics_Studies.tex}
+\newpage
 \input{Chapter/05-Main.tex}
 \newpage
-%\input{Chapter/06-Conclusion.tex}
-%\newpage
-%\input{Chapter/07-Calculations.Tex}
+\input{Chapter/06-Conclusion.tex}
+\newpage
+\input{Chapter/07-Calculations.Tex}
 
-\cleardoublepage % Force le saut vers une nouvelle page
+\cleardoublepage
 \printbibliography[heading=bibintoc, title={References}]
 
 \end{document}
