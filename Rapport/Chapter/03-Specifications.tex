@@ -2,14 +2,16 @@
 \markboth{Specifications}{Specifications}
 
 \section{Objective}
-The purpose of this project is to fly a swarm of UAVs (2 to 3 UAVs) and try to lift off a payload using a net.
+The purpose of this project is to fly a swarm composed of 3 drone and try to lift off a payload using a net.
 \section{Functions}
 \begin{itemize}
 
     \item UWB precise location system
     \item PID Controller for drone stabilization 
-    \item UWB Communication for high frequency refreshing data
-    \item Go back and forth keeping the drone formation (following a leader ?)
+    \item ESP-NOW communication
+    \item Go back and forth keeping the drone formation 
+    \item Software in the loop simulation
+    \item Visualization tools for test
 
 \end{itemize}
 
@@ -22,6 +24,7 @@ The purpose of this project is to fly a swarm of UAVs (2 to 3 UAVs) and try to l
     \item Bibliographical Studies
     \item Video of drone demo 
     \item Functional PID Corrector (C/C++)
+    \item Functional ESP-NOW communication
     \item Functional ESP32 code implementation (C/C++)
     \item Full simulation environement based on  Ardupilot and Mission Planer (Python)
     \item Functional visualisation tools (Matlab)
