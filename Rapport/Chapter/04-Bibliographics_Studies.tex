@@ -1,5 +1,6 @@
 \chapter{Bibliographical Studies}
 \markboth{Bibliographical Studies}{Bibliographical Studies}
+\label{Bibliographical Studies}
 
 \section{UWB}
 
@@ -68,7 +69,7 @@ As we can observe, the processing time is directly linked to the error. The $t_{
 \subsubsection{Double Sided Two way ranging (DS-TWR)}
 \label{DS-TWR}
 In the TWR algorithm, the main inconvenient is the error and misprecision.
-To erase that error, the DS-TWR has been thinked. This algorithm is also using $UWB_1$ and $UWB_2$.
+To erase that error, the DS-TWR has been thinked and proposed in this paper \cite{gezici_localization_nodate}. This algorithm is also using $UWB_1$ and $UWB_2$.
 
 \begin{figure}[!ht]
 \centering
@@ -148,9 +149,9 @@ With this algorithm, we are note dependant of the processor any more. That the a
 When working on swarm drone, there is not only two UWB modules. There is multiple UWB trying to communicate. One weakness of the UWB is it sensibility to noise and interference. The way should be clear before emiting otehrwise that create colision and damaged the singal and corrupt distance estimation.
 For this purpose, we need to look on how to divide time to avoid collision, in our specifif case, we are working with 3 to 4 drone.
 \subsubsection{ALOHA}
-This method is named after the first ALOHAnet system, which introduced it in 1977. It provides a simple approach to channel access control without requiring any time synchronization. Instead of planning transmissions, a module sends its data packet immediately, regardless of whether the medium is currently busy or free.
+This method is named after the first ALOHAnet system, which introduced it in 1970. It provides a simple approach to channel access control without requiring any time synchronization. Instead of planning transmissions, a module sends its data packet immediately, regardless of whether the medium is currently busy or free.
 The primary advantage of  ALOHA lies in its ease of implementation and full decentralization, allowing independent nodes or drones to join the network dynamically without prior initialization. 
-However, its major drawback is its susceptibility to collisions caused by uncoordinated simultaneous transmissions. As demonstrated in foundational studies, the maximum theoretical throughput (channel capacity) of  ALOHA is limited to approximately $18.4\%$ (\textcolor{red}{ref du papier}). This low efficiency makes it unsuitable for high-frequency localization and critical communication applications.
+However, its major drawback is its susceptibility to collisions caused by uncoordinated simultaneous transmissions. As demonstrated in foundational studies, the maximum theoretical throughput (channel capacity) of  ALOHA is limited to approximately $18.4\%$ \cite{noauthor_pdf_nodate}. This low efficiency makes it unsuitable for high-frequency localization and critical communication applications.
 
 
 \subsubsection{Time-division multiple access (TDMA)} \label{TDMA}
@@ -199,12 +200,10 @@ But there is inconvenient, firstly  if we hade one more drone, we have to add tw
 
 This method combines the features of both the ALOHA and TDMA protocols. Time is divided into tranches, and UWB modules are only allowed to start their transmissions at the beginning of a slot boundary. If a module has data ready to transmit, but a slot has already started, it must wait for the next available slot.
 
-This approach preserves the flexibility of ALOHA while doubling the maximum theoretical throughput to approximately $36.8\%$ (\textcolor{red}{ref du papier}). However, it still remains less deterministic and efficient than TDMA due to potential collisions when multiple nodes choose the same slot.
-
-\section{Measure processing}
-In most cases, data measured by sensors are unclear. It could be a sensor offset, or it can also come from crosstalk or other exterior interactions. In order to obtain clean measurements and to be able to use them for controlling or any other purpose, we have to develop some filters. In this section, we will describe three filters used for cleaning the UWB signal. Firstly, we will explain the polynomial filter, secondly the Kalman filter, and finally the extended Kalman filter.\subsection{Polynomial Filter}
-
+This approach preserves the flexibility of ALOHA while doubling the maximum theoretical throughput to approximately $36.8\%$ \cite{noauthor_pdf_2026}. However, it still remains less deterministic and efficient than TDMA due to potential collisions when multiple nodes choose the same slot.
 \newpage
+\section{Measure processing}
+In most cases, data measured by sensors are unclear. It could be a sensor offset, or it can also come from crosstalk or other exterior interactions. In order to obtain clean measurements and to be able to use them for controlling or any other purpose, we have to develop some filters. In this section, we will describe three filters used for cleaning the UWB signal. Firstly, we will explain the polynomial filter, secondly the Kalman filter, and finally the extended Kalman filter.
 
 \subsection{Extended Kalman Filter for relative localisation  }
 In the context of navigating systems in noisy environments with sensors, the Kalman filter is a relevant algorithm. As Welch and Bishop (2006, p. 1) [3] point out, the Kalman filter is notable for its ability to "support estimations of past, present, and even future states [...] even when the precise nature of the modeled system is unknown.". In our study case, we deal with a drone swarm communicating using the UWB communication protocol, which gives us the relative distance between each pair of drones by using the time of flight of a radio wave. The UWB therefore provides a scalar distance, whereas the quantity of interest is the relative position vector. The measurement model, which links the two through the Euclidean norm, is nonlinear, which calls for the extended Kalman filter. This version resorts to a typical technique of linearization around the current state using a Jacobian matrix. We are also considering an anchor-free system which enhances the challenge of this project. In this section, we will first cover the theory of the classical Kalman filter and its mathematical formalist and then dive into the extended Kalman filter and its utility.
@@ -303,5 +302,77 @@ In an article of 2020, Chen et al. \parencite{chen_uwb-assisted_2020} studied th
 
 A closer reasearch to our situation was made by Yang et Lee in 2023 \parencite{yang_ultrawideband_2023} in which they implemented an Extended Kalman Filter using GNSS and INS (Inertial Navigation System) with complementary UWB measurements in a flight controller firmware. They used the flight controller "Pixhawk 4" (the same as us) and successfully carried out a field test which, however, did not include a moving drone formation. 
 
+\section{Communication protocol}
+ 
+\subsection{Xbee}
+
+XBee is a family of radio modules made by Digi International. Depending on the model and firmware, it implements IEEE 802.15.4 \cite{noauthor_ieee_nodate} directly, ZigBee, or Digi’s own DigiMesh protocol. The module is controlled by a microcontroller through a simple serial link (UART or SPI), either in transparent mode (the module behaves like a wireless serial cable) or in API mode (the host sends and receives structured frames with addresses and acknowledgements). \\
+
+\noindent Two bands are commonly used. The 2.4 GHz modules have a high data rate and are widely available. The 900 MHz modules trade throughput for a much longer range. At the MAC layer, 802.15.4 \cite{noauthor_ieee_nodate} uses CSMA/CA, so a module listens before transmitting, and unicast frames can be acknowledged and retried automatically.
+
+\begin{table}[H]
+\centering
+
+\label{tab:xbee}
+\begin{tabular}{@{}p{3.7cm}p{10cm}@{}}
+\toprule
+\textbf{Criterion} & \textbf{XBee} \\
+\midrule
+Range & $\sim$ 60\,m indoor, $\sim$1\,km outdoor line-of-sight  \\
+Latency & A few ms to tens of ms per hop  \\
+Data rate & 250\,kbps raw  \\
+Power consumption & $\sim$ 30--45\,mA in RX/TX (standard module)\\
+Topology & Point-to-point, star, mesh (ZigBee, DigiMesh) \\
+Number of nodes & Hundreds (16-bit addressing)\\
+
+\bottomrule
+\end{tabular}
+\caption{XBee characteristics}
+\end{table}
+
+
+\subsection{UWB}
+Besides ranging, a UWB module is a radio transceiver, so the frames used for ranging (POLL, RESP, FINAL) can carry a small payload. In the DS-TWR algorithm described above, the FINAL frame already contains timestamps (tx1, rx1, tx12). The same mechanism can carry a drone ID, a status flag or a short command. The advantage is that localization and data exchange share a single radio and a single time schedule, so no second module is needed for small messages.\\
+
+\noindent The main limitation is the frame size and the energy cost. UWB frames are short (about 127 bytes in the standard configuration), and the receiver is power-hungry compared with the other technologies in this section. UWB is therefore well suited to short control messages, but not to image or bulk data transfer.
+
+\begin{table}[H]
+\centering
+\label{tab:uwb}
+\begin{tabular}{@{}p{3.7cm}p{10cm}@{}}
+\toprule
+\textbf{Criterion} & \textbf{UWB} \\
+\midrule
+Range & $\sim$10--50\,m in practice indoors, up to $\sim$300\,m line-of-sight \\
+Latency & Frame airtime under 1\,ms; a full DS-TWR exchange takes a few ms \\
+Data rate & 110\,kbps, 850\,kbps or 6.8\,Mbps; small payload per frame ($\sim$127 bytes) \\
+Power consumption & $\sim$ 30--40\,mA in TX; RX is higher \\
+Topology & Peer-to-peer / star (tags and anchors); no native mesh \\
+Number of nodes & Limited by the channel access method (ALOHA, TDMA); a few tens with ranging \\
+\bottomrule
+\end{tabular}\caption{UWB characteristics }
+\end{table}
+
+\subsection{ESP-NOW}
+ESP-NOW is a protocol developed by Espressif for its ESP32 and ESP8266 chips. It uses Wi-Fi radio hardware at 2.4 GHz, but without a router, an access point or an IP connection: data is sent in short vendor-specific Wi-Fi frames directly from one device to another, identified by their MAC addresses. A device registers its peers, sends a packet (up to 250 bytes in the classic version), and receives a callback telling it whether the frame was acknowledged. Broadcast is also possible, and encryption can be enabled per peer. The ESP-NOW connection is connectionless, so there is no handshake before sending. This explains the low latency.\\
+
+\noindent Studies agree on its main features \cite{eridani_comparative_2021}. Authors compared ESP-NOW with Wi-Fi and Bluetooth on range, speed, latency, energy usage and barrier resistance. And evaluated the maximum distance and power consumption of ESP-NOW nodes. A community test \cite{noauthor_esp-now_nodate} published by Espressif reports latency under 20 ms in open field up to 300 m, and a long-range mode (ESP-NOW-LR) reaching up to about a kilometre. Note that this source is not peer-reviewed. 
+
+\begin{table}[H]
+\centering
+\label{tab:espnow}
+\begin{tabular}{@{}p{3.7cm}p{12cm}@{}}
+\toprule
+\textbf{Criterion} & \textbf{ESP-NOW} \\
+\midrule
+Range & $\sim$ 15--50\,m indoors; $\sim$ 200--300\,m outdoors line-of-sight; up to $\sim$1\,km  \\
+Latency & Typically a few ms; under $\sim$ 20\,ms measured in open field \\
+Data rate & Depends on the configured Wi-Fi rate (1\,Mbps by default), 250 bytes per packet \\
+Power consumption & $\sim$ 100--240\,mA in RX/TX;\\
+Topology & Peer-to-peer, one-to-many, broadcast \\
+Number of nodes & About 20 registered peers per device; broadcast has no such limit \\
+\bottomrule
+\end{tabular}\caption{ESP-NOW characteristics}
+\end{table}
 
 \newpage

@@ -404,3 +404,20 @@
 \end{circuitikz}
 }
 
+\providecommand{\FtFVertical}{
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\fontsize{10.2pt}{13.3pt}\selectfont]
+    \node [font=\fontsize{14.8pt}{19.2pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (33.75,12.875) {$UWB_1$};
+    \node [font=\fontsize{14.8pt}{19.2pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (39.625,12.875) {$UWB_2$};
+    \draw [ rotate around={-90:(36.25, 11.25)}] (35.125,11.375) rectangle (37.375,11.125);
+    \draw [ rotate around={-90:(36.4375, 10.9375)}] (36,11) rectangle (36.875,10.875);
+    \draw [ rotate around={-90:(36.4375, 12.0625)}] (36.125,12.125) rectangle (36.75,12);
+    \draw [ rotate around={-90:(40.375, 11.25)}] (39.25,11.375) rectangle (41.5,11.125);
+    \draw [ rotate around={-90:(40.1875, 10.9375)}] (39.75,11) rectangle (40.625,10.875);
+    \draw [ rotate around={-90:(40.1875, 12.0625)}] (39.875,12.125) rectangle (40.5,12);
+    \draw [{Stealth[scale=1.5]}-{Stealth[scale=1.5]}, ] (36.75,12) -- (39.875,12);
+    \node [font=\fontsize{18.2pt}{23.7pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (38.25,12.375) {d};
+    \node [font=\fontsize{14.8pt}{19.2pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (41.375,11.25) {$UWB_2$};
+    \node [font=\fontsize{14.8pt}{19.2pt}\selectfont, inner xsep=0.080cm, inner ysep=0.085cm, rounded corners=0.020cm] at (35.375,11.25) {$UWB_1$};
+\end{circuitikz}
+}

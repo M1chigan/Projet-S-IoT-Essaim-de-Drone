@@ -4,7 +4,7 @@
 \section{UWB}
 In swarm drone project, one information is central and will determine the achievement of the shaping.
 This information is the \textbf{position}. In our case, we are measuring the relative position between drone. \\ 
-To achieve this needed, our professor imposed UWB as localisation sensors. Those sensors are based on electromagnetic signal and needed two modules to interact with each others (Find more information in the bibliographic studies \fcolorbox{red}{white}{\textcolor{red}{ Ajouter \textbf{ref}}}).
+To achieve this needed, our professor imposed UWB as localisation sensors. Those sensors are based on electromagnetic signal and needed two modules to interact with each others (Find more information in the bibliographic studies \ref{Bibliographical Studies}.
 
 \subsection{Algorithm choice}
 As expose in the bibliographic studies, there are differents algorithms which respond to multiples needs. In this project, we need precise localisation data and no interference, furthermore we have maximun 3 drone in the swarm. \\
@@ -16,31 +16,86 @@ We have implemented them into the ESP32-DW1000 module.The $\href{https://github.
 In general, sensors need a calibration to use them efficiently. For UWB module, we need to establish a distance reference. For this project, the reference is the expected distance between drones: 1.20m.
 Afterward, we had to adapt the Antenna Delay parameters which represent signal's time in antenna's PCB. Each module has different time delay. To calibrate, we had to choose a module as a reference, here UWB 1. And then modify Antenna Delay of each drone to make them find 1.20m at 1.20m in real life. 
 After this step, all drones are calibrated for each other. 
-After doing some tests, we had to modify the reference to 1.30m, this modification is explained in the next part \fcolorbox{red}{white}{\textcolor{red}{Ajouter \textbf{ref}}}.
+After doing some tests, we had to modify the reference to 1.30m, this modification is explained in the next part \ref{FtFV}.
 \newpage
 \subsection{Test}
  During the last year project, our colleagues find out that UWB module should be vertically installed to optimize there precision and reach. So we have repeated the same test  in order to verify there result. 
 \subsubsection{Face to Face verticaly}
+\label{FtFV}
+We have carried out same vertical test following this schema :
+\begin{figure}[H]
+  \centering
+  \FtFVertical
+  \caption{Configuration schema of the face to face verticaly}
+\end{figure}
 
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \resizebox{\linewidth}{!}{%
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Real distance (cm) & Measured distance (cm) & Error  \\ \hline
+        70 & 67 & 3 \\ \hline
+        80 & 78 & 2 \\ \hline
+        90 & 89,2 & 0,8 \\ \hline
+        100 & 100 & 0 \\ \hline
+        110 & 110,6 & -0,6 \\ \hline
+        120 & 120 & 0 \\ \hline
+        130 & 132,4 & -2,4 \\ \hline
+        140 & 143,6 & -3,6 \\ \hline
+        150 & 154,2 & -4,2 \\ \hline
+        160 & 165,7 & -5,7 \\ \hline
+        170 & 176,4 & -6,4 \\ \hline
+    \end{tabular}}
+    \caption{Measure for face to face verticaly referenced at 120cm}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.48\textwidth}
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \resizebox{\linewidth}{!}{%
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Real distance (cm) & Measured distance (cm) & Error  \\ \hline
+        70 & 64 & 6 \\ \hline
+        80 & 76,2 & 3,8 \\ \hline
+        90 & 85,6 & 4,4 \\ \hline
+        100 & 97,4 & 2,6 \\ \hline
+        110 & 108,2 & 1,8 \\ \hline
+        120 & 119,6 & 0,4 \\ \hline
+        130 & 130 & 0 \\ \hline
+        140 & 140 & 0 \\ \hline
+        150 & 152,7 & -2,7 \\ \hline
+        160 & 162 & -2 \\ \hline
+        170 & 172,2 & -2,2 \\ \hline
+    \end{tabular}}
+    \caption{Mesures pour module face à face avec une référence posé à 130cm}
+  \end{minipage}
+\end{figure}
+\noindent As we can observe in those table, the precision is decreasing fast when distance is higher than the reference. So place the reference at 130cm would allow us to get better precision at $\pm$ 10cm around 120cm.
 \subsubsection{Face to Face horizontaly}
 \begin{figure}[H]
   \centering
 
   % --- Schéma ---
   \resizebox{0.5\linewidth}{!}{\FtFhorizontale}
-  \captionof{figure}{Schéma de la configuration face à face horizontale}
+  \captionof{figure}{Configuration schema of the face to face horizontaly}
 
   \vspace{1em}
 
   % --- Tableau en deux moitiés ---
   \small
   \setlength{\tabcolsep}{4pt}
-  \begin{minipage}[t]{0.48\textwidth}
+  \begin{minipage}[t]{0.46\textwidth}
     \vspace{0pt}
     \centering
     \begin{tabular}{|c|c|c|}
       \hline
-      Réelle (cm) & Mesurée (cm) & Erreur (cm) \\ \hline
+      Real distance (cm) & Measured distance (cm) & Error \\ \hline
       69,4  & 61    & -8,4 \\ \hline
       70    & 62,2  & -7,8 \\ \hline
       75    & 69,6  & -5,4 \\ \hline
@@ -62,12 +117,12 @@ After doing some tests, we had to modify the reference to 1.30m, this modificati
       132   & 133,7 & 1,7  \\ \hline
     \end{tabular}
   \end{minipage}\hfill
-  \begin{minipage}[t]{0.48\textwidth}
+  \begin{minipage}[t]{0.46\textwidth}
     \vspace{0pt}
     \centering
     \begin{tabular}{|c|c|c|}
       \hline
-      Réelle (cm) & Mesurée (cm) & Erreur (cm) \\ \hline
+      Real distance (cm) & Measured distance (cm) & Error \\ \hline
       135   & 133,6 & -1,4 \\ \hline
       140   & 138,6 & -1,4 \\ \hline
       145   & 144,9 & -0,1 \\ \hline
@@ -91,7 +146,9 @@ After doing some tests, we had to modify the reference to 1.30m, this modificati
 
   \captionof{table}{Mesure face à face de façon horizontale}
 \end{figure}
-\textcolor{red}{Conclude sur les tests de base} \\
+
+Let's compare both position (horizontal or vertical), as we can observe around 120cm for horizontal position, we got around 1.8cm of error and for vertical, we got around 1cm. Also, when the distance move off 120 cm, the precision decreases slower in vertical than in horizontal. Based on this experimentation, we choose to use our module verticaly to get better precision and flexibility.
+
 Normally, in the documentation, there is an antenna diagram which describe the efficient area of the antenna. We were looking for this diagram in order to choose the shape of the drone which get the best precision. After research, we did not find it, therefore we had to realize some tests in different disposition.
 
 \subsubsection{Paralel module}
@@ -110,7 +167,7 @@ Normally, in the documentation, there is an antenna diagram which describe the e
     \resizebox{\linewidth}{!}{%
     \begin{tabular}{|c|c|c|c|c|}
       \hline
-      Décalage (cm) & Angle (°) & Dist. réelle (cm) & Dist. mesurée (cm) & Erreur \\ \hline
+      offset (cm) & Angle (°) & Real distance (cm) & Measured distance (cm) & Error \\ \hline
       0 & 0 & 120 & 117 & 3 \\ \hline
       10 & 4,78 & 121 & 118,4 & 2,6 \\ \hline
       20 & 9,59 & 121,5 & 118,9 & 2,6 \\ \hline
@@ -140,7 +197,7 @@ Normally, in the documentation, there is an antenna diagram which describe the e
     \resizebox{\linewidth}{!}{%
     \begin{tabular}{|l|l|l|}
     \hline
-        Angle(°) & Distance réelle (cm) & Distance mesurée (cm) \\ \hline
+        Angle(°) & Real distance (cm) & Measured distance (cm)  \\ \hline
         10 & 120 & 116,7 \\ \hline
         20 & 120 & 118,4 \\ \hline
         30 & 120 & 119,5 \\ \hline
@@ -170,7 +227,7 @@ Normally, in the documentation, there is an antenna diagram which describe the e
     \resizebox{\linewidth}{!}{%
     \begin{tabular}{|l|l|l|}
     \hline
-        Distance réelle (cm) & Distance mesurée (cm) & Erreur  \\ \hline
+        Real distance (cm) & Measured distance (cm) & Error  \\ \hline
         70 & 97 & -27 \\ \hline
         80 & 109,8 & -29,8 \\ \hline
         90 & 122,8 & -32,8 \\ \hline
@@ -187,7 +244,7 @@ Normally, in the documentation, there is an antenna diagram which describe the e
   \end{minipage}
 \end{figure}
 
-
+\newpage
 \subsection{Filter}
 Electromagnetics signals are sensitive to exterior noise and can be interfered easily. Therefore, we have to filter the raw data. To do so we implement three differents filters.  
 \subsubsection{Polynomial filter}
@@ -205,13 +262,14 @@ During calibration and test, we have discovered that the errors is linked to the
    f(x) = -1{,}004 \times 10^{-6}\, x^4 + 0{,}0005059\, x^3 - 0{,}09263\, x^2 + 7{,}398\, x - 221{,}7
 \end{equation}
 Every measure pass through the equation and are recalibrate based on this equation. That permit to reduce the error when we are at more $\pm$ 10 cm from the reference.\\
-We have implemented it in C/C++: 
+
+\noindent We have implemented it in C/C++ : 
 \begin{figure}[H]
    \centering
-   \resizebox{0.8\textwidth}{!}{\includegraphics{Polynomial_Filter.png}}
-   \caption{Code for polynomial filter}
+   \resizebox{0.7\textwidth}{!}{\includegraphics{Polynomial_Filter.png}}
+   \caption{\href{https://github.com/M1chigan/Projet-S-IoT-Essaim-de-Drone/blob/main/Code/Code_commun/src/filtre.cpp}{Code} for polynomial filter}
 \end{figure}
-
+\newpage
 \subsubsection{NLOS Filter}
 Electromagnetic signal are very sensitive to obstacle. After doing research, we have discovered that the signal will lost power if it encounters an obstacle. Based on that, we can verify that the power receives is strong enough otherwise the value cannot be considered as feasible so we can dennied it.\\
 
@@ -219,36 +277,26 @@ Electromagnetic signal are very sensitive to obstacle. After doing research, we 
 
 \begin{figure}[H]
    \centering
-   \resizebox{0.8\textwidth}{!}{\includegraphics{NLOS Filter.png}}
-   \caption{Code for NLOS Filter}
+   \resizebox{0.70\textwidth}{!}{\includegraphics{NLOS Filter.png}}
+   \caption{\href{https://github.com/M1chigan/Projet-S-IoT-Essaim-de-Drone/blob/main/Code/Code_commun/src/filtre.cpp}{Code} for NLOS Filter}
 \end{figure}
 
 
 \subsubsection{Innovation Gate Filter}
 UWB has tendencies to be noisy, that create some absurd value very high or very low. This data can affect the corrector and create some discontinuity in the drone control. Based on the max speed of the drone, we can determine absurdity by calculating the difference $d_{-1}$ and $d$, then determine if the difference can be reach at the max speed, if not the measure is ignored, otherwise, we accepted it.\\
 
-\noindent We have implemented it in C/C++: 
+\noindent We have implemented it in C/C+: 
 
 \begin{figure}[H]
    \centering
-   \resizebox{0.8\textwidth}{!}{\includegraphics{Innovation_Gate.png}}
-   \caption{Code for innovation gate filter}
+   \resizebox{0.70\textwidth}{!}{\includegraphics{Innovation_Gate.png}}
+   \caption{\href{https://github.com/M1chigan/Projet-S-IoT-Essaim-de-Drone/blob/main/Code/Code_commun/src/filtre.cpp}{Code} for innovation gate filter}
 \end{figure}
 
 \newpage
 
 \section{Communication}
 In the project, we have to differents use for communication, first communication is used to made each drone talk with each other to maintain the shape but also adapt themselves to the other. Second communication is the data's descent from the drone to the base to permit visualition of the swarm and command drone.
-\subsection{Type of communication}
-We have studied and made research of 3 different communication protocol. 
-\subsubsection{Xbee}
-The first communication protocol, we make research about is Xbee because it was recommended by the subject.
-It works well for large range purpose (multiple km range). It has been already implemented by others groups, and by the research team. So, the pipeline was already desin. 
-Otherwise, it needed a supplementary module. Which complexifie the communication management. And, it is in the contrary of the lighweight solution we want to create. 
-\subsubsection{UWB}
-Second communication protocol was to use the UWB as a sensor and also as communication module. It has been researched and implemented in real life. But during the first test, we have seen some capability reduction due to extension of the message which create a reduction of the frequency. Otherwise, it still a good idea cause it only use the UWB module, that reduce the complexity of the system. 
-\subsubsection{ESP-NOW}
-The third communication protocol is ESP-NOW. A specific communication protocol made by Espressif (ESP32 manufacturer) for ESP32. It uses the Wi-Fi antenna and it bandwith of 2.4Ghz. Optimize for ESP because code his handled by the manufacturer, and it pass before every other task on the Wi-Fi instruction pile. It is range can reach more than 150m.
 
 \subsection{Choice}
 We choose ESP-NOW has the protocol for two main raison : it doesn't need new hardware implementation. And, it responds to both communication purpose of the project. Then, has said during the presentation, the code has been optimized and write by the manufacturer which facilitate it implementation. For exemple, send data is only this command :
@@ -280,7 +328,18 @@ And for the base to drone communcation we have this package :
 
 \newpage
 
-\section{Data processing}
+\section{Measure processing and formation control}
+
+After studying the UWB measurements and the communication with ESP-NOW, we have to consider the processing of the retrieved data to finally implement an optimal formation control algorithm. The questions that need to be asked are the following : what data do we need to retrieve and what algorithm do we use for its processing and for the formation control. As mentioned before, our drones include many onboard sensors and benefit from the added UWB module. The bibliographical study gave us insights about potential architectures of measure and control so a choice has to be made considering the hardware available. Here are two things to notice :
+
+
+\begin{itemize}
+    \item UWB modules return purely relative distance measurements and give no sense of direction at all
+    \item The onboard Extended Kalman Filter from the flight controller's firmware Ardupilot fuses the measurements from its different sensors (accelerometer, gyroscope, magnetometer and barometer) and the added GNSS module to get notably an accurate estimation of the drone's attitude (yaw, roll, pitch) as a quaternion, 3 NED (North East Down) velocity components and 3 NED position components (up to 22 states are estimated in total).
+    
+\end{itemize}
+
+ Therefore, we know that we can get good estimates of these states through the onboard EKF of the flight controller. A first choice has to be made about what we want to control. 
 \newpage
 
 \section{Visualization}
@@ -362,7 +421,7 @@ Test is the main part of technical project, reality is always different from the
 \subsection{Simulation}
 Using the architecture describe in the part \ref{Simulation}, we did and planned to do different test for different axes of the project.  
 \subsubsection{Ongoing : }
-
+\label{Simu-level1}
 \underline{Console control:} \\
 This test has for purpose to test MAVLink function, communication and drone control.\\ 
 \noindent It follows the next schema: \\
@@ -381,14 +440,12 @@ This test has for purpose to test MAVLink function, communication and drone cont
    \caption{Drone capability at level 1}
 \end{figure}
 
-\noindent We obtain : \fcolorbox{red}{white}{\textcolor{red}{Ajouter \textbf{photo, linked vidéo (preview)}}} \\
-
-
 \noindent We can conclude that our communication between base and drone, is well-designed and the MAVLink procedure is well send to the drone. 
 
 \subsubsection{Planned :}
 
 \noindent  \underline{Level 2:} \\ 
+\label{Simu-level2}
 Objective of this level, a slave drone need to follow the master drone controlled by the console as in the level 1. To do so it should use communication, attitude and GPS data. Possibly, we can think of integrate UWB to make a full test, closest to the real situation.   
 
 \begin{figure}[H]
@@ -417,8 +474,14 @@ Objective of this level is to reach a full simulation environement where all the
 \end{figure}
 
 \subsection{Outdoor}
-
+Make drone flying is restricted by the laws. It makes test difficult to proceed and rare. Therefore, outdoor test needs to be precisely prepare to not lose any time and be efficient on site.
 \subsubsection{Planned}
-
+We have planned to attempt outdoor test within 2 weeks. During this test, we would love to test: 
+\begin{itemize}
+  \item UWB placement (rotation, and heigh)
+  \item ESP-NOW range 
+  \item Drone control console (as simulation level 1 [\ref{Simu-level1}])
+  \item Slave drone following master drone (as simulation level 1 [\ref{Simu-level2}])
+\end{itemize} 
 
 
