@@ -56,8 +56,20 @@ Please observe the conference page limits. For more information about how to bec
 \section{Related work}
 
 \section{UWB ranging}
+Drone swarm require a way to locate each other in order to keep shape of the swarm and to not collide to each other. UWB has already won its spurs for indoor applications, howewer, outdoor applications needs to be investigated. Locating while using UWB technology necessit to study and test different aspect. Among them, the choice of algorithm, calibration, testing and also data filtering.
+
+\subsection{Algorithm}
+
+\subsection{Calibration}
+
+\subsection{Test}
+
+\subsection{Filter}
 
 \section{Communication Protocol}
+\label{COM_Protocol}
+
+Drone to maintain formation requires various information, from its own sensors but also from the others drones. Drone also needs to transmit its data to a base and receive commands from it. To respond to this requirement, we implemented  ESP-NOW, a wireless communication protocol. 
 
 \section{Data processing and formation control}
 
@@ -78,8 +90,11 @@ Let's consider a triangle formation made of 3 drones. Each edge of the triangle 
     \item The damping force allows to minimize the oscillations and avoid collisions
 \end{itemize}
 
+\section{Visualization}
+Drones are typically working far away from the operator. It makes it difficult to observe, and understand what is happening. That is a problem for testing purposes, so we have to develop a visualizer which permit us to observe drone and detect error and their causes. This visualizer is using Matlab and is based on ESP-NOW [\ref{COM_Protocol}].
 
-\section{Simulation and Visualisation}
+\section{Simulation}
+Drones are restricted from flying above city. Moreover, our school does not have indoor test room. Those constraints reduce the number of outdoor test. However, test is necessary so we developed a simulation architecture. It is based on the flight controller firmware, Ardupilot, a proxy, MAVproxy and a visualizer, Mission planner.
 
 \section{Conclusion}
 
