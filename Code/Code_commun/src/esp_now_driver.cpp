@@ -7,6 +7,7 @@
 #include "pixhawk_driver.h"
 #include <stddef.h>
 
+
 // Raccourci : Drone courant = drone ou on upload le code 
 /*
 Drone 1 (UWB_1) => ID = 1 & MAC = 0xCC, 0xDB, 0xA7, 0x06, 0x8E, 0x08
@@ -40,7 +41,8 @@ typedef struct __attribute__((packed)) {
   uint8_t  id;
   uint32_t t_ms;
   uint8_t commande;
-  float variable;
+  float arg;
+  float arg2;
 } Pkt_base;
 
 static void onRecv(const uint8_t* mac, const uint8_t* data, int len) {
@@ -54,7 +56,7 @@ static void onRecv(const uint8_t* mac, const uint8_t* data, int len) {
   if (len == sizeof(Pkt_base)) {
     Pkt_base p;
     memcpy(&p, data, sizeof(p));
-    process_order(p.commande, p.variable);
+    process_order(p.commande, p.arg,p.arg2);
   }
 
 }
@@ -136,7 +138,6 @@ void send2all(float d,float z,Attitude a, GPS gps) {
   esp_now_send(BCAST, (uint8_t*)&p, sizeof(p));
 
 }
-
 
 
 
