@@ -2,7 +2,6 @@
 #include <Arduino.h>
 #include <esp_now_driver.h>
 
-// put function declarations here:
 String buffer = "";
 int escState = 0; 
 int DRONE_ID = 1;
@@ -12,7 +11,8 @@ float ALT_MAX = 70;
 #define CMD_MODE    2
 #define CMD_TAKEOFF 3
 #define CMD_ARM     4
-#define CMD_PARAM   5
+#define CMD_GO      5
+#define CMD_PARAM   6
 
 struct ModeEntry { const char* name; uint8_t num; };
 const ModeEntry MODES[] = {
@@ -24,16 +24,45 @@ const ModeEntry MODES[] = {
   {"auto",      6},
 };
 
-void executeCommand(String cmd) {
-  cmd.trim();
-  cmd.toLowerCase();
-  if (cmd.length() == 0) return;
+struct GOEntry { const char* name; uint8_t num; int8_t sign; };
 
-  // Découpe : premier mot = verbe, reste = argument
-  int sp = cmd.indexOf(' ');
-  String verbe = (sp < 0) ? cmd : cmd.substring(0, sp);
-  String arg   = (sp < 0) ? ""  : cmd.substring(sp + 1);
-  arg.trim();
+const GOEntry GO[] = {
+  {"gps",    1,  1},
+  {"devant", 2,  1},
+  {"nord",   3,  1},
+  {"sud",    3, -1},
+  {"est",    4,  1},
+  {"ouest",  4, -1},  
+  {"z",      5,  1},
+  {"stop",   6,  1},
+  {"tourne", 7,  1},
+};
+
+static int splitArgs(String s, String* out, int maxn) {
+  int n = 0;
+  s.trim();
+  while (s.length() > 0 && n < maxn) {
+    int sp = s.indexOf(' ');
+    if (sp < 0) { out[n++] = s; break; }
+    out[n++] = s.substring(0, sp);
+    s = s.substring(sp + 1);
+    s.trim();                      
+  }
+  return n;
+}        
+
+void executeCommand(String cmd) {
+  String t[5];
+  int n = splitArgs(cmd, t, 5);
+  if (n == 0) return;
+
+  String verbe = t[0];
+  String arg   = t[1];
+  String arg2  = t[2];
+  verbe.toLowerCase();
+  arg.toLowerCase();
+  arg2.toLowerCase();
+
 
   // [1] status
   if (verbe == "status") {
@@ -67,20 +96,30 @@ void executeCommand(String cmd) {
     return;
   }
 
-  // [4] arm <on|off>
   if (verbe == "arm") {
-    if (arg == "on" || arg == "off") {
-      send2drone(DRONE_ID, CMD_ARM, arg == "on" ? 1 : 0);
-      Serial.println(arg == "on" ? "Armement envoye" : "Desarmement envoye");
+    arg.toUpperCase();                        // accepte on, On, ON
+    if (arg == "ON" || arg == "OFF") {
+      bool on = (arg == "ON");
+      send2drone(DRONE_ID, CMD_ARM, on ? 1 : 0);
+      Serial.println(on ? "Armement envoye" : "Desarmement envoye");
     } else {
-      Serial.println("Usage: arm <on|off>");
+      Serial.println("Usage: arm <ON|OFF>");
     }
     return;
   }
 
-  // [5] param (à définir)
-  if (verbe == "param") {
-    Serial.println("Param : pas encore defini");
+  // [5] GO (à définir)
+  if (verbe == "go") {
+  
+
+    for (const auto& m : GO) {
+      if (arg == m.name) {
+        send2drone(DRONE_ID, CMD_GO, (float)m.num, m.sign * arg2.toFloat());
+        Serial.printf("GO %s %.1f m envoye\n", m.name, arg2.toFloat()); 
+        return;
+      }
+    }
+    Serial.println("GO: direction inconnue");
     return;
   }
 
@@ -90,8 +129,8 @@ void executeCommand(String cmd) {
                    " status\n"
                    " mode <guided|land|rtl|stabilize|loiter|auto>\n"
                    " takeoff <altitude>\n"
-                   " arm <on|off>\n"
-                   " param (a definir)\n"
+                   " arm <ON|OFF>\n"
+                   " GO  <gps [GPS] |devant [distance]|nord [distance]|sud [distance]|est [distance]|ouest [distance]|z [hauteur]|STOP|Tourne [angle]>\n"
                    " help");
     return;
   }
@@ -121,12 +160,12 @@ void loop() {
       executeCommand(buffer);
       buffer = "";
       Serial.print("> ");
-    } else if (c == 8 || c == 127) {          // retour arrière
+    } else if (c == 8 || c == 127) {          
       if (buffer.length() > 0) {
         buffer.remove(buffer.length() - 1);
         Serial.print("\b \b");
       }
-    } else if (c >= 32) {                      // caractères imprimables uniquement
+    } else if (c >= 32) {          
       buffer += c;
       Serial.print(c);
     }

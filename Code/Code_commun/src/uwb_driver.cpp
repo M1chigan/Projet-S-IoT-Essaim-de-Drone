@@ -10,6 +10,7 @@
 #include "DW1000.h"
 #include "DW1000Time.h"
 
+#if !SIM_MODE
 
 
 
@@ -372,7 +373,7 @@ void scheduler_update() {
  
     if (my_turn || takeover) uwb_start_ranging();
 }
-
+#endif 
 
 
 

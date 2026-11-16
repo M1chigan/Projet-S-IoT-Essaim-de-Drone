@@ -14,9 +14,10 @@
 //  donc AUCUN texte ne doit y passer. Utilise LOG/LOGF partout
 //  (dans ce fichier ET dans uwb_driver, esp_now_driver, filtre...).
 // ------------------------------------------------------------
+
 #if SIM_MODE
-  #define LOG(x)
-  #define LOGF(...)
+#define LOG(x)
+#define LOGF(...)
 #else
   #define LOG(x)    Serial.println(x)
   #define LOGF(...) Serial.printf(__VA_ARGS__)
@@ -33,8 +34,6 @@ void setup() {
 #if !SIM_MODE
     Serial.begin(115200);          // logs USB (en simulation, c'est initMAVLINK qui ouvre Serial)
 #endif
-
-    // MAVLink en PREMIER : le heartbeat doit partir quoi qu'il arrive
     if (!initMAVLINK()) { LOG("MAVLINK Down"); } else { LOG("MAVLINK UP"); }
 
     if (!initUWB()) {
@@ -65,7 +64,7 @@ void loop() {
     }
 
     // 2) Communication + UWB
-    scheduler_update();
+    //scheduler_update();
     uwb_update();
 
     // 3) Traitement des distances UWB
@@ -87,13 +86,12 @@ void loop() {
 
             float max_relative_speed = 3.0f;
 
+            char nm[10];
             if (innovationGate_filter(processed_dist, prev_d, max_relative_speed, dt)) {
                 last_distances[from_id] = processed_dist;
-                LOGF("From ID: %d | Raw: %.3f m -> Filtered: %.3f m\n",
-                     from_id, raw_dist, processed_dist);
+                snprintf(nm, sizeof(nm), "f%u", from_id);  sim_report(nm, processed_dist);   // accepté
             } else {
-                LOGF("REJECTED by Gate: From ID %d -> %.3f m (prev: %.3f m)\n",
-                     from_id, processed_dist, prev_d);
+                snprintf(nm, sizeof(nm), "x%u", from_id);  sim_report(nm, processed_dist);   // rejeté
             }
         }
     }

@@ -5,6 +5,10 @@
 #include <mavlink.h>
 #include "config.h"
 
+#if SIM_MODE
+#include "uwb_sim.h"
+#endif
+
 // ---------------------------------------------------------------
 //  Port utilise pour MAVLink : un SEUL port, pour lecture ET ecriture
 // ---------------------------------------------------------------
@@ -98,7 +102,7 @@ static void requestMessage(uint16_t message_id, float frequency_hz) {
 bool initMAVLINK() {
   s_serial.setRxBufferSize(RX_BUFFER_SIZE);   // AVANT begin()
 #if SIM_MODE
-  s_serial.begin(PIXHAWK_BAUDRATE);           // USB : pas de broches
+  s_serial.begin(PIXHAWK_BAUDRATE);          // USB : pas de broches
 #else
   s_serial.begin(PIXHAWK_BAUDRATE, SERIAL_8N1, PIXHAWK_RX_PIN, PIXHAWK_TX_PIN);
 #endif
@@ -125,7 +129,16 @@ void pixhawk_update() {
   while (budget-- > 0 && s_serial.available()) {
     uint8_t c = s_serial.read();
     if (!mavlink_parse_char(MAVLINK_COMM_0, c, &msg, &status)) continue;
-
+    #if SIM_MODE
+    // Distances UWB simulees : NAMED_VALUE_FLOAT "d2", "d3"... envoyé par le pont
+    if (msg.sysid == SIM_SYSID && msg.msgid == MAVLINK_MSG_ID_NAMED_VALUE_FLOAT) {
+      mavlink_named_value_float_t nv;
+      mavlink_msg_named_value_float_decode(&msg, &nv);
+      if (nv.name[0] == 'd' && nv.name[1] >= '1' && nv.name[1] <= '9')
+        uwb_sim_push(nv.name[1] - '0', nv.value);
+      continue;
+    }
+    #endif
     // On ne garde que le drone pilote (ignore drones 2/3, MAVProxy, etc.)
     if (msg.sysid != TARGET_SYSID) continue;
 
@@ -205,6 +218,46 @@ void pixhawk_update() {
 }
 
 // ---------------------------------------------------------------
+//  Mouvements (le drone doit etre en vol, en GUIDED)
+// ---------------------------------------------------------------
+
+// Deplacement relatif dans le repere du drone : avant, droite, bas (m)
+void move_body(float avant, float droite, float bas) {
+  mavlink_message_t msg;
+  mavlink_msg_set_position_target_local_ned_pack(
+      OUR_SYSID, OUR_COMPONENT_ID, &msg, millis(), TARGET_SYSID, s_target_comp,
+      MAV_FRAME_BODY_OFFSET_NED, 0x0DF8,          // position seule
+      avant, droite, bas, 0, 0, 0, 0, 0, 0, 0, 0);
+  sendMessage(msg);
+}
+
+// Deplacement relatif dans le repere geographique : nord, est, bas (m)
+void move_ned(float nord, float est, float bas) {
+  mavlink_message_t msg;
+  mavlink_msg_set_position_target_local_ned_pack(
+      OUR_SYSID, OUR_COMPONENT_ID, &msg, millis(), TARGET_SYSID, s_target_comp,
+      MAV_FRAME_LOCAL_OFFSET_NED, 0x0DF8,         // position seule
+      nord, est, bas, 0, 0, 0, 0, 0, 0, 0, 0);
+  sendMessage(msg);
+}
+
+// Vitesse dans le repere du drone (m/s) : a renvoyer toutes les 200-500 ms
+void set_velocity_body(float vx, float vy, float vz) {
+  mavlink_message_t msg;
+  mavlink_msg_set_position_target_local_ned_pack(
+      OUR_SYSID, OUR_COMPONENT_ID, &msg, millis(), TARGET_SYSID, s_target_comp,
+      MAV_FRAME_BODY_NED, 0x0DC7,                 // vitesse seule
+      0, 0, 0, vx, vy, vz, 0, 0, 0, 0, 0);
+  sendMessage(msg);
+}
+
+// Rotation : angle en degres, relatif au cap actuel ou absolu, sens horaire ou non
+void set_yaw(float deg, bool relatif, bool horaire) {
+  sendCommand(MAV_CMD_CONDITION_YAW,
+              deg, 20 /* deg/s */, horaire ? 1 : -1, relatif ? 1 : 0);
+}
+
+// ---------------------------------------------------------------
 //  Acces aux donnees
 // ---------------------------------------------------------------
 bool     pixhawk_connected() { return s_connected; }
@@ -231,15 +284,15 @@ bool pixhawk_get_ack(uint16_t* command, uint8_t* result) {
 // ---------------------------------------------------------------
 //  Ordres de la console
 // ---------------------------------------------------------------
-void process_order(uint8_t commande, float variable) {
+void process_order(uint8_t commande, float arg,float arg2) {
   switch (commande) {
 
     case CMD_ARM:
-      sendCommand(MAV_CMD_COMPONENT_ARM_DISARM, 1);
-      break;
+      sendCommand(MAV_CMD_COMPONENT_ARM_DISARM, arg > 0.5f ? 1 : 0);
+    break;
 
     case CMD_MODE: {
-      int m = (int)(variable + 0.5f);
+      int m = (int)(arg + 0.5f);
       if (m >= 1 && m <= 6) {
         sendCommand(MAV_CMD_DO_SET_MODE,
                     MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, MODE_TO_ARDU[m]);
@@ -247,12 +300,51 @@ void process_order(uint8_t commande, float variable) {
       break;
     }
 
-    case CMD_TAKEOFF:   // exige : mode GUIDED + drone arme
-      if (variable > 0 && variable <= 30) {          // borne de securite
-        sendCommand(MAV_CMD_NAV_TAKEOFF, 0, 0, 0, NAN, 0, 0, variable);
+    case CMD_TAKEOFF:  
+      if (arg > 0 && arg <= 30) {          // borne de securite
+        sendCommand(MAV_CMD_NAV_TAKEOFF, 0, 0, 0, NAN, 0, 0, arg);
       }
       break;
 
+        case CMD_GO: {
+      int   type = (int)(arg + 0.5f);   // colonne "num" de la table GO
+      float v    = arg2;                // valeur signée (m, ou degrés pour "tourne")
+
+      switch (type) {
+        case 2:   // devant : avancer (v < 0 = reculer)
+          if (fabsf(v) <= 50) move_body(v, 0, 0);
+          break;
+        case 3:   // nord (+) / sud (-)
+          if (fabsf(v) <= 50) move_ned(v, 0, 0);
+          break;
+        case 4:   // est (+) / ouest (-)
+          if (fabsf(v) <= 50) move_ned(0, v, 0);
+          break;
+        case 5:   // z : v > 0 = monter, v < 0 = descendre
+          if (fabsf(v) <= 30) move_body(0, 0, -v);   // en NED, le bas est positif
+          break;
+        case 6:   // STOP : consigne de vitesse nulle (reste en GUIDED)
+          set_velocity_body(0, 0, 0);
+          break;
+        case 7:   // tourne : v > 0 = droite (horaire), v < 0 = gauche
+          if (fabsf(v) <= 360) set_yaw(fabsf(v), true, v >= 0);
+          break;
+        default:  // 1 (GPS) : pas encore géré
+          break;
+      }
+      break;
+    }
+
     default: break;
   }
+}
+void sim_report(const char* name, float value) {
+#if SIM_MODE
+  char nm[10] = {0};                       // le champ fait 10 octets exactement
+  strncpy(nm, name, 9);
+  mavlink_message_t msg;
+  mavlink_msg_named_value_float_pack(OUR_SYSID, OUR_COMPONENT_ID, &msg,
+                                     millis(), nm, value);
+  sendMessage(msg);
+#endif
 }

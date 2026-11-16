@@ -23,15 +23,17 @@ static uint8_t BCAST[6] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
 static uint8_t BASE_MAC[6] = {0xCC, 0xDB, 0xA7, 0x07, 0x15, 0x50}; 
 // Commenté la ligne correspond au drone courant
 static uint8_t D1_MAC[6] = {0xCC, 0xDB, 0xA7, 0x06, 0x8E, 0x08}; 
-static uint8_t D2_MAC[6] = {0xCC, 0xDB, 0xA7, 0x07, 0x15, 0x50};
-static uint8_t D3_MAC[6] = {0x0C, 0xB8, 0x15, 0x6D, 0x5C}; 
+static uint8_t D2_MAC[6] = {0xCC, 0xDB, 0xA7, 0x07, 0xB9, 0x78};
+static uint8_t D3_MAC[6] = {0x0C, 0xB8, 0x15, 0x6D, 0x5C, 0x30 };
+
 
 //Structure de la trame (attriibut packed pour éviter de modifier les arrangement d'octect)
 typedef struct __attribute__((packed)) {
   uint8_t  id;
   uint32_t t_ms;
   uint8_t commande;
-  float variable;
+  float arg;
+  float arg2;
 } Pkt;
 
 static void onRecv(const uint8_t* mac, const uint8_t* data, int len) {
@@ -74,12 +76,13 @@ bool initcom() {
   return true; 
 }
 
-void send2drone(uint8_t id, uint8_t commande,float variable) {
+void send2drone(uint8_t id, uint8_t commande,float arg,float arg2 ) {
     Pkt p;
     p.id = DRONE_ID;
     p.t_ms = millis();
     p.commande = commande;
-    p.variable = variable;
+    p.arg = arg;
+    p.arg2 = arg2;
 
 
 switch (id) {
@@ -95,12 +98,13 @@ switch (id) {
 }
 }
 
-void send2all(uint8_t commande,float variable) {
+void send2all(uint8_t commande,float arg,float arg2) {
     Pkt p;
     p.id = DRONE_ID;
     p.t_ms = millis();
     p.commande = commande;
-    p.variable = variable;
+    p.arg = arg;
+    p.arg2 = arg2;
 
   esp_now_send(BCAST, (uint8_t*)&p, sizeof(p));
 
