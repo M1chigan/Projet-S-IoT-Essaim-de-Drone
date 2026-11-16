@@ -1,17 +1,17 @@
-\chapter{Bibliographical Studies}
-\markboth{Bibliographical Studies}{Bibliographical Studies}
-\label{Bibliographical Studies}
+\chapter{Bibliographical Study}
+\markboth{Bibliographical Study}{Bibliographical Study}
+\label{Bibliographical Study}
 
 \section{UWB}
 
 \subsection{Definitions} 
 Ultra-Wideband (UWB) is a technology using radio frequency to exchange data.
-Communication is not the only purpose; UWB can also be used to locate, which is only possible by using different modules. These algorithms and techniques will be treated in the next part (\ref{UWB_Algo_localisation}).
+Communication is not its only purpose; UWB can also be used to locate, which is only possible by using multiple modules. These algorithms and techniques will be treated in the next part (\ref{UWB_Algo_localisation}).
 In the majority of cases, UWB is deployed for indoor purposes; otherwise, it can be used for outdoor purposes, but this is less present in scientific papers.
 
 
 \subsection{Location algorithm}\label{UWB_Algo_localisation}
-In order to use UWB as a location sensor, we have to use specific algorithms. In the following subsections, we will explain and show 2 different location algorithms: firstly, two-way ranging (TWR), and secondly, double-sided two-way ranging (DS-TWR). Finally, we will describe TDOA, the most advanced algorithm.
+In order to use UWB as a location sensor, we have to use specific algorithms. In the following subsections, we will explain and show 2 different location algorithms: firstly, two-way ranging (TWR), and secondly, double-sided two-way ranging (DS-TWR). Finally, we will describe TDMA, the most advanced algorithm.
 
 \subsubsection{Two way ranging (TWR)}
 The Two-Way Ranging (TWR) algorithm is the easiest and the fastest to implement in a UWB system.
@@ -48,28 +48,28 @@ In order to explain this algorithm, we will use 2 modules called $UWB_1$ and $UW
     \item $UWB_2$ processes the \textbf{POLL} and precisely plans the time of emission $t_{x2}$ for the \textbf{RESP}. It contains ($t_{x2},r_{x2}$).
     \item $UWB_1$ receives the \textbf{RESP} and memorizes $r_{x1}$.
 \end{enumerate}
-With all these parameters, we can deduce these variables:
+With all these parameters, we can deduce the following variables:
 \begin{itemize}
     \item Total time: $t_{tot} = r_{x1} - t_{x1}$
     \item Processing time of $UWB_2$: $t_{proc} = r_{x2} - t_{x2}$
     \item Travel time: $t_{travel} = t_{tot} - t_{proc}$
 \end{itemize}
 The signal travels back and forth, so it covers twice the distance ($d$), and the travel speed of a radio signal is equivalent to the speed of light ($c$). \\ 
-We can deduce this equation: 
+We can therefore deduce this equation: 
 \begin{equation} \label{TWR_eq}
 \boxed{\frac{t_{travel}\times c}{2}=\frac{(t_{tot} - t_{proc}) \times c}{2}= \frac{((r_{x1} - t_{x1}) - (r_{x2} - t_{x2})) \times c}{2}}
 \end{equation}
 We can also determine the error induced by this algorithm.\\
 After calculation (\ref{TWR-Error-calculation}), we obtain this equation: 
 \begin{equation}
-\epsilon \approx \frac{t_ {proc}(e_a - e_b)}{2}
+\varepsilon \approx \frac{t_ {proc}(e_a - e_b)}{2}
 \end{equation}
-As we can observe, the processing time is directly linked to the error. The $t_{proc}$ is around 3,000,000 nanoseconds, so it induces a high error.
+As we can observe, the processing time is directly linked to the error. The $t_{proc}$ is around 3,000,000 nanoseconds (3 ms), so it induces a high error.
 
 \subsubsection{Double Sided Two way ranging (DS-TWR)}
 \label{DS-TWR}
-In the TWR algorithm, the main inconvenient is the error and misprecision.
-To erase that error, the DS-TWR has been thinked and proposed in this paper \cite{gezici_localization_nodate}. This algorithm is also using $UWB_1$ and $UWB_2$.
+In the TWR algorithm, the main inconvenient is the error and imprecision.
+To remove that error, the DS-TWR has been thought and proposed in this paper \cite{gezici_localization_nodate}. This algorithm is also using 2 modules $UWB_1$ and $UWB_2$.
 
 \begin{figure}[!ht]
 \centering
@@ -119,7 +119,7 @@ To erase that error, the DS-TWR has been thinked and proposed in this paper \cit
           arrival $r_{x22}$.
 \end{enumerate}
 
-\noindent With all those parameters, we compute four time intervals :
+\noindent With all those parameters, we can compute four time intervals :
 \begin{itemize}
     \item Response time for $UWB_1 : t_1 = r_{x1} - t_{x1}$
     \item Response time for $UWB_2 : t_2 = r_{x22} - t_{x2}$
@@ -127,27 +127,27 @@ To erase that error, the DS-TWR has been thinked and proposed in this paper \cit
     \item Processing time of $UWB_2 : t_{proc_2} = r_{x2} - t_{x2}$
 \end{itemize}
 
-\noindent We can deduce the travel time: 
+\noindent We can deduce the total travel time: 
 
 \begin{equation}
 \boxed{t_{travel} = \frac{t_1 \times t_2 - t_{proc_1} \times t_{proc_2}}{ t_1 +t_2+t_{proc_1}+t_{proc_2}}}
 \end{equation}
 
-\noindent And then find distance : 
+\noindent And then find the distance between the 2 modules : 
  \begin{equation}
     d = c \times t_{travel}
 \end{equation}         
 
 \noindent Now let's compare the induced error. After calculation (\ref{DSTWR-Error-calculation}), we obtain this equation  : 
 \begin{equation}
-\epsilon \approx T_f \times \frac{e_a + e_b}{2}
+\varepsilon \approx T_f \times \frac{e_a + e_b}{2}
 \end{equation}
-As we can see, the error is not multiplie by $t_{proc}$, so the error is reduced.\\
-With this algorithm, we are note dependant of the processor any more. That the algorithm currently use in our project.
+As we can see, the error is not multiplied by $t_{proc}$, so the error is reduced.\\
+With this algorithm, we are not dependant on the processor anymore. That is the algorithm currently used in our project.
 
 \subsection{Timing algorithm}\label{UWB_Algo_timings}
-When working on swarm drone, there is not only two UWB modules. There is multiple UWB trying to communicate. One weakness of the UWB is it sensibility to noise and interference. The way should be clear before emiting otehrwise that create colision and damaged the singal and corrupt distance estimation.
-For this purpose, we need to look on how to divide time to avoid collision, in our specifif case, we are working with 3 to 4 drone.
+When working on a swarm drone, there are not only two UWB modules : there are actually multiple modules trying to communicate. One weakness of the UWB is its sensibility to noise and interference. The "way" should be clear before emitting otherwise that creates colision and damage the signal, ultimately leading to corrupted distance estimations.
+For this purpose, we need to look on how to divide the time of emission to avoid collision. In our specific case, we are working with 3 to 4 drones.
 \subsubsection{ALOHA}
 This method is named after the first ALOHAnet system, which introduced it in 1970. It provides a simple approach to channel access control without requiring any time synchronization. Instead of planning transmissions, a module sends its data packet immediately, regardless of whether the medium is currently busy or free.
 The primary advantage of  ALOHA lies in its ease of implementation and full decentralization, allowing independent nodes or drones to join the network dynamically without prior initialization. 
@@ -155,7 +155,7 @@ However, its major drawback is its susceptibility to collisions caused by uncoor
 
 
 \subsubsection{Time-division multiple access (TDMA)} \label{TDMA}
-This method has for idea to divide a fixed period of time in trame, and cut it in different tranches. Each tranche is for each drone. Those trames and  tranches  are fixed in the hardware and are stricly respected. 
+This method has for idea to divide a fixed period of time in frames, and cut it in different slots. Each slot is dedicated to each drone. Those frames and slots are fixed in the hardware and are stricly respected. 
 \begin{figure}[H]
     \centering
     \resizebox{0.7\textwidth}{!}{
@@ -184,26 +184,26 @@ This method has for idea to divide a fixed period of time in trame, and cut it i
     \caption{TDMA explanation diagram}
 \end{figure}
 
-For exemple if we have 3 drone, trame of $UWB_1$ when is looking for distance in DS-TWR algorithm is divided by 5.
+For example, if we have 3 drones, the frame of $UWB_1$, when it is looking for distances with a DS-TWR algorithm, is divided in 5 parts.
 \begin{enumerate}
-    \item T1: $UWB_1$ send the \textbf{POLL}  to $UWB_2$ and  $UWB_3$
-    \item T2: $UWB_2$ send the \textbf{RESP}  to $UWB_1$
-    \item T3: $UWB_1$ send the \textbf{FINAL} to  $UWB_2$
-    \item T4: $UWB_3$ send the \textbf{RESP}  to $UWB_1$
-    \item T5: $UWB_1$ send the \textbf{FINAL} to $UWB_3$
+    \item T1: $UWB_1$ sends the \textbf{POLL}  to $UWB_2$ and  $UWB_3$
+    \item T2: $UWB_2$ sends the \textbf{RESP}  to $UWB_1$
+    \item T3: $UWB_1$ sends the \textbf{FINAL} to  $UWB_2$
+    \item T4: $UWB_3$ sends the \textbf{RESP}  to $UWB_1$
+    \item T5: $UWB_1$ sends the \textbf{FINAL} to $UWB_3$
 \end{enumerate}
 
-\noindent This method has an advantage: there is no collision at all due to strict time period. And also permit to shut down the module when we do not need it.
-But there is inconvenient, firstly  if we hade one more drone, we have to add two other tranches, when we reach 10 drone, there is no time anymore to get information at a high frequency. And, it needs a synchronization to make all clock working at same speed and avoid collision perfectly.
+\noindent This method has a clear advantage: there is no collision at all due to strict time periods. It also permits to shut down the modules when we do not need them and save energy. However, there are a few drawbacks: firstly, if we add one more drone, we have to add two other slots, and when reaching 10 drones, there is no time anymore to get information at a high frequency. Moreover, it needs a synchronization to make all the modules' clocks work at the same speed and avoid collision perfectly.
 
 \subsubsection{Slotted ALOHA}
 
-This method combines the features of both the ALOHA and TDMA protocols. Time is divided into tranches, and UWB modules are only allowed to start their transmissions at the beginning of a slot boundary. If a module has data ready to transmit, but a slot has already started, it must wait for the next available slot.
+This method combines the features of both the ALOHA and TDMA protocols. Time is divided into slots, and UWB modules are only allowed to start their transmissions at the beginning of a slot boundary. If a module has data ready to transmit, but a slot has already been taken, it must wait for the next available slot.
 
 This approach preserves the flexibility of ALOHA while doubling the maximum theoretical throughput to approximately $36.8\%$ \cite{noauthor_pdf_2026}. However, it still remains less deterministic and efficient than TDMA due to potential collisions when multiple nodes choose the same slot.
 \newpage
 \section{Measure processing}
-In most cases, data measured by sensors are unclear. It could be a sensor offset, or it can also come from crosstalk or other exterior interactions. In order to obtain clean measurements and to be able to use them for controlling or any other purpose, we have to develop some filters. In this section, we will describe three filters used for cleaning the UWB signal. Firstly, we will explain the polynomial filter, secondly the Kalman filter, and finally the extended Kalman filter.
+
+In most cases, the data measured by sensors are noisy. It could be come from a sensor offset, or it can also come from crosstalk or other exterior interactions. In order to obtain clean measurements and to be able to use them for controlling or any other purpose, we have to develop  filters.
 
 \subsection{Extended Kalman Filter for relative localisation  }
 In the context of navigating systems in noisy environments with sensors, the Kalman filter is a relevant algorithm. As Welch and Bishop (2006, p. 1) [3] point out, the Kalman filter is notable for its ability to "support estimations of past, present, and even future states [...] even when the precise nature of the modeled system is unknown.". In our study case, we deal with a drone swarm communicating using the UWB communication protocol, which gives us the relative distance between each pair of drones by using the time of flight of a radio wave. The UWB therefore provides a scalar distance, whereas the quantity of interest is the relative position vector. The measurement model, which links the two through the Euclidean norm, is nonlinear, which calls for the extended Kalman filter. This version resorts to a typical technique of linearization around the current state using a Jacobian matrix. We are also considering an anchor-free system which enhances the challenge of this project. In this section, we will first cover the theory of the classical Kalman filter and its mathematical formalist and then dive into the extended Kalman filter and its utility.
@@ -233,6 +233,7 @@ In which we have :
 
 At each time $k$, the measurement $z_k$ is written as follows :
 $${\displaystyle \mathbf {z} _{k}=\mathbf {H} _{k}\mathbf {x} _{k}+\mathbf {v} _{k}}$$
+\newpage
 With :
 \begin{itemize}
     \item $H_k$ is the observation matrix
@@ -281,11 +282,14 @@ In our project, the observability problem is harder to deal with because it woul
 \subsection{Data fusion}
 
 \subsubsection{Data fusion with an EFK in drone swarm applications}
-In the context of our project, the most relevant article is most likely "Onboard Ranging-Based Relative Localization and Stability for Lightweight Aerial Swarms" by Li et al. (2025) \parencite{li_onboard_2025} from TU Delft in the Netherlands. In their paper, they share an autonomous relative localization technique fusing UWB distance measurements and state information like velocity, yaw rate, height from neighbours. The following illustration shows their scheme of work : 
+In the context of our project, the most relevant article is most likely "Onboard Ranging-Based Relative Localization and Stability for Lightweight Aerial Swarms" by Li et al. (2025) \parencite{li_onboard_2025} from TU Delft in the Netherlands. 
+
+\newpage
+In their paper, they share an autonomous relative localization technique fusing UWB distance measurements and state information like velocity, yaw rate, height from neighbours. The following illustration shows their scheme of work : 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\linewidth]{Li_2025.png}
+    \includegraphics[width=0.6\linewidth]{Li_2025.png}
     \caption{Scheme of the multi-robot system and all onboard sensors" \parencite{li_onboard_2025}}
     \label{fig:placeholder}
 \end{figure}
@@ -302,6 +306,29 @@ In an article of 2020, Chen et al. \parencite{chen_uwb-assisted_2020} studied th
 
 A closer reasearch to our situation was made by Yang et Lee in 2023 \parencite{yang_ultrawideband_2023} in which they implemented an Extended Kalman Filter using GNSS and INS (Inertial Navigation System) with complementary UWB measurements in a flight controller firmware. They used the flight controller "Pixhawk 4" (the same as us) and successfully carried out a field test which, however, did not include a moving drone formation. 
 
+\section{Drone Swarm Formation Control}
+
+After considering the data processing, it is necessary to understand how we can leverage it to obtain a functional drone swarm formation control.
+This topic is very broad and multiple methods of control can be considered : for the sake of simplicity, we will try to cover methods relevant for our applications which do not require to dive too much into mathematical considerations.
+We will first study the different possible topologies of swarms and then we will focus on formation control methods and conclude with examples related to UWB. 
+
+
+\subsection{Formation Control Scheme}
+
+We can firstly categorize multiple formation control scheme depending on where the decisions are made and how information is shared in the swarm. 
+
+
+In their article of 2024 \cite{bu_2024}, Bu et al. did an exhaustive review of UAV swarm formation control and defined three main formation control schemes : centralized, decentralized and distributed. In a centralized scheme, a single control point such as a computer is in charge of managing and processing all the information as well as taking decisions and giving commands to individual UAVs. In this configuration, the drones' autonomy is thus limited. While this configuration can benefit from simpler decision-making and easier implementation, it suffers from scalability issues and a single point of failure problem. In a decentralized approach, each drone acts based on its local perception and predefined rules and usually limits inter-drone communication. In this case, formation coordination and design are more challenging but scalability and adaptability are improved. Finally, the distributed approach resorts to a more collaborative approach and hence, an extensive communication between the UAVs for teamwork. This configuration is relevant in applications where the use of collective information from different sensors is primordial.
+
+
+
+\subsection{Formation Control Strategy}
+
+Control strategies include the definition of the roles within a swarm as well as the way the swarm is controlled. This broad topic encompasses a lot of aspects that we will not cover exhaustively in this study, particularly on the mathematical theory behind the control implementation.
+
+In the review of Bu. et al. mentioned previously, they discuss various conventional strategies and their characteristics. An intuitive way of thinking of a swarm involves giving each drone a role of either leader or follower. The basic idea is to have one or multiple designated leader drones following the given mission while follower drones maintain a position or a distance from the leaders or other followers. This method shows a good flexibility and can be applied in many different contexts however it heavily relies on the leader which could lead to heavy problems if it is affected. 
+
+\newpage
 \section{Communication protocol}
  
 \subsection{Xbee}
@@ -332,7 +359,7 @@ Number of nodes & Hundreds (16-bit addressing)\\
 
 
 \subsection{UWB}
-Besides ranging, a UWB module is a radio transceiver, so the frames used for ranging (POLL, RESP, FINAL) can carry a small payload. In the DS-TWR algorithm described above, the FINAL frame already contains timestamps (tx1, rx1, tx12). The same mechanism can carry a drone ID, a status flag or a short command. The advantage is that localization and data exchange share a single radio and a single time schedule, so no second module is needed for small messages.\\
+A UWB module is a radio transceiver, so the frames used for ranging (POLL, RESP, FINAL) can carry a small payload. In the DS-TWR algorithm described above, the FINAL frame already contains timestamps (tx1, rx1, tx12). The same mechanism can carry a drone ID, a status flag or a short command. The advantage is that localization and data exchange share a single radio and a single time schedule, so no second module is needed for small messages.\\
 
 \noindent The main limitation is the frame size and the energy cost. UWB frames are short (about 127 bytes in the standard configuration), and the receiver is power-hungry compared with the other technologies in this section. UWB is therefore well suited to short control messages, but not to image or bulk data transfer.
 
@@ -356,7 +383,7 @@ Number of nodes & Limited by the channel access method (ALOHA, TDMA); a few tens
 \subsection{ESP-NOW}
 ESP-NOW is a protocol developed by Espressif for its ESP32 and ESP8266 chips. It uses Wi-Fi radio hardware at 2.4 GHz, but without a router, an access point or an IP connection: data is sent in short vendor-specific Wi-Fi frames directly from one device to another, identified by their MAC addresses. A device registers its peers, sends a packet (up to 250 bytes in the classic version), and receives a callback telling it whether the frame was acknowledged. Broadcast is also possible, and encryption can be enabled per peer. The ESP-NOW connection is connectionless, so there is no handshake before sending. This explains the low latency.\\
 
-\noindent Studies agree on its main features \cite{eridani_comparative_2021}. Authors compared ESP-NOW with Wi-Fi and Bluetooth on range, speed, latency, energy usage and barrier resistance. And evaluated the maximum distance and power consumption of ESP-NOW nodes. A community test \cite{noauthor_esp-now_nodate} published by Espressif reports latency under 20 ms in open field up to 300 m, and a long-range mode (ESP-NOW-LR) reaching up to about a kilometre. Note that this source is not peer-reviewed. 
+\noindent Studies agree on its main features \cite{eridani_comparative_2021}. Authors compared ESP-NOW with Wi-Fi and Bluetooth on range, speed, latency, energy usage and barrier resistance. They also evaluated the maximum distance and power consumption of ESP-NOW nodes. A community test \cite{noauthor_esp-now_nodate} published by Espressif reports latency under 20 ms in open field up to 300 m, and a long-range mode (ESP-NOW-LR) reaching up to about a kilometre. Note that this source is not peer-reviewed. 
 
 \begin{table}[H]
 \centering

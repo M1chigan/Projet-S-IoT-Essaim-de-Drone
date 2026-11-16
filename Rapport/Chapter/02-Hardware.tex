@@ -3,33 +3,115 @@
 
 \section{Drone specifications}
 
-In order to carry out this project, we use the quad-copter drones built at INSA Strasbourg. It is primordial to understand how drones work and what they are made of to successfully achieve our end goal. 
-
-The acronym UAV for \textit{Unmanned Aerial Vehicle} defines an aircraft with no humans onboard and which therefore either autonomous or remotely controlled. Basically, it is a powered aerial vehicle that uses aerodynamic forces to lift itself and fly. There are many types of drones and as many different applications but some components are present in almost all of them. We can divide them roughly into two categories : mechanical and electrical.
+In order to carry out this project, we use the quad-copter drones built at INSA Strasbourg. It is primordial to understand how drones work and what they are made of to successfully achieve our end goal. The acronym UAV for \textit{Unmanned Aerial Vehicle} defines an aircraft with no humans onboard and which is either autonomous or remotely controlled. Basically, it is a powered aerial vehicle that uses aerodynamic forces to lift itself and fly. There are many types of drones and as many different applications but some components are present in almost all of them. We can divide them roughly into two categories : mechanical and electrical.
 
 
 \section{Drone mechanical components}
 
 \subsection{Structure}
 
-A drone's mechanical structure is essentially made of three parts. The frame is the skeleton of the drone and what supports all the elements. It needs to be resistant to withstand shocks but also light enough to fly longer. Carbon fibre is a commonly used material for drone frames due to its resistance and lightweight even though plastic is also used to limit costs. The size of the frame is measured from one corner to the other in a diagonal and be used to categorize drones. The \textit{arms} link the main body part to the motors, placed at the extremities. They should robust enough to support the thrust force created by the propellers. Most drones are quad-copters with 4 arms and motors to have a good compromise between weight and manoeuvrability (6 and 8-motor drones also exist). Finally, the landing gear allows the drone to be land safely and not be damaged. They help absorb the shocks but also preserve the components from dusts when it is static on the ground. They can be fixed or folding and should also benefit from the right choice of material.
+A drone's mechanical structure is essentially made of three parts. The frame is the skeleton of the drone and what supports all the elements. It needs to be resistant to withstand shocks but also light enough to fly for a long time. Carbon fibre is a commonly used material for drone frames due to its resistance and lightweight even though plastic is also used to limit costs. The size of the frame is measured from one corner to the other in a diagonal and be used to categorize drones. The \textit{arms} link the main body part to the motors, placed at the extremities. They should be robust enough to support the thrust force created by the propellers. Most drones are quad-copters with 4 arms and motors to have a good compromise between weight and manoeuvrability (6 and 8-motor drones also exist). Finally, the landing gear allows the drone to land safely and not be damaged. They help to absorb the shocks but also preserve the components from dusts when the drone is static on the ground. They can be fixed or folding and should also benefit from the right choice of material. In the case of the drones at INSA, the main structure is made out of cardboard which helps reduce overall costs and weight but limiting resistance. The landing gear was 3D-printed and is fixed to the body via metal hinges. 
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.4\textwidth}{!}{\includegraphics{drone.jpeg}}
+   \caption{INSA handmade drone made of cardboard}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.5\textwidth}{!}{\includegraphics{drone_land.jpeg}}
+   \caption{INSA's drone landing gear}
+\end{figure}
 
 \subsection{Propulsion system}
 
-Electric motors are necessary to generate lift with propellers and therefore to make the drone fly. The most common type of motors on drones are 3-phased DC brushless motors which offer a high power to weight ratio while preventing heat or mechanical losses normally induced by brushes. An important parameter to consider when choosing a motor is its KV which defines the number of RPM per ESC power supply volt. The rotor size can also be seen on motors noted as "xxyy" where "xx" is the diameter of the rotor and "yy" its height. 
+Electric motors are necessary to generate lift with propellers and make the drone fly. The most common type of motors on drones are 3-phased DC brushless motors which offer a high power to weight ratio while preventing heat or mechanical losses normally induced by brushes. An important parameter to consider when choosing a motor is its KV which defines the number of RPM per ESC power supply Volt. The rotor size can also be seen on motors noted as "xxyy" where "xx" is the diameter of the rotor and "yy" its height, all in mm. 
 
-The propellers can be chosen depending on 3 main factors. First of all, one should be cautious because props either made to turn clockwise (CW) or counter-clockwise (CCW). Secondly, the diameter and the pitch of the blade will influence the quantity of air moved by it. Therefore, it is importance to choose wisely depending on the size of the frame of the drone as well as its category (long-range, filming, racing..). Finally, the number of blades' choice has to be made according to a tradeoff between thrust and efficiency. Three-blade propellers are the most common as they provide a good ratio between trust and efficiency. 
+The propellers can be chosen depending on 3 main factors. First of all, one should be cautious because props are either made to turn clockwise (CW) or counter-clockwise (CCW). Secondly, the diameter and the pitch of the blade will influence the quantity of air moved by it. Therefore, it is important to choose wisely depending on the size of the frame of the drone as well as its usage (long-range, filming, racing..). Finally, the number of blades' choice has to be made according to a trade-off between thrust and efficiency. Three-blade propellers are the most common as they provide a good ratio between thrust and efficiency. 
 
+Here is the reference for the brushless motors on INSA's drones :
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.4\textwidth}{!}{\includegraphics{drone_motors.jpeg}}
+   \caption{INSA's drone brushless motors from T-Motor}
+\end{figure}
+
+It has a KV of 920 which means it can theoretically yield up to 13800 RPM maximum with a 15V battery. The rotor has a 22 mm diameter and a 16 mm height.
+
+\newpage 
 \section{Drone electrical system}
 
 \subsection{Flight controller}
 
-The flight controller or FC is the "brain" of the drone : it receives data from the different onboard sensors and send commands to the motors through the ESCs to maintain the drone's stability. It usually features a 32-bit microcontroller and sensors such as 3-axis gyro-meter and accelerometer. Other optional sensors can be connected to it like a GNSS, a magnetometer or a barometer. It is also linked to a RC receiver to be controlled remotely using high-frequency radio-communication. Common flight controller firmwares include Betaflight, Ardupilot and PX4. 
+The flight controller or FC is the "brain" of the drone : it receives data from the different onboard sensors and send commands to the motors through the ESCs to maintain the drone's stability. It usually features a 32-bit microcontroller and sensors such as a 3-axis gyro-meter and an accelerometer. Other optional sensors can be connected to it like a GNSS, a magnetometer or a barometer. It is also linked to a RC receiver to be controlled remotely using high-frequency radio-communication. Common flight controller firmwares include Betaflight, Ardupilot and PX4. INSA's drones are equiped with a Pixhawk 4 flight controller running on the Ardupilot firmware.
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.3\textwidth}{!}{\includegraphics{drone_FC.jpeg}}
+   \caption{INSA's drone Pixhawk 4 flight controller}
+\end{figure}
 
 \subsection{ESC (Electronic Speed Controllers)}
 
-ESCs may not be the first components that come to mind when thinking about drones but they are essential for its proper functioning. They serve as bridges between the flight controller's commands and the motors : they help converting the DC power from the battery to timed AC signals to control the brushless motors. It uses a MCU to decode the information from the FC and a MOSFET 3-phase inverter to ensure the DC-AC conversion. Each motor require one ESC even if today, 4-1 ESC single boards exist.
+ESCs may not be the first components that come to mind when thinking about drones but they are essential for its proper functioning. They serve as bridges between the flight controller's commands and the motors : they help converting the DC power from the battery to timed AC signals to control the brushless motors. It uses a MCU to decode the information from the FC and a MOSFET 3-phase inverter to ensure the DC-AC conversion. Each motor require one ESC and today, 4-1 ESC single boards exist. The ESCs installed on our drones are from T-motor and can support a 20 A maximum continuous current. They include no BEC (Battery Elimination Circuit, essentially a step-down voltage regulator) and can input signals at up to 600 Hz.
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.5\textwidth}{!}{\includegraphics{drone_esc.jpeg}}
+   \caption{INSA's drone ESCs from T-Motor}
+\end{figure}
+
+\newpage
 
 \subsection{Power supply}
 
-On most drones, the only power supply available is a battery. The choice of the battery is paramount because its capacity will dictate the time of flight of the drone. The main chemical technology for drone batteries is Lithium-Polymer (LiPo). Its two important parameters are its capacity C measured in mAh as well as its peak current measured in multiple of C. The number of S indicates the number of LiPo cells in series with one cell having a maximum charge of 4.2 V.
+On most drones, the only power supply available is a battery. The choice of the battery is paramount because its capacity will dictate the time of flight of the drone. The main chemical technology for drone batteries is Lithium-Polymer (LiPo). Its two important parameters are its capacity C measured in mAh as well as its peak current measured in multiple of C. The number of S indicates the number of LiPo cells in series with one cell having a maximum charge of 4.2 V. Our drones are equipped with a distribution board from Holybro that can power up to 8 ESCS and also help centralizing and transferring PWM signals (to control the motors) from the FC to the ESCs. We use LiPo 4S battery with various capacity to power the drones.
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.6\textwidth}{!}{\includegraphics{drone_battery.jpeg}}
+   \caption{Typical 4S LiPo battery used on our drones}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.6\textwidth}{!}{\includegraphics{drone_power.jpeg}}
+   \caption{INSA's drone power distribution board from Holybro}
+\end{figure}
+
+\newpage
+
+\section{UWB modules}
+
+In order to implement Ultrawide Band on our drones, we use modules from Makerfabs which includes a DW1000 UWB transceiver from Decawave as well as an ESP32 microcontroler unit. These modules are particularly convenient as they are quick and easy to prototype with. For that, we use the Arduino IDE which allows us to easily interface the UWB sensor with the ESP32 using the dedicated libraries. While other modules exist, these ones were used during last year's project so are directly available and fulfil our requirements. The idea is to minimize the added onboard hardware on the drone and by using the ESP32 included in the module, we can transpose the functions of the Raspberry Pi used traditionally on our drones to a much more compact and energy-efficient chip. To do so, we would take advantage of the dual core of the ESP32 to implement all our desired features : one core would be dedicated to  manage both UWB and MAVLink (with the flight controller) communications while the other would be running a formation control algorithm. 
+
+\begin{figure}[H]
+   \centering
+   \resizebox{0.6\textwidth}{!}{\includegraphics{uwb_module.jpg}}
+   \caption{ESP-32 and UWB module from Makerfabs }
+\end{figure}
+
+
+\section{Drone Hardware References Summary}
+
+\begin{center}
+\begin{tabular}{ | m{5cm} | m{5cm}| m{5cm} | } 
+    \hline
+  \textbf{Component} & \textbf{Reference} & \textbf{Information} \\ 
+
+  \hline
+  Flight controller & Pixhawk 4 with Ardupilot firmware & \href{https://docs.px4.io/main/en/flight_controller/pixhawk4}{Pixhawk 4 website} 
+  \href{https://ardupilot.org/ardupilot/}{Ardupilot website}\\ 
+  \hline
+  DC brushless motors & T-motor AIR2216II / KV920 & \href{https://www.uavmodel.com/fr/products/t-motor-air2216-ii-kv920-motor?variant=47477299675290}{Brushless motors information} \\ 
+  \hline
+  ESCs & T-motor AIR 20A 600 Hz 3-4S NO BEC  & \href{https://store.tmotor.com/product/air-20a-4s-esc.html}{ESCs information} \\ 
+  \hline
+  Power distribution board & Holybro PM07-V22  & \href{https://docs.holybro.com/power-module-and-pdb/power-module/pm07-quick-start-guide}{PM07 Start Guide} \\ 
+  \hline
+  UWB-ESP32 modules & Makerfabs ESP32 UWB & \href{https://www.makerfabs.com/esp32-uwb-ultra-wideband.html}{Modules information} \\ 
+  \hline
+\end{tabular}
+\end{center}
