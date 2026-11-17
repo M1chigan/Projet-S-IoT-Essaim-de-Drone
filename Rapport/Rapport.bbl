@@ -357,7 +357,7 @@
       \verb http://ieeexplore.ieee.org/document/978374/
       \endverb
     \endentry
-    \entry{cao_dynamic_2018}{article}{}
+    \entry{cao_2018}{article}{}
       \name{author}{5}{}{%
         {{hash=020cf66b73a8192ff17ac07341d306d2}{%
            family={Cao},
@@ -419,7 +419,7 @@
       \verb https://ieeexplore.ieee.org/document/8443328/
       \endverb
     \endentry
-    \entry{astrom_feedback_2021}{book}{}
+    \entry{astrom_2021}{book}{}
       \name{author}{2}{}{%
         {{hash=f0f3bc9540d4770c9cd66454728924ca}{%
            family={Åström},
@@ -455,7 +455,7 @@
       \field{title}{Feedback systems: an introduction for scientists and engineers}
       \field{year}{2021}
     \endentry
-    \entry{van_der_helm_-board_2020}{article}{}
+    \entry{van_der_helm_2020}{article}{}
       \name{author}{4}{}{%
         {{hash=6a243b620bb699307a1eb1fd4ba039ad}{%
            family={Van\bibnamedelimb Der\bibnamedelima Helm},
@@ -517,7 +517,7 @@
       \verb http://link.springer.com/10.1007/s10514-019-09843-6
       \endverb
     \endentry
-    \entry{li_onboard_2025}{article}{}
+    \entry{li_2025}{article}{}
       \name{author}{6}{}{%
         {{hash=17d1751aab152fbe8bbc32a8dd18e784}{%
            family={Li},
@@ -583,7 +583,7 @@
       \verb https://ieeexplore.ieee.org/document/11119828/
       \endverb
     \endentry
-    \entry{chen_uwb-assisted_2020}{inproceedings}{}
+    \entry{chen_2020}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=a0572c817cd435c09bbeee7b63926f77}{%
            family={Chen},
@@ -638,7 +638,7 @@
       \verb https://ieeexplore.ieee.org/document/9037604/
       \endverb
     \endentry
-    \entry{yang_ultrawideband_2023}{article}{}
+    \entry{yang_2023}{article}{}
       \name{author}{2}{}{%
         {{hash=6704ed7e2baceb869c99c27244c724aa}{%
            family={Yang},
@@ -715,8 +715,8 @@
       \strng{authorbibnamehash}{e914a39fcaeb90ac7bf20959197e2156}
       \strng{authornamehash}{e914a39fcaeb90ac7bf20959197e2156}
       \strng{authorfullhash}{e914a39fcaeb90ac7bf20959197e2156}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{issn}{2504-446X}
@@ -741,6 +741,59 @@
       \endverb
       \verb{url}
       \verb https://www.mdpi.com/2504-446X/8/7/320
+      \endverb
+    \endentry
+    \entry{oh_survey_2015}{article}{}
+      \name{author}{3}{}{%
+        {{hash=841345416892fc54e2f2d9730a1eaaef}{%
+           family={Oh},
+           familyi={O\bibinitperiod},
+           given={Kwang-Kyo},
+           giveni={K\bibinithyphendelim K\bibinitperiod}}}%
+        {{hash=b8c981679c026448ab3a222daa3f066f}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Myoung-Chul},
+           giveni={M\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=94fa0b6115767ff5497fd47bab1bb834}{%
+           family={Ahn},
+           familyi={A\bibinitperiod},
+           given={Hyo-Sung},
+           giveni={H\bibinithyphendelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \strng{fullhash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \strng{bibnamehash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \strng{authorbibnamehash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \strng{authornamehash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \strng{authorfullhash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00051098}
+      \field{journaltitle}{Automatica}
+      \field{langid}{english}
+      \field{month}{3}
+      \field{shortjournal}{Automatica}
+      \field{title}{A survey of multi-agent formation control}
+      \field{urlday}{23}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{53}
+      \field{year}{2015}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{424\bibrangedash 440}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1016/j.automatica.2014.10.022
+      \endverb
+      \verb{urlraw}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0005109814004038
+      \endverb
+      \verb{url}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0005109814004038
       \endverb
     \endentry
     \entry{noauthor_ieee_nodate}{misc}{}
