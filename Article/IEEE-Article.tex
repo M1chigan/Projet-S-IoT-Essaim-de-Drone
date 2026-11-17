@@ -203,9 +203,24 @@ After this test, we conducted several other tests, shown below:
     \caption{Other test configurations}
     \label{fig:OtherTests}
 \end{figure}
-Through the horizontal test, we have found a loss of precision of around
-0.5~cm, with an average of 2.5~cm. Then, the parallel test and the radial test show that the modules remain accurate when moving at an angle reaching an error of 4cm, so we can make the formation we want.
-However, the face to back test led to areally bad precision, around 33.29cm. That constrains us in the formation.
+Table~\ref{tab:uwb_tests} summarizes the results of the different tests.
+
+\begin{table}[!t]
+\caption{Ranging error for each test configuration}
+\label{tab:uwb_tests}
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Configuration} & \textbf{Average absolute error (cm)} \\
+\hline
+Vertical to vertical & 2 \\
+Horizontal & 2.5 \\
+Parallel & $\leq$ 4 (max.) \\
+Radial & $\leq$ 4 (max.) \\
+Face to back & 33.29 \\
+\hline
+\end{tabular}
+\end{table}
 
 \subsection{Filter}
 The previous tests showed good results, but those data were measured when the
@@ -256,12 +271,26 @@ we accept it.
 
 \section{Communication Protocol} \label{COM_Protocol}
 
-Drone to maintain formation requires various information, from its own sensors but also from the others drones. Drone also needs to transmit its data to a base and receive commands from it. To respond to this requirement, we implemented  ESP-NOW, a wireless communication protocol. 
+To maintain formation, each drone requires various pieces of information, from
+its own sensors but also from the other drones. Each drone also needs to
+transmit its data to a base and receive commands from it. To meet these
+requirements, we implemented ESP-NOW, a wireless communication protocol. 
+
+ESP-NOW is a protocol developed by Espressif for its ESP32 and ESP8266 chips.
+It uses Wi-Fi radio hardware at 2.4~GHz, but without a router, an access point
+or an IP connection: data is sent in short vendor-specific Wi-Fi frames
+directly from one device to another, identified by their MAC addresses. 
+
+We chose ESP-NOW as the communication protocol for two main reasons: it does
+not need any new hardware, and it meets both communication purposes of the project.
+It was successfully implemented on the ESP32 boardS. During this test, we reached a range of 150~m indoors , which lets us expect a better range outdoors.
+This implementation allows the creation of, and work on, two other parts of the project: Visualization (Section~\ref{Visualization}) and Simulation (Section~\ref{Simulation}).
+
 
 
 \subsection{Formation Control}
 
-The previous parts established a robust manner of collecting distance measurements through UWB as well as an efficient communication protocol for ESP boards with ESP-NOW. Along with the data from the flight controller's onboard sensors, the swarm can now collectively take advantage of many different information for its navigation. The objective is now to design a formation controller so that the swarm keeps a defined formation along a given trajectory.
+The previous parts established a robust manner of collecting distance measurements through UWB as well as an efficient communication protocol for ESP boards with ESP-NOW. Along with the data from the flight controller's onboard sensors, the swarm can now collectively take advantage of much different information for its navigation. The objective is now to design a formation controller so that the swarm keeps a defined formation along a given trajectory.
 
 \subsection{Formation Control}
 
@@ -331,6 +360,7 @@ As its name suggests, a state observer is a model helping to reconstruct a state
 \end{itemize}
 
 \section{Visualization}
+\label{Visualization}
 Drones are typically working far away from the operator. It makes it difficult
 to observe and understand what is happening. That is a problem for testing
 purposes, so we have to develop a visualizer which allows us to observe the
@@ -368,7 +398,7 @@ Secondly, a formation visualizer:
 Then, a data visualizer:
 \begin{figure}[H]
    \centering
-   \includegraphics[width=\linewidth]{data_visualizer.png}
+   \includegraphics[width=0.8\linewidth]{data_visualizer.png}
    \caption{Data visualizer}
    \label{fig:DataVisualizer}
 \end{figure}
@@ -377,7 +407,66 @@ Then, a data visualizer:
 
 
 \section{Simulation}
+\label{Simulation}
 Drones are restricted from flying above city. Moreover, our school does not have indoor test room. Those constraints reduce the number of outdoor test. However, test is necessary so we developed a simulation architecture. It is based on the flight controller firmware, Ardupilot, a proxy, MAVproxy and a visualizer, Mission planner.
+
+The simulation architecture is complex and uses various pieces of code and
+software. Find below a representation.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\linewidth}{!}{\SchSimulation}
+    \caption{Simulation architecture}
+    \label{fig:SchSimulation}
+\end{figure}
+
+This architecture allows us to create different simulations. The first one we
+tested is a simulation where the base controls the drone using a console.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\linewidth}{!}{\LevelUN}
+    \caption{Console simulation}
+    \label{fig:LevelUN}
+\end{figure}
+
+This simulation was successfully completed, with a good response of the drone
+and a direct reaction in the simulator. This test will be repeated in real
+conditions to validate the simulation architecture.
+
+After this first level, we have established three more, corresponding to
+different difficulties.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \resizebox{\linewidth}{!}{\LevelDeux}
+        \caption{Level 2}
+        \label{fig:LevelDeux}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \resizebox{\linewidth}{!}{\LevelTrois}
+        \caption{Level 3}
+        \label{fig:LevelTrois}
+    \end{subfigure}
+
+    \vspace{1em}
+
+    \begin{subfigure}{0.7\linewidth}
+        \centering
+        \resizebox{\linewidth}{!}{\LevelQuatre}
+        \caption{Level 4}
+        \label{fig:LevelQuatre}
+    \end{subfigure}
+
+    \caption{Simulation levels 2 to 4}
+    \label{fig:Levels}
+\end{figure}
+
+The last one corresponds to the objective we want to reach, where 3 drones keep
+formation while moving, based on UWB and ESP-NOW.   
 
 \section{Conclusion}
 

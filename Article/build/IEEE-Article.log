@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.11)  17 NOV 2026 21:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.11)  17 NOV 2026 23:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -648,55 +648,55 @@ Package hyperref Info: Link coloring OFF on input line 21.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 44.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 61.
  (C:\Users\liene\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 44.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 61.
  (C:\Users\liene\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Calculating math sizes for size <18.2> on input line 78.
- [1{C:/Users/liene/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
+) [1{C:/Users/liene/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-LaTeX Font Info:    Calculating math sizes for size <14.8> on input line 158.
-LaTeX Font Info:    Calculating math sizes for size <10.2> on input line 176.
-<image/Polynomial.png, id=100, 349.743pt x 215.277pt>
+LaTeX Font Info:    Calculating math sizes for size <18.2> on input line 86.
+LaTeX Font Info:    Calculating math sizes for size <14.8> on input line 166.
+LaTeX Font Info:    Calculating math sizes for size <10.2> on input line 184.
+
+Underfull \vbox (badness 1189) has occurred while \output is active []
+
+ [2]
+<image/Polynomial.png, id=129, 349.743pt x 215.277pt>
 File: image/Polynomial.png Graphic file (type png)
 <use image/Polynomial.png>
-Package pdftex.def Info: image/Polynomial.png  used on input line 214.
+Package pdftex.def Info: image/Polynomial.png  used on input line 237.
 (pdftex.def)             Requested size: 252.0pt x 155.11427pt.
+ [3 <./image/Polynomial.png>]
+<image/Attitude_visualization.png, id=143, 481.8pt x 524.96124pt>
+File: image/Attitude_visualization.png Graphic file (type png)
+<use image/Attitude_visualization.png>
+Package pdftex.def Info: image/Attitude_visualization.png  used on input line 374.
+(pdftex.def)             Requested size: 130.56558pt x 142.26208pt.
+ [4]
+<image/Formation_profil.png, id=153, 734.745pt x 637.38126pt>
+File: image/Formation_profil.png Graphic file (type png)
+<use image/Formation_profil.png>
+Package pdftex.def Info: image/Formation_profil.png  used on input line 384.
+(pdftex.def)             Requested size: 120.95892pt x 104.92995pt.
+<image/Formation_up.png, id=154, 734.745pt x 739.76375pt>
+File: image/Formation_up.png Graphic file (type png)
+<use image/Formation_up.png>
+Package pdftex.def Info: image/Formation_up.png  used on input line 390.
+(pdftex.def)             Requested size: 120.95892pt x 121.78484pt.
+<image/data_visualizer.png, id=155, 146.04562pt x 100.12407pt>
+File: image/data_visualizer.png Graphic file (type png)
+<use image/data_visualizer.png>
+Package pdftex.def Info: image/data_visualizer.png  used on input line 401.
+(pdftex.def)             Requested size: 201.60077pt x 138.22328pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [2]
-<image/Attitude_visualization.png, id=119, 481.8pt x 524.96124pt>
-File: image/Attitude_visualization.png Graphic file (type png)
-<use image/Attitude_visualization.png>
-Package pdftex.def Info: image/Attitude_visualization.png  used on input line 283.
-(pdftex.def)             Requested size: 130.56558pt x 142.26208pt.
-<image/Formation_profil.png, id=120, 734.745pt x 637.38126pt>
-File: image/Formation_profil.png Graphic file (type png)
-<use image/Formation_profil.png>
-Package pdftex.def Info: image/Formation_profil.png  used on input line 293.
-(pdftex.def)             Requested size: 120.95892pt x 104.92995pt.
-<image/Formation_up.png, id=121, 734.745pt x 739.76375pt>
-File: image/Formation_up.png Graphic file (type png)
-<use image/Formation_up.png>
-Package pdftex.def Info: image/Formation_up.png  used on input line 299.
-(pdftex.def)             Requested size: 120.95892pt x 121.78484pt.
-
-Underfull \vbox (badness 1308) has occurred while \output is active []
-
- [3 <./image/Polynomial.png> <./image/Attitude_visualization.png (PNG copy)>]
-<image/data_visualizer.png, id=130, 146.04562pt x 100.12407pt>
-File: image/data_visualizer.png Graphic file (type png)
-<use image/data_visualizer.png>
-Package pdftex.def Info: image/data_visualizer.png  used on input line 310.
-(pdftex.def)             Requested size: 252.0pt x 172.77834pt.
-
+ [5 <./image/Attitude_visualization.png (PNG copy)> <./image/Formation_profil.png (PNG copy)> <./image/Formation_up.png (PNG copy)> <./image/data_visualizer.png>]
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -708,28 +708,28 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4
+[6
 
- <./image/Formation_profil.png (PNG copy)> <./image/Formation_up.png (PNG copy)> <./image/data_visualizer.png>] (c:\Users\liene\Documents\INSA\S9\Projet S-IoT\Projet-S-IoT-Essaim-de-Drone\Article\build\IEEE-Article.aux)
+] (c:\Users\liene\Documents\INSA\S9\Projet S-IoT\Projet-S-IoT-Essaim-de-Drone\Article\build\IEEE-Article.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `IEEE-Article.out' has not changed.
-(rerunfilecheck)             Checksum: 2CC33D29B90F6A8919ED9F58ABD1583B;2491.
+(rerunfilecheck)             Checksum: 894D2B4F7506A13B01B19ED506815962;2956.
  ) 
 Here is how much of TeX's memory you used:
- 41842 strings out of 467871
- 999841 string characters out of 5418376
- 1693058 words of memory out of 5000000
- 70243 multiletter control sequences out of 15000+600000
- 680510 words of font info for 156 fonts, out of 8000000 for 9000
+ 42085 strings out of 467871
+ 1004331 string characters out of 5418376
+ 1739484 words of memory out of 5000000
+ 70471 multiletter control sequences out of 15000+600000
+ 686839 words of font info for 182 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,15n,108p,946b,841s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "c:\Users\liene\Documents\INSA\S9\Projet S-IoT\Projet-S-IoT-Essaim-de-Drone\Article\build\IEEE-Article.pdf" (4 pages, 319504 bytes).
+ 99i,15n,108p,1306b,927s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/liene/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on "c:\Users\liene\Documents\INSA\S9\Projet S-IoT\Projet-S-IoT-Essaim-de-Drone\Article\build\IEEE-Article.pdf" (6 pages, 412861 bytes).
 PDF statistics:
- 207 PDF objects out of 1000 (max. 8388607)
- 46 named destinations out of 1000 (max. 500000)
- 182 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 264 PDF objects out of 1000 (max. 8388607)
+ 58 named destinations out of 1000 (max. 500000)
+ 206 words of extra memory for PDF output out of 10000 (max. 10000000)
 
