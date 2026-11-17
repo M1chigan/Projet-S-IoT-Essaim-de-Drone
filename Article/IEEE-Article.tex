@@ -41,24 +41,32 @@ noe.ramdani@insa-strasbourg.fr}
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+Drone swarms showcase great possibilities for multiple applications notably thanks to their larger monitoring capabilities and ranges of action. One paramount condition to enable swarming relies on efficient and robust communication and localisation. This can be made possible with different kinds of sensors such as GNSS modules, LIDAR or cameras. One promising approach uses Ultrawide Band (UWB), a radio communication protocol using large bandwidth pulses to calculate precisely very short times of flight and therefore centimetre-accurate distances between 2 points. This paper therefore aims to present an attempt at implementing swarming behaviours in Ardupilot-based drones using UWB modules for ranging as well as ESP-NOW for communication. After detailing UWB and ESP-NOW implementations, it establishes a simple Leader-Follower architecture with a distance-based control law. 
 \end{abstract}
 
 \begin{IEEEkeywords}
-component, formatting, style, styling, insert.
+Drone swarm, Ultrawide Band, ESP-NOW.
 \end{IEEEkeywords}
 
 \section{Introduction}
 
-Quadcopter drones have now become a system of choice in multiple applications, ranging from defense to monitoring and exploration. Their ability to quickly reach points difficult to access for humans as well as their compacity and their movement possibilities make up very interesting abilities in a lot of contexts. Drone swarms, formed by multiple drones, extend these possibilities by being able to monitor larger spaces or carrying heavier payloads. In these configurations, a challenge lies in making multiple drones interact with each other to efficiently conduct a collective task. For that, each drone has to be able to retrieve information about his current state and communicate it to others. Therefore, three different parts have to considered : localization tools, communication protocols and formation control.
+Quad-copter drones have now become a system of choice in multiple applications, ranging from defence to monitoring and exploration. Their ability to quickly reach points difficult to access for humans as well as their compactness and their movement possibilities make up very interesting abilities in a lot of contexts. Drone swarms, formed by multiple drones, extend these possibilities by being able to monitor larger spaces or carrying heavier payloads. In these configurations, a challenge lies in making multiple drones interact with each other to efficiently conduct a collective task. For that, each drone has to be able to retrieve information about his current state and communicate it to others. Therefore, three different parts have to considered : localization tools, communication protocols and formation control.
 
-In this paper, we present a project in which  we use Ultra-Wideband (UWB) technology to obtain accurate distance measurements between pairs of drones. Each drone carries a board combining an ESP32 microcontroller and a DW1000 UWB transceiver. In addition, we use the data provided by the flight controller’s onboard sensors to localize each drone in space. The objective is to design a system that takes advantage of both UWB and the onboard sensors to obtain an accurate estimate of the position of each drone relative to the others, in order to control the formation of the swarm.
+In this paper, we present a project in which  we use Ultra-Wideband (UWB) technology to obtain accurate distance measurements between pairs of drones. Each drone carries a board combining an ESP32 microcontroller and a DW1000 UWB transceiver. In addition, we use the data provided by the flight controller’s onboard sensors to localize each drone in space. The objective is to design a system that takes advantage of both UWB and the onboard sensors to obtain an accurate estimate of the position of each drone relative to the others, in order to control the formation of the swarm. Finally, it presents simulations and visualisation tools designed to help in the project development.
 
 \subsection{Objectives}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits. For more information about how to become an IEEE Conference author or how to write your paper, please visit   IEEE Conference Author Center website: https://conferences.ieeeauthorcenter.ieee.org/.
+This project has the objective to establish a drone swarm using distance measurements with Ultrawide Band as well as a communication protocol between drones. Originally, we were suggested to work with Xbee modules from Digi but we quickly realized adding another piece of hardware wouldn't be practical (this topic is detailed in section IV). The three main objectives of the project are as follows : 
+
+\begin{itemize}
+    \item Robust and reliable UWB measurements
+    \item Working drone swarm formation control
+    \item Low-computational algorithms for embedded systems
+\end{itemize}
+
+\subsection{Hardware and software}
+
+The hardware used for this project will have an influence on many aspects of the development, it is therefore important to present it beforehand. The drones used have been built across the years by students from INSA Strasbourg, particularly to participate to the International Micro Air Vehicle competition (IMAV). Built as standard quad-copters, they integrate all their necessary components : a flight controller (Pixhawk 4), a power distribution board (Holybro PM07), 4 ESCs (600 Hz 20A T-Motor), 4 DC brushless motors (T-Motor KV920) and a GNSS module. The flight controller's firmware is Ardupilot, an open-source firmware widely used in the field. Finally, a development board from Makerfabs including both a ESP-32 microcontroller and a DW1000 UWB module is attached to each drone to perform UWB measurements as well as data processing, data communication and formation control. The boards are programmed with Arduino IDE using the dedicated MAVLink and DW1000 libraries; Mission Planner is used for Software-In-The-Loop (SITL) simulations. Other simulation and visualisation tools have developed with the well-known Matlab software from Mathworks as well as Python language. 
+
 
 \section{Related work}
 
@@ -250,23 +258,76 @@ we accept it.
 
 Drone to maintain formation requires various information, from its own sensors but also from the others drones. Drone also needs to transmit its data to a base and receive commands from it. To respond to this requirement, we implemented  ESP-NOW, a wireless communication protocol. 
 
-\section{Data processing and formation control}
-
-The previous parts established a robust manner of collecting distance measurements through UWB as well as an efficient communication protocol for ESP boards with ESP-NOW. Along with the data from the flight controller's onboard sensors, the swarm can now collectively take advantage of much different information for its navigation. The objective is to design a formation controller so that the swarm keeps a defined formation along a given trajectory.
 
 \subsection{Formation Control}
 
-The leader-follower architecture has been chosen for its ease of implementation and to limit the transmission of data. The idea is the following : the leader is given a trajectory to follow, for example navigate between two waypoints, and the two followers adjust themselves to follow the leader while keeping the formation. This implies that the leader doesn't take part in the formation control as its only goal is to reach its destination.
+The previous parts established a robust manner of collecting distance measurements through UWB as well as an efficient communication protocol for ESP boards with ESP-NOW. Along with the data from the flight controller's onboard sensors, the swarm can now collectively take advantage of many different information for its navigation. The objective is now to design a formation controller so that the swarm keeps a defined formation along a given trajectory.
+
+\subsection{Formation Control}
+
+The leader-follower architecture has been chosen for its ease of implementation and to limit the transmission of data. The idea is the following : the leader is given a trajectory to follow, for example navigating between two waypoints, and the two followers adjust themselves to follow the leader while keeping the formation. This implies that the leader doesn't take part in the formation control as its only goal is to reach its destination : that reduces the overall complexity of the system.
 
 
-The chosen formation architecture relies on a distance-based control which basically has the goal of keeping a specified distance between each drone at any given moment. The chosen control law is based on PD controller (Proportional-Derivative) and can be explained with a simple analogy with a spring : the proportional term corresponds to the restoring force of the spring while the derivative term is comparable to the damping factor of the spring.
+The chosen formation control architecture relies on a distance-based control which basically has the goal of keeping a specified distance between each drone at any given moment. The chosen control law is based on a PD controller (Proportional-Derivative) and can be explained with a simple analogy using a spring : the proportional term corresponds to the restoring force of the spring while the derivative term is comparable to the damping factor of the spring.
 
-Let's consider a triangle formation made of 3 drones. Each edge of the triangle is modelled by a spring whose resting length is equivalent to the desired distance $d_{des}$ between the 2 drones. 
+Let's consider a triangle formation made of 3 drones. Each edge of the triangle is modelled by a spring whose resting length is equivalent to the desired distance $d_{des}$ between the 2 drones. The 2 neighbours $j\in[1,2,3]$ of each drone $i\in[1,2,3]$ belong to $\mathcal{N}_i$.
 
 \begin{itemize}
     \item The restoring force pushes or pulls the drone to minimize the distance error :
 
-    \item The damping force allows to minimize the oscillations and avoid collisions
+    \begin{equation}
+       P=-K_p\sum_{j\in \mathcal{N}_i}(d_{ij}-d^\ast _{ij})\frac{p_i-p_j}{d_{ij}}
+    \end{equation}
+    
+
+    $K_p$ is the proportional gain, $d_{ij}$ is the distance between drone $i$ and drone $j$, $d^\ast_{ij}$ is the \textbf{desired} distance between drone $i$ and drone $j$, $p_i-p_j$ is relative position vector. Dividing it by the distance between the drones gives us a normalized vector pointing in the direction between the 2 drones. We sum the force obtained for each neighbour of the drone to get the overall vectorial force. The proportional term therefore generates a force in the right direction depending on the distance error : if $d_{ij}>d^\ast _{ij}$ then the drone is too far and the overall force is negative. Since the relative position vector is pointing from drone  $j$ to drone $i$, the negative force pushes drone $i$ towards drone $j$. If $d_{ij}<d^\ast _{ij}$, the overall force is positive and pulls drone $i$ away from drone $j$.
+
+    
+    \item The damping force allows to minimize the oscillations and avoid collisions :
+    \begin{equation}
+        D=-K_d\sum_{j\in \mathcal{N}_i}(v_i-v_j)
+    \end{equation}
+    
+
+    $K_p$ is the derivative gain, $v_{i}$ and $v_j$ are respectively the velocities of drone $i$ and drone $j$. If the difference between the velocities of the drones is too large, the derivative term generates an opposite force to slow the movement. We do the sum of the force for each neighbouring drone to get an overall force.
+
+    \item The final total control input $u$ for drone $i$ is : 
+    \begin{equation}
+          u_i=-K_p\sum_{j\in \mathcal{N}_i}(d_{ij}-d^\ast _{ij})\frac{p_i-p_j}{d_{ij}}-K_d\sum_{j\in \mathcal{N}_i}(v_i-v_j)
+    \end{equation}
+  
+\end{itemize}
+
+This control law implies that each follower drone  should be able to make the following measurements :
+
+\begin{itemize}
+    \item $d$ : the distances between itself and the other drones (2 measurements per drone in a 3-drone swarm)
+    \item $p$ : the relative position vector between itself and other drones
+    \item $v$ : its own velocity and the velocity of its neighbours    
+\end{itemize}
+
+The distances can be retrieved thanks to the UWB sensors placed on the drones. On the other side, the velocities are estimated through the onboard EKF of the flight controller and can be easily communicated to the drone's neighbours through ESP-NOW as explained previously. Finally, we need to get the relative position vector defined by $p_i-p_j$. That data is not available directly therefore it is necessary to implement a state observer.
+
+
+\subsection{State observer}
+
+As its name suggests, a state observer is a model helping to reconstruct a state to be used in a state-space closed-loop model. This can be done in several manners and the Kalman Filter is one of the main possibilities. In this project, we propose to implement a simple Prediction-Correction algorithm (close to a Kalman Filter) to estimate the relative position vector. It is built as follows :
+
+\begin{itemize}
+    \item The prediction phase used a simple kinematic model to predict the relative position vector :
+    $$\hat{p}_{pred}=\hat{p}+v_{rel}\cdot dt$$
+
+    Here $\hat{p}_{pred}$ is the predicted vector, $\hat{p}$ is the previous step's estimation, $v_{rel}$ is the relative speed between 2 drones and $dt$ is the time step.
+
+    \item The correction phase introduces the UWB measurement of the distance between the 2 drones $d_{mes}$ as follows : 
+    \begin{equation*}
+        \hat{p}= \hat{p}_{pred}+\frac{\hat{p}_{pred}}{\Vert \hat{p}_{pred}\Vert} \cdot l_{obs} \cdot (d_{mes}-\Vert \hat{p}_{pred}\Vert)
+    \end{equation*}
+
+    The observer gain $l_{obs}$ dictates how much we trust the UWB measurements to adjust the prediction. As these measurements are purely distances, we need to give it a direction which is made by multiplying by the fraction of the predicted vector by its norm. 
+
+    \subsection{Full control and observer architecture}
+
 \end{itemize}
 
 \section{Visualization}
