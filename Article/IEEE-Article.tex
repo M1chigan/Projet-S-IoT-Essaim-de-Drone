@@ -9,6 +9,13 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{hyperref} 
+\usepackage{circuitikz}
+\usepackage{float}
+\usepackage{subcaption}
+\graphicspath{{image/}}
+
+\input{schema/Figure.tex}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -60,20 +67,192 @@ Drone swarm require a way to locate each other in order to keep shape of the swa
 
 \subsection{Algorithm}
 
-\subsection{Calibration}
+\subsubsection{Localization algorithm}
+UWB is basically a communication protocol. By exchanging messages and saving
+the time of emission and reception, we can deduce the distance. Different
+algorithms exist, we chose the Double-Sided Two-Way Ranging (DS-TWR)
+described by the schema below:
+
+\begin{figure}[H]
+    \centering
+    \resizebox{0.8\linewidth}{!}{\DSTWR}
+    \caption{DS-TWR algorithm representation}
+    \label{fig:DS-TWR}
+\end{figure}
+
+DS-TWR works in 6 steps:
+\begin{enumerate}
+    \item $UWB_1$ sends a \textbf{POLL} to $UWB_2$. The time of emission
+          $t_{x1}$ is memorized by $UWB_1$.
+    \item $UWB_2$ receives the \textbf{POLL} and memorizes the time of
+          arrival $r_{x2}$.
+    \item $UWB_2$ processes the \textbf{POLL} and precisely plans the time
+          of emission $t_{x2}$ of the \textbf{RESP}, so that the reply
+          delay $D_b = t_{x2} - r_{x2}$ is known.
+    \item $UWB_1$ receives the \textbf{RESP} and memorizes the time of
+          arrival $r_{x1}$.
+    \item $UWB_1$ processes the \textbf{RESP} and precisely plans the time
+          of emission $t_{x12}$ of the \textbf{FINAL}, so that the reply
+          delay $D_a = t_{x12} - r_{x1}$ is known. The \textbf{FINAL}
+          contains $(t_{x1},\, r_{x1},\, t_{x12})$.
+    \item $UWB_2$ receives the \textbf{FINAL} and memorizes the time of
+          arrival $r_{x22}$.
+\end{enumerate}
+
+\noindent With all those parameters, we can compute four time intervals:
+\begin{itemize}
+    \item Response time for $UWB_1 : t_1 = r_{x1} - t_{x1}$
+    \item Response time for $UWB_2 : t_2 = r_{x22} - t_{x2}$
+    \item Processing time of $UWB_1 : t_{proc_1} = t_{x12} - r_{x1}$
+    \item Processing time of $UWB_2 : t_{proc_2} = t_{x2} - r_{x2}$
+\end{itemize}
+
+\noindent We can deduce the travel time:
+
+\begin{equation}
+\boxed{t_{travel} = \frac{t_1 \times t_2 - t_{proc_1} \times t_{proc_2}}{ t_1 +t_2+t_{proc_1}+t_{proc_2}}}
+\end{equation}
+
+\noindent And then find the distance between the 2 modules, with $c$ the speed of light:
+\begin{equation}
+    d = c \times t_{travel}
+\end{equation}
+
+\subsubsection{Time management algorithm}
+Electromagnetic signals easily interfere with each other. Those interferences
+distort the distance result. To avoid those problems, we have implemented
+Time Division Multiple Access (TDMA). Find a description below:
+
+\begin{figure}[H]
+    \centering
+    \resizebox{0.8\linewidth}{!}{\TDMA}
+    \caption{TDMA representation}
+    \label{fig:TDMA}
+\end{figure}
+
+For example, if we have 3 drones, the frame of $UWB_1$, when it is looking for
+distances with a DS-TWR algorithm, is divided in 5 parts.
+\begin{enumerate}
+    \item T1: $UWB_1$ sends the \textbf{POLL} to $UWB_2$ and $UWB_3$
+    \item T2: $UWB_2$ sends the \textbf{RESP} to $UWB_1$
+    \item T3: $UWB_1$ sends the \textbf{FINAL} to $UWB_2$
+    \item T4: $UWB_3$ sends the \textbf{RESP} to $UWB_1$
+    \item T5: $UWB_1$ sends the \textbf{FINAL} to $UWB_3$
+\end{enumerate}
+
+\noindent This method has a clear advantage: there is no collision at all due
+to strict time periods. It also allows us to shut down the modules when we do
+not need them and save energy. However, there are a few drawbacks: firstly,
+if we add one more drone, we have to add two other slots, and when reaching
+10 drones, there is no time anymore to get information at a high frequency.
+Moreover, it needs a synchronization to make all the modules' clocks work at
+the same speed and avoid collision perfectly.
 
 \subsection{Test}
+After calibrating our UWB modules to 130~cm, which is 10~cm higher than the
+optimal distance between drones, we conducted different tests to observe
+results and precision in many various cases.
+The first one is the vertical to vertical UWB module test.
+\begin{figure}[H]
+    \centering
+    \resizebox{0.8\linewidth}{!}{\FtFVertical}
+    \caption{Vertical to vertical representation}
+    \label{fig:FtFVertical}
+\end{figure}
+With this disposition, we have gotten an average absolute error of 2~cm,
+which, for UWB applications, is very low compared to the standard (10~cm).
+
+After this test, we conducted several other tests, shown below:
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \resizebox{\linewidth}{!}{\FtFhorizontale}
+        \subcaption{Horizontal test representation}
+        \label{fig:FtFHorizontal}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \resizebox{\linewidth}{!}{\SchemaParalleles}
+        \subcaption{Parallel test representation}
+        \label{fig:Paralleles}
+    \end{minipage}
+
+    \vspace{1em}
+
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \resizebox{\linewidth}{!}{\Schemarayon}
+        \subcaption{Radial test representation}
+        \label{fig:Rayon}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \resizebox{\linewidth}{!}{\FtB}
+        \subcaption{Face to back test representation}
+        \label{fig:FtB}
+    \end{minipage}
+    \caption{Other test configurations}
+    \label{fig:OtherTests}
+\end{figure}
+Through the horizontal test, we have found a loss of precision of around
+0.5~cm, with an average of 2.5~cm. Then, the parallel test and the radial test show that the modules remain accurate when moving at an angle reaching an error of 4cm, so we can make the formation we want.
+However, the face to back test led to areally bad precision, around 33.29cm. That constrains us in the formation.
 
 \subsection{Filter}
+The previous tests showed good results, but those data were measured when the
+measurement was stable. However, when the UWB modules are moving, the error
+increases widely. To reduce this error, we have implemented three different
+filters:
 
-\section{Communication Protocol}
-\label{COM_Protocol}
+\subsubsection{Polynomial Filter}
+We have observed that the errors are linked to the real distance and vary
+following an approximate polynomial equation.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{Polynomial.png}
+   \caption{Diagram of the error based on real distance}
+   \label{fig:Polynomial}
+\end{figure}
+
+Using the Excel trendline tool, we got this error equation:
+
+\begin{equation}
+\begin{split}
+   f(x) ={}& -1.004 \times 10^{-6}\, x^4 + 0.0005059\, x^3 \\
+           & - 0.09263\, x^2 + 7.398\, x - 221.7
+\end{split}
+\end{equation}
+
+Every measure passes through the equation and is recalibrated based on it.
+That allows us to reduce the error when we are more than $\pm$10~cm from the
+reference.
+
+
+
+\subsubsection{Non Light Of Sight (NLOS) Filter}
+Electromagnetic signals are very sensitive to obstacles. After doing research,
+we have discovered that the signal loses power if it encounters an obstacle.
+Based on that, we can verify that the power of the received signal is strong
+enough; otherwise, the value cannot be considered as valid and we can reject it.
+
+\subsubsection{Innovation gate filter}
+UWB has a tendency to be noisy, which can create absurd values, either very
+high or very low. These data can affect the controller and create some
+discontinuities in the drone control. Based on the maximum speed of the drone,
+we can determine absurdity by calculating the difference between the previous
+distance $d_{-1}$ and the current $d$, then determining whether this difference
+can be reached at the maximum speed. If not, the measure is ignored; otherwise,
+we accept it.
+
+\section{Communication Protocol} \label{COM_Protocol}
 
 Drone to maintain formation requires various information, from its own sensors but also from the others drones. Drone also needs to transmit its data to a base and receive commands from it. To respond to this requirement, we implemented  ESP-NOW, a wireless communication protocol. 
 
 \section{Data processing and formation control}
 
-The previous parts established a robust manner of collecting distance measurements through UWB as well as an efficient communication protocol for ESP boards with ESP-NOW. Along with the data from the flight controller's onboard sensors, the swarm can now collectively take advantage of many different information for its navigation. The objective is to design a formation controller so that the swarm keeps a defined formation along a given trajectory.
+The previous parts established a robust manner of collecting distance measurements through UWB as well as an efficient communication protocol for ESP boards with ESP-NOW. Along with the data from the flight controller's onboard sensors, the swarm can now collectively take advantage of much different information for its navigation. The objective is to design a formation controller so that the swarm keeps a defined formation along a given trajectory.
 
 \subsection{Formation Control}
 
@@ -91,7 +270,50 @@ Let's consider a triangle formation made of 3 drones. Each edge of the triangle 
 \end{itemize}
 
 \section{Visualization}
-Drones are typically working far away from the operator. It makes it difficult to observe, and understand what is happening. That is a problem for testing purposes, so we have to develop a visualizer which permit us to observe drone and detect error and their causes. This visualizer is using Matlab and is based on ESP-NOW [\ref{COM_Protocol}].
+Drones are typically working far away from the operator. It makes it difficult
+to observe and understand what is happening. That is a problem for testing
+purposes, so we have to develop a visualizer which allows us to observe the
+drones and detect errors and their causes. This visualizer uses MATLAB and is
+based on ESP-NOW [\ref{COM_Protocol}].
+
+We have developed an application which allows us to show different aspects.
+Firstly, an attitude visualizer:
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth, height=5cm, keepaspectratio]{Attitude_visualization.png}
+   \caption{Attitude visualizer}
+   \label{fig:Attitude}
+\end{figure}
+
+Secondly, a formation visualizer:
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Formation_profil.png}
+        \subcaption{Formation profile visualizer}
+        \label{fig:FormationProfile}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Formation_up.png}
+        \subcaption{Formation upper view visualizer}
+        \label{fig:FormationUp}
+    \end{minipage}
+    \caption{Formation visualizers}
+    \label{fig:Formation}
+\end{figure}
+
+Then, a data visualizer:
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{data_visualizer.png}
+   \caption{Data visualizer}
+   \label{fig:DataVisualizer}
+\end{figure}
+
+
+
 
 \section{Simulation}
 Drones are restricted from flying above city. Moreover, our school does not have indoor test room. Those constraints reduce the number of outdoor test. However, test is necessary so we developed a simulation architecture. It is based on the flight controller firmware, Ardupilot, a proxy, MAVproxy and a visualizer, Mission planner.
