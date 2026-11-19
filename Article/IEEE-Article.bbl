@@ -1,0 +1,307 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{kalman1960}{article}{}
+      \name{author}{1}{}{%
+        {{hash=2bdc83bc7a4c09a9020f492d9e1b5c92}{%
+           family={Kalman},
+           familyi={K\bibinitperiod},
+           given={R.\bibnamedelimi E.},
+           giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
+      \strng{fullhash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
+      \strng{bibnamehash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
+      \strng{authorbibnamehash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
+      \strng{authornamehash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
+      \strng{authorfullhash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The classical filtering and prediction problem is re-examined using the Bode-Shannon representation of random processes and the “state-transition” method of analysis of dynamic systems. New results are: (1) The formulation and methods of solution of the problem apply without modification to stationary and nonstationary statistics and to growing-memory and infinite-memory filters. (2) A nonlinear difference (or differential) equation is derived for the covariance matrix of the optimal estimation error. From the solution of this equation the co-efficients of the difference (or differential) equation of the optimal linear filter are obtained without further calculations. (3) The filtering problem is shown to be the dual of the noise-free regulator problem. The new method developed here is applied to two well-known problems, confirming and extending earlier results. The discussion is largely self-contained and proceeds from first principles; basic concepts of the theory of random processes are reviewed in the Appendix.}
+      \field{annotation}{Article originel de Kalman}
+      \field{issn}{0021-9223}
+      \field{journaltitle}{Journal of Basic Engineering}
+      \field{month}{3}
+      \field{number}{1}
+      \field{title}{A {New} {Approach} to {Linear} {Filtering} and {Prediction} {Problems}}
+      \field{urlday}{5}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{82}
+      \field{year}{1960}
+      \field{urldateera}{ce}
+      \field{pages}{35\bibrangedash 45}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1115/1.3662552
+      \endverb
+      \verb{urlraw}
+      \verb https://asmedigitalcollection.asme.org/fluidsengineering/article/82/1/35/397706/A-New-Approach-to-Linear-Filtering-and-Prediction
+      \endverb
+      \verb{url}
+      \verb https://asmedigitalcollection.asme.org/fluidsengineering/article/82/1/35/397706/A-New-Approach-to-Linear-Filtering-and-Prediction
+      \endverb
+    \endentry
+    \entry{cao_2018}{article}{}
+      \name{author}{5}{}{%
+        {{hash=020cf66b73a8192ff17ac07341d306d2}{%
+           family={Cao},
+           familyi={C\bibinitperiod},
+           given={Yanjun},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=122748fbd1766f07a1685dde181113ca}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Meng},
+           giveni={M\bibinitperiod}}}%
+        {{hash=53d51d632e7a4765d43f51326d38942c}{%
+           family={Svogor},
+           familyi={S\bibinitperiod},
+           given={Ivan},
+           giveni={I\bibinitperiod}}}%
+        {{hash=557abc80f36ae6d55cc6cd9989e7053b}{%
+           family={Wei},
+           familyi={W\bibinitperiod},
+           given={Shaoming},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0447a47c3901adcce2c4cf4fe3f89287}{%
+           family={Beltrame},
+           familyi={B\bibinitperiod},
+           given={Giovanni},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{0abecb67ddd9c3c0812a5f57287f7346}
+      \strng{fullhash}{2d374bb8b75614bf3bcd567709f72652}
+      \strng{bibnamehash}{2d374bb8b75614bf3bcd567709f72652}
+      \strng{authorbibnamehash}{2d374bb8b75614bf3bcd567709f72652}
+      \strng{authornamehash}{0abecb67ddd9c3c0812a5f57287f7346}
+      \strng{authorfullhash}{2d374bb8b75614bf3bcd567709f72652}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2169-3536}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Dynamic {Range}-{Only} {Localization} for {Multi}-{Robot} {Systems}}
+      \field{urlday}{6}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{6}
+      \field{year}{2018}
+      \field{urldateera}{ce}
+      \field{pages}{46527\bibrangedash 46537}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2018.2866259
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:C\:\\Users\\Noé\\Zotero\\storage\\MHGV4452\\Cao et al. - 2018 - Dynamic Range-Only Localization for Multi-Robot Systems.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/8443328/
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/8443328/
+      \endverb
+    \endentry
+    \entry{li_2025}{article}{}
+      \name{author}{6}{}{%
+        {{hash=17d1751aab152fbe8bbc32a8dd18e784}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Shushuai},
+           giveni={S\bibinitperiod}}}%
+        {{hash=e6291876ce919d000f432ebcc73df696}{%
+           family={Shan},
+           familyi={S\bibinitperiod},
+           given={Feng},
+           giveni={F\bibinitperiod}}}%
+        {{hash=92fe5bed5d83b1322e8e2c95c5d513b7}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Jiangpeng},
+           giveni={J\bibinitperiod}}}%
+        {{hash=be080beefb92ffca25145c90d7e89e7d}{%
+           family={Coppola},
+           familyi={C\bibinitperiod},
+           given={Mario},
+           giveni={M\bibinitperiod}}}%
+        {{hash=edb22d8cead9be6011fcbf158923335c}{%
+           family={De\bibnamedelima Wagter},
+           familyi={D\bibinitperiod\bibinitdelim W\bibinitperiod},
+           given={Christophe},
+           giveni={C\bibinitperiod}}}%
+        {{hash=2ce6c1d6ffa919e9fbf6ea9365c4f513}{%
+           family={De\bibnamedelima Croon},
+           familyi={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={Guido\bibnamedelimb C.\bibnamedelimi H.\bibnamedelimi E.},
+           giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{08631b0bbf0120864d8c2a45863653a9}
+      \strng{fullhash}{1cecf18eeea9922da52e2639ca90a8cf}
+      \strng{bibnamehash}{1cecf18eeea9922da52e2639ca90a8cf}
+      \strng{authorbibnamehash}{1cecf18eeea9922da52e2639ca90a8cf}
+      \strng{authornamehash}{08631b0bbf0120864d8c2a45863653a9}
+      \strng{authorfullhash}{1cecf18eeea9922da52e2639ca90a8cf}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2377-3766, 2377-3774}
+      \field{journaltitle}{IEEE Robotics and Automation Letters}
+      \field{month}{10}
+      \field{number}{10}
+      \field{title}{Onboard {Ranging}-{Based} {Relative} {Localization} and {Stability} for {Lightweight} {Aerial} {Swarms}}
+      \field{urlday}{9}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{10}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \field{pages}{10066\bibrangedash 10073}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/LRA.2025.3597039
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/document/11119828/
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/document/11119828/
+      \endverb
+    \endentry
+    \entry{bu_2024}{article}{}
+      \name{author}{3}{}{%
+        {{hash=5f934d0f882369e41c4063b7831f55fa}{%
+           family={Bu},
+           familyi={B\bibinitperiod},
+           given={Yajun},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=c3c51c024073000f62e305a7d00034d1}{%
+           family={Yan},
+           familyi={Y\bibinitperiod},
+           given={Ye},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=5e06904a5fdf1fbdb54df07eee3e703d}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Yueneng},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{e914a39fcaeb90ac7bf20959197e2156}
+      \strng{fullhash}{e914a39fcaeb90ac7bf20959197e2156}
+      \strng{bibnamehash}{e914a39fcaeb90ac7bf20959197e2156}
+      \strng{authorbibnamehash}{e914a39fcaeb90ac7bf20959197e2156}
+      \strng{authornamehash}{e914a39fcaeb90ac7bf20959197e2156}
+      \strng{authorfullhash}{e914a39fcaeb90ac7bf20959197e2156}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{2504-446X}
+      \field{journaltitle}{Drones}
+      \field{month}{7}
+      \field{number}{7}
+      \field{shorttitle}{Advancement {Challenges} in {UAV} {Swarm} {Formation} {Control}}
+      \field{title}{Advancement {Challenges} in {UAV} {Swarm} {Formation} {Control}: {A} {Comprehensive} {Review}}
+      \field{urlday}{23}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{8}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \field{pages}{320}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/drones8070320
+      \endverb
+      \verb{urlraw}
+      \verb https://www.mdpi.com/2504-446X/8/7/320
+      \endverb
+      \verb{url}
+      \verb https://www.mdpi.com/2504-446X/8/7/320
+      \endverb
+    \endentry
+    \entry{oh_survey_2015}{article}{}
+      \name{author}{3}{}{%
+        {{hash=841345416892fc54e2f2d9730a1eaaef}{%
+           family={Oh},
+           familyi={O\bibinitperiod},
+           given={Kwang-Kyo},
+           giveni={K\bibinithyphendelim K\bibinitperiod}}}%
+        {{hash=b8c981679c026448ab3a222daa3f066f}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Myoung-Chul},
+           giveni={M\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=94fa0b6115767ff5497fd47bab1bb834}{%
+           family={Ahn},
+           familyi={A\bibinitperiod},
+           given={Hyo-Sung},
+           giveni={H\bibinithyphendelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \strng{fullhash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \strng{bibnamehash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \strng{authorbibnamehash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \strng{authornamehash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \strng{authorfullhash}{3278fcb7fe5d1388c67ef49edf5066e7}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00051098}
+      \field{journaltitle}{Automatica}
+      \field{langid}{english}
+      \field{month}{3}
+      \field{shortjournal}{Automatica}
+      \field{title}{A survey of multi-agent formation control}
+      \field{urlday}{23}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{volume}{53}
+      \field{year}{2015}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{424\bibrangedash 440}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1016/j.automatica.2014.10.022
+      \endverb
+      \verb{urlraw}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0005109814004038
+      \endverb
+      \verb{url}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0005109814004038
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
