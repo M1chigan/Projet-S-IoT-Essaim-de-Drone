@@ -1,0 +1,31 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {III.1}{\ignorespaces TWR explanation diagram}}{9}{figure.caption.3}%
+\contentsline {figure}{\numberline {III.2}{\ignorespaces DS-TWR explanation diagram}}{10}{figure.caption.5}%
+\contentsline {figure}{\numberline {III.3}{\ignorespaces TDMA explanation diagram}}{11}{figure.caption.8}%
+\contentsline {figure}{\numberline {III.4}{\ignorespaces Ongoing discrete Kalman filter cycle (Welch and Bishop (2006, p. 5) \blx@tocontentsinit {0}\parencite {welch2006}) }}{14}{figure.caption.13}%
+\contentsline {figure}{\numberline {III.5}{\ignorespaces Scheme of the multi-robot system and all onboard sensors" \blx@tocontentsinit {0}\parencite {li_onboard_2025}}}{16}{figure.caption.18}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {IV.1}{\ignorespaces Configuration schema of the face to face verticaly}}{20}{figure.caption.24}%
+\contentsline {figure}{\numberline {IV.2}{\ignorespaces Measure for face to face verticaly referenced at 120cm}}{20}{figure.caption.25}%
+\contentsline {figure}{\numberline {IV.3}{\ignorespaces Mesures pour module face à face avec une référence posé à 130cm}}{20}{figure.caption.25}%
+\contentsline {figure}{\numberline {IV.4}{\ignorespaces Configuration schema of the face to face horizontaly}}{21}{figure.caption.27}%
+\contentsline {figure}{\numberline {IV.5}{\ignorespaces Schema of the paralel configuration}}{22}{figure.caption.29}%
+\contentsline {figure}{\numberline {IV.6}{\ignorespaces Schema of the rayon configuration}}{22}{figure.caption.31}%
+\contentsline {figure}{\numberline {IV.7}{\ignorespaces Schema of the face to back configuration}}{22}{figure.caption.33}%
+\contentsline {figure}{\numberline {IV.8}{\ignorespaces Diagram of the error based on real distance}}{23}{figure.caption.35}%
+\contentsline {figure}{\numberline {IV.9}{\ignorespaces \href {https://github.com/M1chigan/Projet-S-IoT-Essaim-de-Drone/blob/main/Code/Code_commun/src/filtre.cpp}{Code} for polynomial filter}}{23}{figure.caption.36}%
+\contentsline {figure}{\numberline {IV.10}{\ignorespaces \href {https://github.com/M1chigan/Projet-S-IoT-Essaim-de-Drone/blob/main/Code/Code_commun/src/filtre.cpp}{Code} for NLOS Filter}}{24}{figure.caption.38}%
+\contentsline {figure}{\numberline {IV.11}{\ignorespaces \href {https://github.com/M1chigan/Projet-S-IoT-Essaim-de-Drone/blob/main/Code/Code_commun/src/filtre.cpp}{Code} for innovation gate filter}}{24}{figure.caption.40}%
+\contentsline {figure}{\numberline {IV.12}{\ignorespaces Code for send messsage using ESP-NOW}}{25}{figure.caption.41}%
+\contentsline {figure}{\numberline {IV.13}{\ignorespaces Drone communication package}}{25}{figure.caption.42}%
+\contentsline {figure}{\numberline {IV.14}{\ignorespaces Drone communication package}}{26}{figure.caption.43}%
+\contentsline {figure}{\numberline {IV.15}{\ignorespaces Visualization architecture}}{28}{figure.caption.44}%
+\contentsline {figure}{\numberline {IV.16}{\ignorespaces Simulation architecture}}{30}{figure.caption.47}%
+\contentsline {figure}{\numberline {IV.17}{\ignorespaces Architecture of the first level of simulation}}{31}{figure.caption.49}%
+\contentsline {figure}{\numberline {IV.18}{\ignorespaces Drone capability at level 1}}{31}{figure.caption.50}%
+\contentsline {figure}{\numberline {IV.19}{\ignorespaces Architecture of the second level of simulation}}{32}{figure.caption.52}%
+\contentsline {figure}{\numberline {IV.20}{\ignorespaces Architecture of the third level of simulation}}{32}{figure.caption.53}%
+\contentsline {figure}{\numberline {IV.21}{\ignorespaces Architecture of the fourth level of simulation}}{33}{figure.caption.54}%
