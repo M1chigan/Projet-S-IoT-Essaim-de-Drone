@@ -19,48 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
-    \entry{gezici_localization_nodate}{article}{}
-      \name{author}{4}{}{%
-        {{hash=394d95efe06253b18f92466e72677f8d}{%
-           family={Gezici},
-           familyi={G\bibinitperiod},
-           given={Sinan},
-           giveni={S\bibinitperiod}}}%
-        {{hash=10ec710e904a0cfc30e97f58652f081b}{%
-           family={Kobayashi},
-           familyi={K\bibinitperiod},
-           given={Hisashi},
-           giveni={H\bibinitperiod}}}%
-        {{hash=de7b0e512fcdd087f5750837f7c7cb9f}{%
-           family={Poor},
-           familyi={P\bibinitperiod},
-           given={H\bibnamedelima Vincent},
-           giveni={H\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
-        {{hash=b6b81c9bb27d6566c0f4ccb812093f11}{%
-           family={Sahinoglu},
-           familyi={S\bibinitperiod},
-           given={Zafer},
-           giveni={Z\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{3b71df816746777166b9418bf0683b6c}
-      \strng{fullhash}{f4e5fd4c9613e10a36fca53fc98b83fe}
-      \strng{bibnamehash}{f4e5fd4c9613e10a36fca53fc98b83fe}
-      \strng{authorbibnamehash}{f4e5fd4c9613e10a36fca53fc98b83fe}
-      \strng{authornamehash}{3b71df816746777166b9418bf0683b6c}
-      \strng{authorfullhash}{f4e5fd4c9613e10a36fca53fc98b83fe}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Localization relying on wireless ultra-wideband (UWB) signaling is investigated. Various localization alternatives are considered and the UWB time-of-arrival based one is found to have highest ranging accuracy. The challenges in UWB positioning problems, such as multiple-access interference, multipath and non-line-of-sight propagation are presented along with the fundamental limits for time-of-arrival estimation and time-of-arrival-based positioning. To reduce complexity of optimal schemes achieving those limits, suboptimal alternatives are also developed and analyzed. Moreover, a hybrid scheme that incorporates time-of-arrival and signal strength measurements is investigated.}
-      \field{title}{Localization via {Ultra}-{Wideband} {Radios}}
-      \verb{file}
-      \verb PDF:C\:\\Users\\liene\\Zotero\\storage\\6QZ5W4N3\\Gezici et al. - Localization via Ultra-Wideband Radios.pdf:application/pdf
-      \endverb
-    \endentry
     \entry{noauthor_pdf_nodate}{misc}{}
       \list{language}{1}{%
         {en}%
@@ -715,8 +673,8 @@
       \strng{authorbibnamehash}{e914a39fcaeb90ac7bf20959197e2156}
       \strng{authornamehash}{e914a39fcaeb90ac7bf20959197e2156}
       \strng{authorfullhash}{e914a39fcaeb90ac7bf20959197e2156}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{issn}{2504-446X}

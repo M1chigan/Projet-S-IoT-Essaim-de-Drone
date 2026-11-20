@@ -19,6 +19,63 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global}
+    \entry{noauthor_pdf_nodate}{misc}{}
+      \list{language}{1}{%
+        {en}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{PDF {|} In September 1968 the University of Hawaii began work on a research program to investigate the use of radio communications for computer-computer... {|} Find, read and cite all the research you need on ResearchGate}
+      \field{journaltitle}{ResearchGate}
+      \field{shorttitle}{({PDF}) {THE} {ALOHA} {SYSTEM}}
+      \field{title}{({PDF}) {THE} {ALOHA} {SYSTEM}: another alternative for computer communications}
+      \field{urlday}{13}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1145/1478462.1478502
+      \endverb
+      \verb{file}
+      \verb Snapshot:C\:\\Users\\liene\\Zotero\\storage\\39W9DST9\\234790393_THE_ALOHA_SYSTEM_another_alternative_for_computer_communications.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.researchgate.net/publication/234790393_THE_ALOHA_SYSTEM_another_alternative_for_computer_communications
+      \endverb
+      \verb{url}
+      \verb https://www.researchgate.net/publication/234790393_THE_ALOHA_SYSTEM_another_alternative_for_computer_communications
+      \endverb
+    \endentry
+    \entry{noauthor_pdf_2026}{article}{}
+      \list{language}{1}{%
+        {en}%
+      }
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{abstract}{PDF {|} This paper was originally distributed informally as ARPA Satellite System Note 8 on June 26, 1972. The paper is an important one and since its... {|} Find, read and cite all the research you need on ResearchGate}
+      \field{journaltitle}{ResearchGate}
+      \field{month}{8}
+      \field{title}{({PDF}) {ALOHA} packet system with and without slots and capture}
+      \field{urlday}{13}
+      \field{urlmonth}{10}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1145/1024916.1024920
+      \endverb
+      \verb{file}
+      \verb Snapshot:C\:\\Users\\liene\\Zotero\\storage\\TYLIRZN7\\234802142_ALOHA_packet_system_with_and_without_slots_and_capture.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.researchgate.net/publication/234802142_ALOHA_packet_system_with_and_without_slots_and_capture
+      \endverb
+      \verb{url}
+      \verb https://www.researchgate.net/publication/234802142_ALOHA_packet_system_with_and_without_slots_and_capture
+      \endverb
+    \endentry
     \entry{kalman1960}{article}{}
       \name{author}{1}{}{%
         {{hash=2bdc83bc7a4c09a9020f492d9e1b5c92}{%
@@ -36,8 +93,8 @@
       \strng{authorbibnamehash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
       \strng{authornamehash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
       \strng{authorfullhash}{2bdc83bc7a4c09a9020f492d9e1b5c92}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The classical filtering and prediction problem is re-examined using the Bode-Shannon representation of random processes and the “state-transition” method of analysis of dynamic systems. New results are: (1) The formulation and methods of solution of the problem apply without modification to stationary and nonstationary statistics and to growing-memory and infinite-memory filters. (2) A nonlinear difference (or differential) equation is derived for the covariance matrix of the optimal estimation error. From the solution of this equation the co-efficients of the difference (or differential) equation of the optimal linear filter are obtained without further calculations. (3) The filtering problem is shown to be the dual of the noise-free regulator problem. The new method developed here is applied to two well-known problems, confirming and extending earlier results. The discussion is largely self-contained and proceeds from first principles; basic concepts of the theory of random processes are reviewed in the Appendix.}
@@ -99,8 +156,8 @@
       \strng{authorbibnamehash}{2d374bb8b75614bf3bcd567709f72652}
       \strng{authornamehash}{0abecb67ddd9c3c0812a5f57287f7346}
       \strng{authorfullhash}{2d374bb8b75614bf3bcd567709f72652}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{2169-3536}
@@ -166,8 +223,8 @@
       \strng{authorbibnamehash}{1cecf18eeea9922da52e2639ca90a8cf}
       \strng{authornamehash}{08631b0bbf0120864d8c2a45863653a9}
       \strng{authorfullhash}{1cecf18eeea9922da52e2639ca90a8cf}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{2377-3766, 2377-3774}
@@ -220,8 +277,8 @@
       \strng{authorbibnamehash}{e914a39fcaeb90ac7bf20959197e2156}
       \strng{authornamehash}{e914a39fcaeb90ac7bf20959197e2156}
       \strng{authorfullhash}{e914a39fcaeb90ac7bf20959197e2156}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{issn}{2504-446X}
@@ -272,8 +329,8 @@
       \strng{authorbibnamehash}{3278fcb7fe5d1388c67ef49edf5066e7}
       \strng{authornamehash}{3278fcb7fe5d1388c67ef49edf5066e7}
       \strng{authorfullhash}{3278fcb7fe5d1388c67ef49edf5066e7}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{00051098}

@@ -6,7 +6,7 @@
 
 \subsection{Definitions} 
 Ultra-Wideband (UWB) is a technology using radio frequency to exchange data.
-Communication is not its only purpose; UWB can also be used to locate, which is only possible by using multiple modules. These algorithms and techniques will be dealt with in the next part (\ref{UWB_Algo_localisation}).
+Communication is not its only purpose; UWB can also be used to locate, which is only possible by using multiple modules. These algorithms and techniques will be covered in the next part (\ref{UWB_Algo_localisation}).
 In the majority of cases, UWB is deployed for indoor purposes; otherwise, it can be used for outdoor purposes, but this is less present in scientific papers.
 
 
@@ -15,7 +15,7 @@ In order to use UWB as a location sensor, we have to use specific algorithms. In
 
 \subsubsection{Two way ranging (TWR)}
 The Two-Way Ranging (TWR) algorithm is the easiest and the fastest to implement in a UWB system.
-In order to explain this algorithm, we will use 2 modules called $UWB_1$ and $UWB_2$.
+In order to explain it, we will use 2 modules called $UWB_1$ and $UWB_2$.
 
 \begin{figure}[!ht]
 \centering
@@ -69,7 +69,7 @@ As we can observe, the processing time is directly linked to the error. The $t_{
 \subsubsection{Double Sided Two way ranging (DS-TWR)}
 \label{DS-TWR}
 In the TWR algorithm, the main drawback is the error and inaccuracy.
-To remove that error, the DS-TWR has been thought and proposed in this paper \cite{gezici_localization_nodate}. This algorithm also uses 2 modules $UWB_1$ and $UWB_2$.
+To remove that error, the DS-TWR can be implemented. This algorithm also uses 2 modules $UWB_1$ and $UWB_2$.
 
 \begin{figure}[!ht]
 \centering
@@ -146,8 +146,7 @@ As we can see, the error is not multiplied by $t_{proc}$, so the error is reduce
 With this algorithm, we are not dependent on the processor anymore. That is the algorithm currently used in our project.
 
 \subsection{Timing algorithm}\label{UWB_Algo_timings}
-When working on a swarm drone, there are not only two UWB modules : there are actually multiple modules trying to communicate. One weakness of the UWB is its sensitivity to noise and interference. The "way" should be clear before emitting, otherwise that creates collision and damages the signal, ultimately leading to corrupted distance estimations.
-For this purpose, we need to look on how to divide the time of emission to avoid collision. In our specific case, we are working with 3 to 4 drones.
+When working on a drone swarm, there are not only two UWB modules : there are actually multiple modules trying to communicate. One weakness of the UWB is its sensitivity to noise and interference. The "way" should be clear before emitting, otherwise that creates collisions and damages the signal, ultimately leading to corrupted distance estimations. For this purpose, we need to look at how to divide the time of emission to avoid collision. In our specific case, we are working with 3 to 4 drones.
 \subsubsection{ALOHA}
 This method is named after the first ALOHAnet system, which introduced it in 1970. It provides a simple approach to channel access control without requiring any time synchronization. Instead of planning transmissions, a module sends its data packet immediately, regardless of whether the medium is currently busy or free.
 The primary advantage of  ALOHA lies in its ease of implementation and full decentralization, allowing independent nodes or drones to join the network dynamically without prior initialization. 
@@ -265,7 +264,7 @@ Like the original filter, it is recursive: only the current estimate and its cov
 
 \subsection{UWB localization : benefits and limits }
 
-As described in the previous section, UWB ranging enables centimeter-level accuracy via time of flight calculations. However, the data gives us only the relative distances between each drone which is not enough to perform localisation : in particular information about orientation is missing. In this section, we will discuss the viability of a distance-only approach and the topic of observability.
+As described in the previous section, UWB ranging enables centimeter-level accuracy via time of flight calculations. However, the data gives us only the relative distances between each drone which is not enough to perform localisation : in particular, information about orientation is missing. In this section, we will discuss the viability of a distance-only approach and the topic of observability.
 
 \subsubsection{Range-only system}
 
@@ -280,12 +279,14 @@ of agents must meet more stringent conditions to be observable and the relative 
 \subsection{Data fusion}
 
 \subsubsection{Data fusion with an EKF in drone swarm applications}
-In the context of our project, the most relevant article is most likely "Onboard Ranging-Based Relative Localization and Stability for Lightweight Aerial Swarms" by Li et al. \parencite{li_2025} from TU Delft in the Netherlands. In their paper, they share an autonomous relative localization technique fusing UWB distance measurements and state information like velocity, yaw rate, height from neighbours. The following illustration shows their scheme of work : 
+In the context of our project, the most relevant article is most likely "Onboard Ranging-Based Relative Localization and Stability for Lightweight Aerial Swarms" by Li et al. \parencite{li_2025} from TU Delft in the Netherlands.
+\newpage
+In their paper, they share an autonomous relative localization technique fusing UWB distance measurements and state information like velocity, yaw rate, height from neighbours. The following illustration shows their scheme of work : 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\linewidth]{Li_2025.png}
-    \caption{Enter Caption}
+    \caption{Scheme of work of Li et al. \parencite{li_2025} }
     \label{fig:placeholder}
 \end{figure}
 
@@ -317,7 +318,9 @@ Control strategies include the definition of the roles within a swarm as well as
 
 
 In the review of Bu et al. \parencite{bu_2024} mentioned previously, they discuss various conventional strategies and their characteristics. An intuitive way of imagining the configuration of a swarm involves giving each drone a role of either leader or follower. The basic idea is to have one or multiple designated leader drones following the given mission while follower drones maintain a position or a distance from the leaders or other followers. This method shows a good flexibility and can be applied in many different contexts. However, it heavily relies on the leader which could cause heavy problems if it is affected. Other approaches include virtual-structures, behaviour-based architectures, consensus-based architectures and artificial potential fields. Within the context of our project, our main constraint lies on the hardware, where the implemented control strategy should run on a ESP32 microcontroller. The leader-follower architecture reduces the overall computational cost and complexity of the system since the leader does not necessarily need to be part of the control architecture.
-In order to keep a pre-defined formation, each drone within the swarm needs to constantly adjust itself to be in the right position. As defined in the article of Oh et al. \cite{oh_survey_2015}, it is possible to categorize the types of formation control depending on the sensing capabilities and the interaction topology of agents. The categories can be represented as follows :
+In order to keep a pre-defined formation, each drone within the swarm needs to constantly adjust itself to be in the right position. As defined in the article of Oh et al. \cite{oh_survey_2015}, it is possible to categorize the types of formation control depending on the sensing capabilities and the interaction topology of agents.
+\newpage
+The categories can be represented as follows :
 
 
 \begin{figure}[H]

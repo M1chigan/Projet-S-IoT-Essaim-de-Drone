@@ -40,7 +40,7 @@ noe.ramdani@insa-strasbourg.fr}
 \maketitle
 
 \begin{abstract}
-Drone swarms showcase great possibilities for multiple applications notably thanks to their larger monitoring capabilities and ranges of action. One paramount condition to enable swarming relies on efficient and robust communication and localisation. This can be made possible with different kinds of sensors such as GNSS modules, LIDAR or cameras. One promising approach uses Ultrawide Band (UWB), a radio communication protocol using large bandwidth pulses to calculate precisely very short times of flight and therefore centimetre-accurate distances between 2 points. This paper therefore aims to present an attempt at implementing swarming behaviours in Ardupilot-based drones using UWB modules for ranging as well as ESP-NOW for communication. After detailing UWB and ESP-NOW implementations, it establishes a simple Leader-Follower architecture with a distance-based control law. 
+Drone swarms showcase great possibilities for multiple applications notably thanks to their larger monitoring capabilities and ranges of action. One paramount condition to enable swarming relies on efficient and robust communication and localisation. This can be made possible with different kinds of sensors such as GNSS modules, LIDARs or cameras. One promising approach uses Ultrawide Band (UWB), a radio communication protocol using large bandwidth pulses to calculate precisely very short times of flight and therefore centimetre-accurate distances between 2 points. This paper therefore aims to present an attempt at implementing swarming behaviours in Ardupilot-based drones using UWB modules for ranging as well as ESP-NOW for communication. After detailing UWB and ESP-NOW implementations, it establishes a simple Leader-Follower architecture with a distance-based control law. 
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -51,10 +51,10 @@ Drone swarm, Ultrawide Band, ESP-NOW.
 
 Quadcopter drones have now become a system of choice in multiple applications, ranging from defence to monitoring and exploration. Their ability to quickly reach points difficult to access for humans as well as their compactness and their movement possibilities make up very interesting abilities in a lot of contexts. Drone swarms, formed by multiple drones, extend these possibilities by being able to monitor larger spaces or carrying heavier payloads. In these configurations, a challenge lies in making multiple drones interact with each other to efficiently conduct a collective task. For that, each drone has to be able to retrieve information about its current state and communicate it to others. Therefore, three different parts have to be considered : localization tools, communication protocols and formation control.
 
-In this paper, we present a project in which  we use Ultra-Wideband (UWB) technology to obtain accurate distance measurements between pairs of drones. Each drone carries a board combining an ESP32 microcontroller and a DW1000 UWB transceiver. In addition, we use the data provided by the flight controller’s onboard sensors to localize each drone in space. The objective is to design a system that takes advantage of both UWB and the onboard sensors to obtain an accurate estimate of the position of each drone relative to the others, in order to control the formation of the swarm. Finally, it presents simulations and visualisation tools designed to help in the project development.
+In this paper, we present a project in which  we use UltraWide Band (UWB) technology to obtain accurate distance measurements between pairs of drones. Each drone carries a board combining an ESP32 microcontroller and a DW1000 UWB transceiver. In addition, we use the data provided by the flight controller’s onboard sensors to localize each drone in space. The objective is to design a system that takes advantage of both UWB and the onboard sensors to obtain an accurate estimate of the position of each drone relatively to the others, in order to control the formation of the swarm. Finally, it presents simulations and visualisation tools designed to help in the project development.
 
 \subsection{Objectives}
-This project aims to establish a drone swarm using distance measurements with Ultrawide Band as well as a communication protocol between drones. Originally, we were suggested to work with Xbee modules from Digi but we quickly realized adding another piece of hardware would not be practical (this topic is detailed in section IV). The three main objectives of the project are as follows : 
+This project aims to establish a drone swarm using distance measurements with Ultrawide Band as well as a communication protocol between drones. Originally, we were suggested to work with Xbee modules from Digi but we quickly realized adding another piece of hardware would not be practical. The three main objectives of the project are as follows : 
 
 \begin{itemize}
     \item Robust and reliable UWB measurements
@@ -64,17 +64,17 @@ This project aims to establish a drone swarm using distance measurements with Ul
 
 \subsection{Hardware and software}
 
-The hardware used for this project will have an influence on many aspects of the development, it is therefore important to present it beforehand. The drones used have been built across the years by students from INSA Strasbourg, particularly to participate in the International Micro Air Vehicle competition (IMAV). Built as standard quad-copters, they integrate all their necessary components : a flight controller (Pixhawk 4), a power distribution board (Holybro PM07), 4 ESCs (600 Hz 20A T-Motor), 4 DC brushless motors (T-Motor KV920) and a GNSS module. The flight controller's runs on Ardupilot, an open-source firmware widely used in the field. Finally, a development board from Makerfabs including both a ESP-32 microcontroller and a DW1000 UWB module is attached to each drone to perform UWB measurements as well as data processing, data communication and formation control. The boards are programmed with Arduino IDE using the dedicated MAVLink and DW1000 libraries; Mission Planner is used for Software-In-The-Loop (SITL) simulations. Other simulation and visualisation tools have been developed with the well-known Matlab software from Mathworks as well as Python language. 
+The hardware used for this project will have an influence on many aspects of the development, it is therefore important to present it beforehand. The drones used have been built across the years by students from INSA Strasbourg, particularly to participate in the International Micro Air Vehicle competition (IMAV). Built as standard quadcopters, they integrate all their necessary components : a flight controller (Pixhawk 4), a power distribution board (Holybro PM07), 4 ESCs (600 Hz 20A T-Motor), 4 DC brushless motors (T-Motor KV920) and a GNSS module. The flight controller runs on Ardupilot, an open-source firmware widely used in the field. Finally, a development board from Makerfabs including both a ESP-32 microcontroller and a DW1000 UWB module is attached to each drone to perform UWB measurements as well as data processing, data communication and formation control. The boards are programmed with Arduino IDE using the dedicated MAVLink and DW1000 libraries; Mission Planner is used for Software-In-The-Loop (SITL) simulations. Other simulation and visualisation tools have been developed with the well-known Matlab software from Mathworks as well as the Python language. 
 
 
 \section{Related work}
 
-In the context of drone swarming, it is essential that the drones are able to perform ranging and communication. Ranging can be implemented easily thanks to a classic two way ranging (TWR) ranging algorithm which calculates the distance between two modules based on the total time of flight of the poll and response messages. Double-sided two way raning (DS-TWR) adds a "final" message sent to the second module which mathematically reduces the overall error as it's not depend on the time of processing anymore. When dealing with a drone swarm, multiple UWB modules have to interact with each other which calls for the necessity of managing the modules' emission time to avoid signal collisions. 
-Different algorithms exist from random emission timing to more complex deterministic management. The original ALOHA system established in 1970 is based on random emission time which results in a very high rate of collisions : the maximum channel utilization in theory is about 18.6 \%. Its main advantages lies in on decentralisation with nodes being to join the network without prior initialisation as well as its ease of implementation. The Slotted Aloha method implements "slots" at the beginning of which each module can emit. It approximately doubles the maximum throughput to 36.8\% but collisions rates are still relatively high since multiple nodes can choose the same slot. The most efficient algorithm is called TDMA (Time Divison Multiple Access) which is stricly deterministic : it allows precise slots to each drone in time frames. In theory it avoids all collisions but it needs precise synchronisation between each drones and is more complex to implement with large number of drones. 
+In the context of drone swarming, it is essential that the drones are able to perform ranging and communication. Ranging can be implemented easily thanks to a classic two way ranging (TWR) ranging algorithm which calculates the distance between two modules based on the total time of flight of the poll and response messages. Double-sided two way ranging (DS-TWR) adds a "final" message sent to the second module which mathematically reduces the overall error as it's not dependent on the time of processing anymore. When dealing with a drone swarm, multiple UWB modules have to interact with each other which calls for the necessity of managing the modules' emission time to avoid signal collisions. 
+Different algorithms exist from random emission timing to more complex deterministic management. The original ALOHA system established in 1970 is based on random emission time which results in a very high rate of collisions: the maximum channel utilization in theory is about 18.4 \% \parencite{noauthor_pdf_nodate}. Its main advantages are its decentralisation, with nodes being to join the network without prior initialisation as well as its ease of implementation. The Slotted Aloha method implements "slots" at the beginning of which each module can emit. It approximately doubles the maximum throughput to 36.8\% \parencite{noauthor_pdf_2026} but collisions rates are still relatively high since multiple nodes can choose the same slot. The most efficient algorithm is called TDMA (Time Divison Multiple Access) which is stricly deterministic : it allows precise slots to each drone in time frames. In theory it avoids all collisions but it needs precise synchronisation between each drones and is more complex to implement with large number of drones. 
 
 When dealing with sensors, it is often necessary to use filters in order to clean the data. In other cases, observers helps reconstructing a state of a system that is not measured. Kalman filters, described in the pioneering article of 1960 \parencite{kalman1960}, are common tools for this matter since they offer simple integration and relatively low computational load. UWB sensors have already been used for robot localisation as in \parencite{cao_2018}, which presents a method based on successive stages which allows to dynamically localize multiple robots by using trilateration and an EKF recursive estimation.  Li et al. \parencite{li_2025} share an autonomous relative localization technique
 fusing UWB distance measurements and state information like velocity, yaw rate, height from
-neighbours. The article is particularly appropriate because it deals with every aspect of our project. It brings up the fusion of multiple sensors through an EKF, the use of Ultra-wide band for both ranging and communication as well as observability considerations and hardware resource constraints. Nevertheless, they do not implement GPS when merging data, which differs from the context of
+neighbours. The article is particularly appropriate because it deals with every aspect of our project. It brings up the fusion of multiple sensors through an EKF, the use of UltraWide band for both ranging and communication as well as observability considerations and hardware resource constraints. Nevertheless, they do not implement GPS when merging data, which differs from the context of
 our work.
 
 
@@ -95,7 +95,7 @@ described by the diagram below:
 
 \begin{figure}[H]
     \centering
-    \resizebox{0.8\linewidth}{!}{\DSTWR}
+    \resizebox{0.85\linewidth}{!}{\DSTWR}
     \caption{DS-TWR algorithm representation}
     \label{fig:DS-TWR}
 \end{figure}
@@ -118,7 +118,7 @@ DS-TWR works in 6 steps:
     \item $UWB_2$ receives the \textbf{FINAL} and memorizes the time of
           arrival $r_{x22}$.
 \end{enumerate}
-
+\newpage
 \noindent With all those parameters, we can compute four time intervals:
 \begin{itemize}
     \item Response time for $UWB_1 : t_1 = r_{x1} - t_{x1}$
@@ -165,8 +165,7 @@ to strict time periods. It also allows us to shut down the modules when we do
 not need them and save energy. However, there are a few drawbacks: firstly,
 if we add one more drone, we have to add two other slots, and when reaching
 10 drones, there is no time anymore to get information at a high frequency.
-Moreover, it needs a synchronization to make all the modules' clocks work at
-the same speed and avoid collision.
+Moreover, it requires clock synchronization across all modules to prevent collisions.
 
 \subsection{Test}
 After calibrating our UWB modules to 130~cm, which is 10~cm higher than our chosen
@@ -373,15 +372,16 @@ As its name suggests, a state observer is a model helping to reconstruct a state
 \label{Visualization}
 Drones are typically working far away from the operator. It makes it difficult
 to observe and understand what is happening. That is a problem for testing
-purposes, so we have to develop a visualizer which allows us to observe the
+purposes, so we have to develop a visualizer which allows to observe the
 drones and detect errors and their causes. This visualizer uses MATLAB and is
 based on ESP-NOW [\ref{COM_Protocol}].
 
+\newpage
 We have developed an application which allows to show different aspects.
 Firstly, an attitude visualizer:
 \begin{figure}[H]
    \centering
-   \includegraphics[width=0.7\linewidth]{Attitude_visualization.png}
+   \includegraphics[width=0.67\linewidth]{Attitude_visualization.png}
    \caption{Attitude visualizer}
    \label{fig:Attitude}
 \end{figure}
@@ -404,10 +404,11 @@ Secondly, a formation visualizer:
     \label{fig:Formation}
 \end{figure}
 
+\newpage
 Then, a data visualizer:
 \begin{figure}[H]
    \centering
-   \includegraphics[width=0.6\linewidth]{data_visualizer.png}
+   \includegraphics[width=0.65\linewidth]{data_visualizer.png}
    \caption{Data visualizer}
    \label{fig:DataVisualizer}
 \end{figure}
@@ -417,7 +418,7 @@ Then, a data visualizer:
 
 \section{Simulation}
 \label{Simulation}
-Drones are restricted from flying above cities. Moreover, our school does not have any indoor test room. Those constraints reduce the number of possible outdoor tests. However, they are necessary so we developed a simulation architecture. It is based on the flight controller firmware, Ardupilot, a proxy, MAVproxy and a visualizer, Mission planner.
+Drones are restricted from flying above cities. Moreover, our school does not have any indoor test room. Those constraints reduce the number of possible outdoor tests. However, extensive testing is necessary, so we developed a simulation architecture. It is based on the flight controller firmware, Ardupilot, a proxy, MAVproxy and a visualizer, Mission planner.
 
 The simulation architecture is complex and uses various pieces of code and
 software. You will find below a representation of it.
@@ -473,11 +474,13 @@ different difficulties.
 \end{figure}
 
 The last one corresponds to the objective we want to reach, where 3 drones keep
-the formation while moving, based on UWB and ESP-NOW.   
+the formation while moving, using on UWB and ESP-NOW.   
 
 \section{Conclusion}
 
 This paper introduced a drone swarm project based on UWB measurements and distance-based formation control. It aimed at giving an overview of this academic project, covering every topic. It showed satisying results for UWB measurements and data communication with ESP-NOW as well as an architecture for distance-based formation control. It can be easily recreated with an Ardupilot flight controller as well as Makerfabs UWB-ESP32 boards. Next project steps include formation control implementation and outdoor tests including 2 drone and 3 drone configurations.
+
+\newpage 
 
 \printbibliography[heading=bibintoc, title={References}]
 
